@@ -8,6 +8,7 @@
     "react": "^16.8.6",
     "react-apollo": "^2.5.8",
     "react-dom": "^16.8.6",
+    "react-hook-form": "^4.2.1",
     "react-intl": "^2.9.0"
   },
   "devDependencies": {
@@ -20,6 +21,6 @@
     "eslint-config-vtex-react": "^5.1.0",
     "prettier": "^1.18.2",
     "prop-types": "^15.7.2",
-    "typescript": "3.5.2"
+    "typescript": "3.7.3"
   }
 }

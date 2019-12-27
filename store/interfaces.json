@@ -1,0 +1,12 @@
+{
+  "form": {
+    "component": "Form",
+    "composition": "children"
+  },
+  "form-input": {
+    "component": "FormInput"
+  },
+  "form-submit": {
+    "component": "FormSubmit"
+  }
+}

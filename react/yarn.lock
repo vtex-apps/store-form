@@ -4465,6 +4465,11 @@ react-dom@^16.8.4, react-dom@^16.8.6:
     prop-types "^15.6.2"
     scheduler "^0.15.0"
 
+react-hook-form@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-4.2.1.tgz#b7622d8b03d5721fbaefdb9a93c8bd1b98fb8f1e"
+  integrity sha512-/ueibUB/ROj2+pJS2fGfkzJKs/x3EYCdf/cFAdwJE2RUozDJVwD6uylnqExxNxyU1juFxBc7bPMsqvm3Hisrgw==
+
 react-intl@^2.8.0, react-intl@^2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-2.9.0.tgz#c97c5d17d4718f1575fdbd5a769f96018a3b1843"
@@ -5298,10 +5303,10 @@ type-fest@^0.5.2:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.5.2.tgz#d6ef42a0356c6cd45f49485c3b6281fc148e48a2"
   integrity sha512-DWkS49EQKVX//Tbupb9TFa19c7+MK1XmzkrZUR8TAktmE/DizXoaoJV6TZ/tSIPXipqNiRI6CyAe7x69Jb6RSw==
 
-typescript@3.5.2:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.2.tgz#a09e1dc69bc9551cadf17dba10ee42cf55e5d56c"
-  integrity sha512-7KxJovlYhTX5RaRbUdkAXN1KUZ8PwWlTzQdHV6xNqvuFOs7+WBo10TQUqT19Q/Jz2hk5v9TQDIhyLhhJY4p5AA==
+typescript@3.7.3:
+  version "3.7.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.3.tgz#b36840668a16458a7025b9eabfad11b66ab85c69"
+  integrity sha512-Mcr/Qk7hXqFBXMN7p7Lusj1ktCBydylfQM/FZCk5glCNQJrCUKPkMHdo9R0MTFWsC/4kPFvDS0fDPvukfCkFsw==
 
 typescript@^3.3.3333:
   version "3.5.3"
