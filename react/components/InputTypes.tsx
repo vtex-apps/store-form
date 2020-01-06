@@ -28,13 +28,13 @@ export type InputWrapperProps = {
   path: string
 }
 
-export type SelectProps = {
+export type SelectWrapperProps = {
   path: string
   options: Array<string>
   validator: ValidationOptions
 }
 
-export type ErrorWarningProps = {
+export type ValidationWarningProps = {
   path: string
 }
 

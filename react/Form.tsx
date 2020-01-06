@@ -3,7 +3,7 @@ import { FormContext, useForm } from 'react-hook-form'
 
 import jsonSchema from './mockJSONSchema'
 import { FormSchemaContext } from './components/InputTypes'
-import { FieldBuilder } from './components/Inputs'
+import { FieldBuilder } from './components/FieldBuilder'
 import { buildObjectFromFormData } from './modules/JSONPathHandler'
 
 const onSubmit = (data: { [key: string]: string }) =>
