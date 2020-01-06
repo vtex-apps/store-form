@@ -1,14 +1,125 @@
 import React, { FC, useContext } from 'react'
 import { useFormContext, ValidationOptions } from 'react-hook-form'
 
-import { InputProps, FormSchemaContext } from '../InputTypes'
+import {
+  InputProps,
+  FormSchemaContext,
+  InputTypes,
+  JSONSchemaType,
+} from '../InputTypes'
 import { ValidationWarning } from '../ValidationWarning'
 import { getObjectFromPath } from '../../modules/JSONPathHandler'
 
 import { InputWrapper } from './InputWrapper'
 
-export const NumberInput: FC<InputProps> = props => {
+const getNumberValidator = (
+  currentObject: JSONSchemaType,
+  required: boolean,
+  minimum: number | undefined,
+  maximum: number | undefined
+): ValidationOptions => {
+  const validator: ValidationOptions = {
+    validate: {
+      multipleOf: (value: string) => {
+        if (currentObject.type === 'integer') {
+          return (
+            currentObject.multipleOf &&
+            (parseInt(value) % parseInt(currentObject.multipleOf) === 0 ||
+              'Must be a multiple of ' + currentObject.multipleOf)
+          )
+        } else {
+          // TODO: implement float checking with epsilon
+          return true
+        }
+      },
+    },
+  }
+
+  if (required) {
+    validator.required = 'This field is required'
+  }
+
+  if (currentObject.type === 'integer') {
+    validator.pattern = {
+      value: /^([+-]?[1-9]\d*|0)$/,
+      message: 'Must be an integer',
+    }
+  } else {
+    validator.pattern = {
+      value: /^([0-9]+([,.][0-9]+))?$/,
+      message: 'Must be a float',
+    }
+  }
+
+  if (minimum || minimum === 0) {
+    validator.min = {
+      value: minimum,
+      message: 'Must be greater than: ' + minimum,
+    }
+  }
+
+  if (maximum || maximum === 0) {
+    validator.max = {
+      value: maximum,
+      message: 'Must be lower than: ' + currentObject.maximum,
+    }
+  }
+
+  return validator
+}
+
+type RawNumberInputProps = {
+  path: string
+  validator: ValidationOptions
+  inputType: keyof typeof InputTypes
+  min?: number
+  max?: number
+  step?: number | string
+  defaultValue?: string
+}
+
+const RawNumberInput: FC<RawNumberInputProps> = props => {
   const { register, watch } = useFormContext()
+  const inputProps: React.ComponentProps<'input'> = {}
+  inputProps.name = props.path
+  inputProps.ref = register(props.validator)
+  if (props.step) {
+    inputProps.step = props.step
+  }
+  if (props.defaultValue) {
+    inputProps.placeholder = props.defaultValue
+  }
+
+  switch (props.inputType) {
+    case 'HIDDEN':
+      inputProps.type = 'hidden'
+      break
+    case 'SLIDER':
+      if (props.min !== undefined && props.max !== undefined) {
+        inputProps.min = props.min
+        inputProps.max = props.max
+        inputProps.type = 'range'
+      }
+      break
+    default:
+      inputProps.type = 'number'
+      break
+  }
+
+  let currValue = watch(props.path)
+  if (currValue === undefined) {
+    currValue = props.defaultValue
+  }
+
+  return (
+    <div>
+      <input {...inputProps} className="dib" />
+      {props.inputType === 'SLIDER' && <p className="dib">{currValue}</p>}
+    </div>
+  )
+}
+
+export const NumberInput: FC<InputProps> = props => {
   const schema = useContext(FormSchemaContext)
   const currentObject = getObjectFromPath(schema, props.path)
   if (!currentObject) {
@@ -67,90 +178,24 @@ export const NumberInput: FC<InputProps> = props => {
   const defaultValue =
     currentObject.default !== undefined ? currentObject.default : props.default
 
-  const validator: ValidationOptions = {
-    validate: {
-      multipleOf: (value: string) => {
-        if (currentObject.type === 'integer') {
-          return (
-            currentObject.multipleOf &&
-            (parseInt(value) % parseInt(currentObject.multipleOf) === 0 ||
-              'Must be a multiple of ' + currentObject.multipleOf)
-          )
-        } else {
-          // TODO: implement float checking with epsilon
-          return true
-        }
-      },
-    },
-  }
-
-  if (props.required) {
-    validator.required = 'This field is required'
-  }
-
-  if (currentObject.type === 'integer') {
-    validator.pattern = {
-      value: /^([+-]?[1-9]\d*|0)$/,
-      message: 'Must be an integer',
-    }
-  } else {
-    validator.pattern = {
-      value: /^([0-9]+([,.][0-9]+))?$/,
-      message: 'Must be a float',
-    }
-  }
-
-  if (minimum || minimum === 0) {
-    validator.min = {
-      value: minimum,
-      message: 'Must be greater than: ' + minimum,
-    }
-  }
-
-  if (maximum || maximum === 0) {
-    validator.max = {
-      value: maximum,
-      message: 'Must be lower than: ' + currentObject.maximum,
-    }
-  }
-
-  const inputProps: React.ComponentProps<'input'> = {}
-  inputProps.name = props.path
-  inputProps.ref = register(validator)
-  if (step) {
-    inputProps.step = step
-  }
-  if (defaultValue) {
-    inputProps.placeholder = defaultValue
-  }
-
-  switch (props.inputType) {
-    case 'HIDDEN':
-      inputProps.type = 'hidden'
-      break
-    case 'SLIDER':
-      if (minimum !== undefined && maximum !== undefined) {
-        inputProps.min = minimum
-        inputProps.max = maximum
-        inputProps.type = 'range'
-      }
-      break
-    default:
-      inputProps.type = 'number'
-      break
-  }
-
-  let currValue = watch(props.path)
-  if (currValue === undefined) {
-    currValue = defaultValue
-  }
+  const validator = getNumberValidator(
+    currentObject,
+    props.required !== undefined ? props.required : false,
+    minimum,
+    maximum
+  )
 
   return (
     <InputWrapper title={currentObject.title} path={props.path}>
-      <div>
-        <input {...inputProps} className="dib" />
-        {props.inputType === 'SLIDER' && <p className="dib">{currValue}</p>}
-      </div>
+      <RawNumberInput
+        path={props.path}
+        validator={validator}
+        inputType={props.inputType}
+        min={minimum}
+        max={maximum}
+        step={step}
+        defaultValue={defaultValue}
+      />
       <ValidationWarning path={props.path} />
     </InputWrapper>
   )

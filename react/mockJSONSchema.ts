@@ -46,6 +46,7 @@ export default {
       properties: {
         streetType: {
           type: 'string',
+          title: 'Street Type',
           enum: ['street', 'road', 'avenue', 'boulevard'],
         },
         streetAddress: {
@@ -57,6 +58,7 @@ export default {
           title: 'Street Number',
         },
       },
+      required: ['streetType'],
     },
     agreement: {
       type: 'boolean',

@@ -1,25 +1,25 @@
 import React, { FC, useContext } from 'react'
 import { useFormContext, ValidationOptions } from 'react-hook-form'
 
-import { InputProps, FormSchemaContext } from '../InputTypes'
+import {
+  InputProps,
+  FormSchemaContext,
+  InputTypes,
+  JSONSchemaType,
+} from '../InputTypes'
 import { ValidationWarning } from '../ValidationWarning'
 import { getObjectFromPath } from '../../modules/JSONPathHandler'
 
 import { InputWrapper } from './InputWrapper'
 import { SelectWrapper } from './SelectWrapper'
 
-export const StringInput: FC<InputProps> = props => {
-  const { register } = useFormContext()
-  const schema = useContext(FormSchemaContext)
-  const currentObject = getObjectFromPath(schema, props.path)
-
-  if (!currentObject) {
-    return <></>
-  }
-
+const getStringFieldValidator = (
+  currentObject: JSONSchemaType,
+  required: boolean
+): ValidationOptions => {
   const validator: ValidationOptions = {}
 
-  if (props.required) {
+  if (required) {
     validator.required = 'This field is required'
   }
 
@@ -44,15 +44,27 @@ export const StringInput: FC<InputProps> = props => {
       message: 'Insert a valid input!',
     }
   }
+  return validator
+}
 
-  let input = <></>
-  if (currentObject.enum) {
+type RawStringInputProps = {
+  currentObject: JSONSchemaType
+  inputType: keyof typeof InputTypes
+  validator: ValidationOptions
+  path: string
+  required?: boolean
+}
+
+const RawStringInput: FC<RawStringInputProps> = props => {
+  const { register } = useFormContext()
+
+  if (props.currentObject.enum) {
     if (props.inputType === 'RADIO') {
-      input = currentObject.enum.map((value: string) => (
-        <div className="db" key={value}>
+      const radios = props.currentObject.enum.map((value: string) => (
+        <div key={value}>
           <input
             name={props.path}
-            ref={register(validator)}
+            ref={register(props.validator)}
             type="radio"
             required={props.required}
             id={value}
@@ -61,18 +73,25 @@ export const StringInput: FC<InputProps> = props => {
           <label htmlFor={value}>{value}</label>
         </div>
       ))
-    } else if (props.inputType === 'SELECT' || props.inputType === 'DEFAULT') {
-      input = (
+
+      return (
+        <>
+          <label>{props.currentObject.time}</label>
+          {radios}
+        </>
+      )
+    } else {
+      return (
         <SelectWrapper
           path={props.path}
-          options={currentObject.enum}
-          validator={validator}
+          options={props.currentObject.enum}
+          validator={props.validator}
         />
       )
     }
   } else {
     let inputType: string
-    switch (currentObject.format) {
+    switch (props.currentObject.format) {
       case 'date-time':
         inputType = 'datetime-local'
         break
@@ -89,19 +108,39 @@ export const StringInput: FC<InputProps> = props => {
       default:
         inputType = 'text'
     }
-    input = (
+    return (
       <input
         name={props.path}
-        ref={register(validator)}
+        ref={register(props.validator)}
         type={inputType}
         required={props.required}
       />
     )
   }
+}
+
+export const StringInput: FC<InputProps> = props => {
+  const schema = useContext(FormSchemaContext)
+  const currentObject = getObjectFromPath(schema, props.path)
+
+  if (!currentObject) {
+    return <></>
+  }
+
+  const validator = getStringFieldValidator(
+    currentObject,
+    props.required !== undefined ? props.required : false
+  )
 
   return (
     <InputWrapper title={currentObject.title} path={props.path}>
-      {input}
+      <RawStringInput
+        currentObject={currentObject}
+        inputType={props.inputType}
+        validator={validator}
+        path={props.path}
+        required={props.required}
+      />
       <ValidationWarning path={props.path} />
     </InputWrapper>
   )

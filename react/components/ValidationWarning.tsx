@@ -5,6 +5,7 @@ import { ValidationWarningProps } from './InputTypes'
 
 export const ValidationWarning: FC<ValidationWarningProps> = props => {
   const { errors } = useFormContext()
+
   return (
     <>
       {errors[props.path] && (
