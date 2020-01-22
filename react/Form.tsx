@@ -1,23 +1,18 @@
 import React, { FC } from 'react'
-import { FormContext, useForm } from 'react-hook-form'
+import { FormContext, JSONSchemaType } from 'react-hook-form-jsonschema'
 
 import jsonSchema from './mockJSONSchema'
-import { FormSchemaContext } from './components/InputTypes'
-import { FieldBuilder } from './components/FieldBuilder'
-import { buildObjectFromFormData } from './modules/JSONPathHandler'
+import { ObjectRenderer } from './components/ObjectRenderer'
 
-const onSubmit = (data: { [key: string]: string }) =>
+const onSubmit = (data: JSONSchemaType) =>
   // eslint-disable-next-line no-console
-  console.log(buildObjectFromFormData(data, jsonSchema))
+  console.log(data)
 
-const FormSubmit: FC = props => {
-  const methods = useForm()
+const MakeForm: FC = props => {
   return (
-    <FormSchemaContext.Provider value={jsonSchema}>
-      <FormContext {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>{props.children}</form>
-      </FormContext>
-    </FormSchemaContext.Provider>
+    <FormContext schema={jsonSchema} onSubmit={onSubmit}>
+      {props.children}
+    </FormContext>
   )
 }
 
@@ -26,17 +21,13 @@ type FormProps = {
   schema: string
 }
 
-const Form: FC<FormProps> = props => {
-  const body = props.children ? (
-    props.children
-  ) : (
-    <>
-      <FieldBuilder path="#" inputType="DEFAULT" />
+const Form: FC<FormProps> = () => {
+  return (
+    <MakeForm>
+      <ObjectRenderer path="#" />
       <input type="submit" />
-    </>
+    </MakeForm>
   )
-
-  return <FormSubmit>{body}</FormSubmit>
 }
 
 export default Form
