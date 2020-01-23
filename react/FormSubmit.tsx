@@ -1,10 +1,10 @@
 import React from 'react'
 import { Input } from 'vtex.styleguide'
 
-export type FormSubmit = {
+export type FormSubmitProps = {
   label: string
 }
 
-export default function FormSubmit(props: FormSubmit) {
+export default function FormSubmit(props: FormSubmitProps) {
   return <Input type="submit" value={props.label} />
 }
