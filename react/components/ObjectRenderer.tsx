@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { RadioGroup, Input, Dropdown } from 'vtex.styleguide'
+import { RadioGroup, Input, Dropdown, Textarea } from 'vtex.styleguide'
 import {
   UseRawInputReturnType,
   InputReturnTypes,
@@ -9,19 +9,29 @@ import {
   UISchemaType,
   useObject,
   Controller,
+  ErrorMessage,
+  UseTextAreaReturnType,
 } from 'react-hook-form-jsonschema'
+
+const parseErrorMessage = (error: ErrorMessage): string => {
+  if (!error) {
+    return ''
+  }
+
+  return error.message
+}
 
 const SpecializedObject: FC<{ baseObject: InputReturnTypes }> = props => {
   switch (props.baseObject.type) {
     case InputTypes.input: {
       const inputObject = props.baseObject as UseRawInputReturnType
       return (
-        <>
-          <Input
-            {...inputObject.getInputProps()}
-            label={inputObject.getObject().title}
-          />
-        </>
+        <Input
+          {...inputObject.getInputProps()}
+          label={inputObject.getObject().title}
+          error={inputObject.getError() ? true : false}
+          errorMessage={parseErrorMessage(inputObject.getError())}
+        />
       )
     }
     case InputTypes.radio: {
@@ -30,12 +40,18 @@ const SpecializedObject: FC<{ baseObject: InputReturnTypes }> = props => {
         <Controller
           name={radioObject.path}
           control={radioObject.formContext.control}
+          rules={props.baseObject.validator}
           as={
             <RadioGroup
+              name={radioObject.getObject().title}
+              required={radioObject.isRequired}
               hideBorder
+              label={radioObject.getObject().title}
               options={radioObject.getItems().map(value => {
                 return { value: value, label: value }
               })}
+              error={radioObject.getError() ? true : false}
+              errorMessage={parseErrorMessage(radioObject.getError())}
             />
           }
         />
@@ -45,20 +61,35 @@ const SpecializedObject: FC<{ baseObject: InputReturnTypes }> = props => {
       const selectObject = props.baseObject as UseSelectReturnType
       return (
         <>
-          <label {...selectObject.getLabelProps()}>{selectObject.name}</label>
           <Controller
             name={selectObject.path}
             control={selectObject.formContext.control}
+            rules={props.baseObject.validator}
             as={
               <Dropdown
+                name={selectObject.getObject().title}
                 multi={false}
+                label={selectObject.getObject().title}
                 options={selectObject.getItems().map(value => {
                   return { value: value, label: value }
                 })}
+                error={selectObject.getError() ? true : false}
+                errorMessage={parseErrorMessage(selectObject.getError())}
               />
             }
           />
         </>
+      )
+    }
+    case InputTypes.textArea: {
+      const textAreaObject = props.baseObject as UseTextAreaReturnType
+      return (
+        <Textarea
+          {...textAreaObject.getTextAreaProps()}
+          label={textAreaObject.getObject().title}
+          error={textAreaObject.getError() ? true : false}
+          errorMessage={parseErrorMessage(textAreaObject.getError())}
+        />
       )
     }
   }
@@ -76,7 +107,6 @@ export const ObjectRenderer: FC<{
       {methods.map(obj => (
         <div key={`${obj.type}${obj.path}`}>
           <SpecializedObject baseObject={obj} />
-          {obj.getError() && <p>This is an error!</p>}
         </div>
       ))}
     </>
