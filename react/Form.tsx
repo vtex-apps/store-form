@@ -3,6 +3,7 @@ import { FormContext, JSONSchemaType } from 'react-hook-form-jsonschema'
 
 import jsonSchema from './mockJSONSchema'
 import { ObjectRenderer } from './components/ObjectRenderer'
+import FormSubmit from './FormSubmit'
 
 const onSubmit = (data: JSONSchemaType) =>
   // eslint-disable-next-line no-console
@@ -25,7 +26,7 @@ const Form: FC<FormProps> = () => {
   return (
     <MakeForm>
       <ObjectRenderer path="#" />
-      <input type="submit" />
+      <FormSubmit label="Submit" />
     </MakeForm>
   )
 }
