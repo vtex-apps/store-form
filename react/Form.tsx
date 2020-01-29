@@ -22,13 +22,17 @@ type FormProps = {
   schema: string
 }
 
-const Form: FC<FormProps> = () => {
-  return (
-    <MakeForm>
-      <ObjectRenderer path="#" />
-      <FormSubmit label="Submit" />
-    </MakeForm>
-  )
+const Form: FC<FormProps> = props => {
+  if (!props.children) {
+    return (
+      <MakeForm>
+        <ObjectRenderer path="#" />
+        <FormSubmit label="Submit" />
+      </MakeForm>
+    )
+  }
+
+  return <MakeForm>{props.children}</MakeForm>
 }
 
 export default Form
