@@ -9,7 +9,7 @@
     "react-apollo": "^2.5.8",
     "react-dom": "^16.8.6",
     "react-hook-form-jsonschema": "0.2.0-beta",
-    "react-intl": "^2.9.0"
+    "react-intl": "^3.11.0"
   },
   "devDependencies": {
     "@types/graphql": "14.0.7",
