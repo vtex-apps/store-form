@@ -1,4 +1,12 @@
 {
   "admin/test": "teste",
-  "store/test": "teste"
+  "store/test": "teste",
+  "store/form.error.required": "Este campo es requerido",
+  "store/form.error.maxLenght": "Este campo tiene una longitud máxima de: {lenght}",
+  "store/form.error.minLenght": "Este campo tiene una longitud mínima de: {lenght}",
+  "store/form.error.maxValue": "El valor máximo aceptado por este campo es {value}",
+  "store/form.error.minValue": "El valor mínimo aceptado por este campo es {value}",
+  "store/form.error.pattern": "Este texto no coincide con el patrón esperado",
+  "store/form.error.multipleOf": "Debe ser un mútiplo de {value}",
+  "store/form.error.undefinedError": "Error indefinido!"
 }
