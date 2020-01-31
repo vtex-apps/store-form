@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useMemo } from 'react'
 import { Dropdown } from 'vtex.styleguide'
 import {
   Controller,
@@ -19,6 +19,12 @@ export const DropdownRenderer: FC<{
   const selectObject = props.selectObject
   const error = selectObject.getError()
   const title = selectObject.getObject().title
+  const items = selectObject.getItems()
+  const options = useMemo(() => {
+    return items.map(value => {
+      return { value: value, label: value }
+    })
+  }, [items])
 
   return (
     <>
@@ -31,9 +37,7 @@ export const DropdownRenderer: FC<{
             name={title}
             multi={false}
             label={title}
-            options={selectObject.getItems().map(value => {
-              return { value: value, label: value }
-            })}
+            options={options}
             error={error ? true : false}
             errorMessage={useFormattedError(error)}
           />
