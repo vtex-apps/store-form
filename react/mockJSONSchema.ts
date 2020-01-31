@@ -1,6 +1,4 @@
 export default {
-  $id: 'https://example.com/person.schema.json',
-  $schema: 'http://json-schema.org/draft-07/schema#',
   title: 'Person',
   type: 'object',
   properties: {
@@ -20,13 +18,6 @@ export default {
       type: 'integer',
       minimum: 0,
       maximum: 120,
-    },
-    roundedDecades: {
-      type: 'integer',
-      title: 'Rounded Decades',
-      multipleOf: 10,
-      description:
-        'How many decades (rounded to the neared 10 mutiple) the person has.',
     },
     height: {
       type: 'number',
@@ -58,7 +49,7 @@ export default {
           title: 'Street Number',
         },
       },
-      required: ['streetType'],
+      required: ['streetType', 'streetAddress', 'streetNumber'],
     },
     agreement: {
       type: 'boolean',
