@@ -30,7 +30,7 @@ const messages = defineMessages({
     id: 'store/form.error.multipleOf',
     defaultMessage: '',
   },
-  undefinedError: {
+  genericError: {
     id: 'store/form.error.undefinedError',
     defaultMessage: '',
   },
@@ -60,6 +60,6 @@ export const useFormattedError = (message: ErrorMessage): string => {
         value: message.expected,
       })
     default:
-      return intl.formatMessage(messages.undefinedError)
+      return intl.formatMessage(messages.genericError)
   }
 }
