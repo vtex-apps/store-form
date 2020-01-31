@@ -4,6 +4,16 @@ Store Form offers utilities to **build a form based on a [Masterdata v2](https:/
 
 To handle the schema this block uses the [`react-hook-form-jsonschema`](https://github.com/vtex/react-hook-form-jsonschema) library under the hood.
 
+## Table of Contents
+
+- [Store Form](#store-form)
+  - [Configuration](#configuration)
+    - [form](#form)
+    - [form-input](#form-input)
+    - [form-input.input](#form-inputinput)
+    - [form-field-group](#form-field-group)
+  - [Example usage](#example-usage)
+
 ## Configuration
 
 There are **multiple building blocks of Store Form**:
