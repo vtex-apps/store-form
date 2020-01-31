@@ -38,9 +38,7 @@ If `form` does not have any children the default behaviour will be to try to gen
 | `entity`  | `String` | The entity in `Masterdata v2` where the document will be saved. This field is **required**.                                                             | `""`              |
 | `schema`  | `String` | The schema **already** in `Masterdata v2` against which the form content will be validated and the form will be built upon. This field is **required**. | `""`              |
 
-### `form-input`
-
-All of the blocks of the `form-input` family share the following props:
+### `form-input.radiogroup`, `form-input.dropdown`, `form-input.textarea`
 
 | **Props** | **Type** | **Description**                                                                                                                                                                                                                                                                                                            | **Default Value** |
 | --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
@@ -48,11 +46,10 @@ All of the blocks of the `form-input` family share the following props:
 
 ### `form-input.input`
 
-Besides the common props, this field accepts the following props:
-
-| **Props**   | **Type**                                  | **Description**                                                                                                                                                                                                                          | **Default Value** |
-| ----------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `inputType` | `input` &#124; `hidden` &#124; `password` | Defines the type of the text input to be rendered: <br>`input`: renders a normal text input.<br>`hidden`: Does not render an input, but adds it's value to the submitted document. <br>`password`: Renders an input as a password field. | `input`           |
+| **Props**   | **Type**                                  | **Description**                                                                                                                                                                                                                                                                                                            | **Default Value** |
+| ----------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `path`      | `String`                                  | Path in the jsonschema this input is validated against. The path is always in the form: `#/some/child/data/field/here` where `#` represents the root of the schema, and the `some/child/data/field/here` represents the tree of objects (from `some` to `here`) to get to the desired field, which in this case is `here`. | `""`              |
+| `inputType` | `input` &#124; `hidden` &#124; `password` | Defines the type of the text input to be rendered: <br>`input`: renders a normal text input.<br>`hidden`: Does not render an input, but adds it's value to the submitted document. <br>`password`: Renders an input as a password field.                                                                                   | `input`           |
 
 ### `form-field-group`
 
