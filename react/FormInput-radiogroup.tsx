@@ -1,11 +1,8 @@
 import React from 'react'
 
 import { RadioGroupInput } from './components/RadioGroupRenderer'
+import { BaseInputProps } from './typings/InputProps'
 
-export type FormRadiogroupProps = {
-  path: string
-}
-
-export default function FormInputRadiogroup(props: FormRadiogroupProps) {
+export default function FormInputRadiogroup(props: BaseInputProps) {
   return <RadioGroupInput path={props.path} />
 }

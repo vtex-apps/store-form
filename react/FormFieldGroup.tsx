@@ -2,9 +2,9 @@ import React from 'react'
 import { UISchemaType } from 'react-hook-form-jsonschema'
 
 import { ObjectRenderer } from './components/ObjectRenderer'
+import { BaseInputProps } from './typings/InputProps'
 
-export type FormFieldGroupProps = {
-  path: string
+export interface FormFieldGroupProps extends BaseInputProps {
   uiSchema: UISchemaType
 }
 

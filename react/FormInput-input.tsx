@@ -5,13 +5,14 @@ import {
   HiddenInput,
   PasswordInput,
 } from './components/InputRenderer'
+import { BaseInputProps } from './typings/InputProps'
 
 export enum InputTypes {
   input = 'input',
   hidden = 'hidden',
   password = 'password',
 }
-export type FormInputProps = {
+export interface FormInputProps extends BaseInputProps {
   path: string
   inputType: InputTypes
 }

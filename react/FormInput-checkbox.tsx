@@ -1,11 +1,8 @@
 import React from 'react'
 
 import { CheckboxInput } from './components/CheckboxRenderer'
+import { BaseInputProps } from './typings/InputProps'
 
-export type FormCheckboxProps = {
-  path: string
-}
-
-export default function FormInput(props: FormCheckboxProps) {
+export default function FormInput(props: BaseInputProps) {
   return <CheckboxInput path={props.path} />
 }
