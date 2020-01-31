@@ -1,6 +1,4 @@
 {
-  "admin/test": "teste",
-  "store/test": "teste",
   "store/form.error.required": "Este campo é necessário",
   "store/form.error.maxLength": "Este campo deve ter até {value} caracteres",
   "store/form.error.minLength": "Este campo deve ter no mínimo {value} caracteres",
