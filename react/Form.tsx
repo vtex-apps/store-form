@@ -23,7 +23,7 @@ type FormProps = {
 }
 
 const Form: FC<FormProps> = props => {
-  if (!props.children) {
+  if (!React.Children.count(props.children)) {
     return (
       <MakeForm>
         <ObjectRenderer path="#" />
