@@ -18,6 +18,7 @@ export const RadioGroupRenderer: FC<{
 }> = props => {
   const radioObject = props.radioObject
   const error = radioObject.getError()
+  const title = radioObject.getObject().title
 
   return (
     <Controller
@@ -26,10 +27,10 @@ export const RadioGroupRenderer: FC<{
       rules={radioObject.validator}
       as={
         <RadioGroup
-          name={radioObject.getObject().title}
+          name={title}
           required={radioObject.isRequired}
           hideBorder
-          label={radioObject.getObject().title}
+          label={title}
           options={radioObject.getItems().map(value => {
             return { value: value, label: value }
           })}

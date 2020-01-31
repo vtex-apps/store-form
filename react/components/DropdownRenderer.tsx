@@ -18,6 +18,7 @@ export const DropdownRenderer: FC<{
 }> = props => {
   const selectObject = props.selectObject
   const error = selectObject.getError()
+  const title = selectObject.getObject().title
 
   return (
     <>
@@ -27,9 +28,9 @@ export const DropdownRenderer: FC<{
         rules={selectObject.validator}
         as={
           <Dropdown
-            name={selectObject.getObject().title}
+            name={title}
             multi={false}
-            label={selectObject.getObject().title}
+            label={title}
             options={selectObject.getItems().map(value => {
               return { value: value, label: value }
             })}
