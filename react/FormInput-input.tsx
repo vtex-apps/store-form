@@ -13,8 +13,7 @@ export enum InputTypes {
   password = 'password',
 }
 export interface FormInputProps extends BaseInputProps {
-  path: string
-  inputType: InputTypes
+  inputType?: InputTypes
 }
 
 export default function FormInput(props: FormInputProps) {

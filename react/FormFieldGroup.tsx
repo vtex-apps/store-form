@@ -5,7 +5,7 @@ import { ObjectRenderer } from './components/ObjectRenderer'
 import { BaseInputProps } from './typings/InputProps'
 
 export interface FormFieldGroupProps extends BaseInputProps {
-  uiSchema: UISchemaType
+  uiSchema?: UISchemaType
 }
 
 export default function FormInput(props: FormFieldGroupProps) {
