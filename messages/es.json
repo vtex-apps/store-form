@@ -6,5 +6,5 @@
   "store/form.error.minValue": "El valor mínimo aceptado por este campo es {value}",
   "store/form.error.pattern": "Este texto no coincide con el patrón esperado",
   "store/form.error.multipleOf": "Debe ser un mútiplo de {value}",
-  "store/form.error.undefinedError": "Error indefinido!"
+  "store/form.error.undefinedError": "Valor no válido!"
 }
