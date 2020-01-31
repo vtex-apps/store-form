@@ -31,7 +31,7 @@ If `form-input` family of blocks, `form-field-group` or `form-submit` are used, 
 
 ### `form`
 
-If `form` does not have any children the default behaviour will be to try to generate a form automatically based on the JSON Schema provided. If it has children it will simply ccreate a context for the blocks `form-input` and `form-submit` to use.
+If `form` does not have any children the default behaviour will be to try to generate a form automatically based on the JSON Schema provided. If it has children it will simply create a context for the blocks `form-input` and `form-submit` to use.
 
 | **Props** | **Type** | **Description**                                                                                                                                         | **Default Value** |
 | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
