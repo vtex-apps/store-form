@@ -7,11 +7,11 @@ const messages = defineMessages({
     defaultMessage: '',
   },
   maxLength: {
-    id: 'store/form.error.maxLenght',
+    id: 'store/form.error.maxLength',
     defaultMessage: '',
   },
   minLength: {
-    id: 'store/form.error.minLenght',
+    id: 'store/form.error.minLength',
     defaultMessage: '',
   },
   maxValue: {
