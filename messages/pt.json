@@ -1,4 +1,10 @@
 {
-  "admin/test": "teste",
-  "store/test": "teste"
+  "store/form.error.required": "Este campo é necessário",
+  "store/form.error.maxLength": "Este campo deve ter até {value} caracteres",
+  "store/form.error.minLength": "Este campo deve ter no mínimo {value} caracteres",
+  "store/form.error.maxValue": "O valor máximo aceito neste campo é {value}",
+  "store/form.error.minValue": "O valor mínimo aceito neste campo é {value}",
+  "store/form.error.pattern": "Este texto não corresponde com o padrão esperado",
+  "store/form.error.multipleOf": "Este campo deve ser um mútiplo de {value}",
+  "store/form.error.undefinedError": "Valor inválido!"
 }

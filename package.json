@@ -6,7 +6,7 @@
   },
   "scripts": {
     "lint": "cd ./react && yarn lint",
-    "test": "cd ./react && yarn test",
+    "test": "cd ./react && yarn test --passWithNoTests",
     "lint:locales": "intl-equalizer",
     "locales:fix": "intl-equalizer --fix",
     "verify": "yarn lint && yarn lint:locales && yarn test"

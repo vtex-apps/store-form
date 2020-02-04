@@ -1,0 +1,30 @@
+{
+  "form": {
+    "component": "Form",
+    "composition": "children"
+  },
+  "form-field-group": {
+    "component": "FormFieldGroup"
+  },
+  "form-input": {
+    "component": "nop"
+  },
+  "form-input.checkbox": {
+    "component": "FormInput-checkbox"
+  },
+  "form-input.dropdown": {
+    "component": "FormInput-dropdown"
+  },
+  "form-input.input": {
+    "component": "FormInput-input"
+  },
+  "form-input.radiogroup": {
+    "component": "FormInput-radiogroup"
+  },
+  "form-input.textarea": {
+    "component": "FormInput-textarea"
+  },
+  "form-submit": {
+    "component": "FormSubmit"
+  }
+}
