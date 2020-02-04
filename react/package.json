@@ -35,5 +35,6 @@
     "setupFilesAfterEnv": [
       "./setupTest.js"
     ]
-  }
+  },
+  "version": "0.1.0"
 }
