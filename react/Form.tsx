@@ -1,38 +1,34 @@
 import React, { FC } from 'react'
-import { FormContext, JSONSchemaType } from 'react-hook-form-jsonschema'
 
-import jsonSchema from './mockJSONSchema'
 import { ObjectRenderer } from './components/ObjectRenderer'
 import FormSubmit from './FormSubmit'
-
-const onSubmit = (data: JSONSchemaType) =>
-  // eslint-disable-next-line no-console
-  console.log(data)
-
-const MakeForm: FC = props => {
-  return (
-    <FormContext schema={jsonSchema} onSubmit={onSubmit}>
-      {props.children}
-    </FormContext>
-  )
-}
-
-type FormProps = {
-  entity: string
-  schema: string
-}
+import documentSchemaV2 from './graphql/getSchema.graphql'
+import { useQuery } from './hooks/mockUseQuery'
+import { FormRenderer } from './components/FormRenderer'
+import { FormProps } from './typings/FormProps'
 
 const Form: FC<FormProps> = props => {
+  const { data } = useQuery(documentSchemaV2, {
+    variables: {
+      dataEntity: 'Test',
+      schema: 'person',
+    },
+  })
+
   if (!React.Children.count(props.children)) {
     return (
-      <MakeForm>
+      <FormRenderer schema={data} formProps={props}>
         <ObjectRenderer path="#" />
         <FormSubmit label="Submit" />
-      </MakeForm>
+      </FormRenderer>
     )
   }
 
-  return <MakeForm>{props.children}</MakeForm>
+  return (
+    <FormRenderer schema={data} formProps={props}>
+      {props.children}
+    </FormRenderer>
+  )
 }
 
 export default Form
