@@ -4,7 +4,11 @@
   "store/form.error.minLength": "Este campo deve ter no mínimo {value} caracteres",
   "store/form.error.maxValue": "O valor máximo aceito neste campo é {value}",
   "store/form.error.minValue": "O valor mínimo aceito neste campo é {value}",
+  "store/form.error.notFloat": "Deve ser um número",
+  "store/form.error.notInteger": "Deve ser um número inteiro",
   "store/form.error.pattern": "Este texto não corresponde com o padrão esperado",
+  "store/form.error.notInEnum": "Deve ser algum dos seguintes valores: {values}",
   "store/form.error.multipleOf": "Este campo deve ser um mútiplo de {value}",
-  "store/form.error.undefinedError": "Valor inválido!"
+  "store/form.error.undefinedError": "Valor inválido!",
+  "store/form.submit": "Enviar"
 }
