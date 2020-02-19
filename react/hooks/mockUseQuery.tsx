@@ -13,7 +13,6 @@ interface QueryResult<TData = any, TVariables = OperationVariables>
   options?: QueryHookOptions<TData, TVariables>
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useQuery<TData, TVariables = OperationVariables>(
   query?: DocumentNode,
   options?: QueryHookOptions<TData, TVariables>
