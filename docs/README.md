@@ -42,21 +42,21 @@ If `form` does not have any children the default behaviour will be to try to gen
 
 | **Props** | **Type** | **Description**                                                                                                                                                                                                                                                                                                            | **Default Value** |
 | --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `path`    | `String` | Path in the jsonschema this input is validated against. The path is always in the form: `#/some/child/data/field/here` where `#` represents the root of the schema, and the `some/child/data/field/here` represents the tree of objects (from `some` to `here`) to get to the desired field, which in this case is `here`. | `""`              |
+| `path`    | `String` | Path in the jsonschema this input is validated against. The path is always in the form: `$/some/child/data/field/here` where `$` represents the root of the schema, and the `some/child/data/field/here` represents the tree of objects (from `some` to `here`) to get to the desired field, which in this case is `here`. | `""`              |
 
 ### `form-input.input`
 
 | **Props**   | **Type**                                  | **Description**                                                                                                                                                                                                                                                                                                            | **Default Value** |
 | ----------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `path`      | `String`                                  | Path in the jsonschema this input is validated against. The path is always in the form: `#/some/child/data/field/here` where `#` represents the root of the schema, and the `some/child/data/field/here` represents the tree of objects (from `some` to `here`) to get to the desired field, which in this case is `here`. | `""`              |
+| `path`      | `String`                                  | Path in the jsonschema this input is validated against. The path is always in the form: `$/some/child/data/field/here` where `$` represents the root of the schema, and the `some/child/data/field/here` represents the tree of objects (from `some` to `here`) to get to the desired field, which in this case is `here`. | `""`              |
 | `inputType` | `input` &#124; `hidden` &#124; `password` | Defines the type of the text input to be rendered: <br>`input`: renders a normal text input.<br>`hidden`: Does not render an input, but adds it's value to the submitted document. <br>`password`: Renders an input as a password field.                                                                                   | `input`           |
 
 ### `form-field-group`
 
-| **Props**  | **Type** | **Description**                                                                                                                                                                                                                                                                                                | **Default Value** |
-| ---------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `path`     | `String` | Path in the jsonschema this input is validated against. The path is always in the form: #/some/child/data/field/here where # represents the root of the schema, and the some/child/data/field/here represents the tree of objects (from some to here) to get to the desired field, which in this case is here. | `""`              |
-| `uiSchema` | `object` | This UISchema is a modified schema type, relative to the object passed in the `path` prop, the format of the UISchema is described bellow.                                                                                                                                                                     | `{}`              |
+| **Props**  | **Type** | **Description**                                                                                                                                                                                                                                                                                                    | **Default Value** |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
+| `path`     | `String` | Path in the jsonschema this input is validated against. The path is always in the form: `$/some/child/data/field/here` where `$` represents the root of the schema, and the some/child/data/field/here represents the tree of objects (from some to here) to get to the desired field, which in this case is here. | `""`              |
+| `uiSchema` | `object` | This UISchema is a modified schema type, relative to the object passed in the `path` prop, the format of the UISchema is described bellow.                                                                                                                                                                         | `{}`              |
 
 The uiSchema has the following schema format:
 
@@ -222,22 +222,22 @@ Suppose now that you only want to render the required fields and don't care abou
   },
   "form-input.input#firstName": {
     "props": {
-      "path": "#/firstName"
+      "path": "$/firstName"
     }
   },
   "form-input.input#lastName": {
     "props": {
-      "path": "#/lastName"
+      "path": "$/lastName"
     }
   },
   "form-input.checkbox#agreement": {
     "props": {
-      "path": "#/agreement"
+      "path": "$/agreement"
     }
   },
   "form-field-group#address": {
     "props": {
-      "path": "#/address",
+      "path": "$/address",
       "uiSchema": {
 	"type": "default",
 	"properties": {
