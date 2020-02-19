@@ -26,6 +26,7 @@ There are **multiple building blocks of Store Form**:
 - `form-input.textarea`: This block will render a textarea input in the form.
 - `form-field-group`: This block will, based on the schema provided, automatically build a form based on the provided path in the schema.
 - `form-submit`: This block will render a button to submit the form content.
+- `form-success`: This block accepts a `children` element and these children will be rendered when the form is submitted succesfully instead of the form itself.
 
 If `form-input` family of blocks, `form-field-group` or `form-submit` are used, they **need** to be children of a `form` block.
 
