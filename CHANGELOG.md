@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Graphql mutation to save the form input in masterdata on submit.
+- Error messages when submitting goes wrong.
+- Success component(`form-success`) when the form is succesfully submitted.
+
 ## [0.1.0] - 2020-02-04
 
 ### Added
+
 - Intial release.
