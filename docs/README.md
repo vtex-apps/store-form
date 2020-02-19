@@ -19,14 +19,14 @@ To handle the schema this block uses the [`react-hook-form-jsonschema`](https://
 There are **multiple building blocks of Store Form**:
 
 - `form`: This is the top level block in which you will specify which entity and schema from `Masterdata v2` to use for building and submitting your form.
-- `form-input.checkbox`: This block will render a checkbox in the form.
-- `form-input.dropdown`: This block will render a dropdown in the form.
-- `form-input.input`: This block will render a simple text input in the form.
-- `form-input.radiogroup`: This block will render a group of radio buttons in the form.
-- `form-input.textarea`: This block will render a textarea input in the form.
-- `form-field-group`: This block will, based on the schema provided, automatically build a form based on the provided path in the schema.
-- `form-submit`: This block will render a button to submit the form content.
-- `form-success`: This block accepts a `children` element and these children will be rendered when the form is submitted succesfully instead of the form itself.
+- `form-input.checkbox`: Will render a checkbox in the form.
+- `form-input.dropdown`: Will render a dropdown in the form.
+- `form-input.input`: Will render a simple text input in the form.
+- `form-input.radiogroup`: Will render a group of radio buttons in the form.
+- `form-input.textarea`: Will render a textarea input in the form.
+- `form-field-group`: Will, based on the schema provided, automatically build a form based on the provided path in the schema.
+- `form-submit`: Will render a button to submit the form content.
+- `form-success`: Accepts a `children` element and these children will be rendered when the form is submitted succesfully instead of the form itself.
 
 If `form-input` family of blocks, `form-field-group` or `form-submit` are used, they **need** to be children of a `form` block.
 
