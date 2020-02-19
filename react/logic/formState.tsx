@@ -11,7 +11,7 @@ function reducer(
   action: SubmittingAction
 ): SubmittingState {
   switch (action.type) {
-    case 'START_SUBMITTING': {
+    case 'SET_LOADING': {
       return {
         loading: true,
         userInputError: null,
@@ -19,7 +19,7 @@ function reducer(
         success: null,
       }
     }
-    case 'SUCCESS_SUBMITTING': {
+    case 'SET_SUCCESS': {
       return {
         loading: false,
         userInputError: false,
@@ -27,7 +27,7 @@ function reducer(
         success: true,
       }
     }
-    case 'USER_INPUT_ERROR_SUBMITTING': {
+    case 'SET_USER_INPUT_ERROR': {
       return {
         ...state,
         loading: false,
@@ -35,7 +35,7 @@ function reducer(
         success: false,
       }
     }
-    case 'SERVER_INTERNAL_ERROR_SUBMITTING': {
+    case 'SET_SERVER_INTERNAL_ERROR': {
       return {
         ...state,
         loading: false,
@@ -56,10 +56,10 @@ export type SubmittingState = {
 }
 
 export type SubmittingAction =
-  | { type: 'START_SUBMITTING' }
-  | { type: 'SUCCESS_SUBMITTING' }
-  | { type: 'USER_INPUT_ERROR_SUBMITTING' }
-  | { type: 'SERVER_INTERNAL_ERROR_SUBMITTING' }
+  | { type: 'SET_LOADING' }
+  | { type: 'SET_SUCCESS' }
+  | { type: 'SET_USER_INPUT_ERROR' }
+  | { type: 'SET_SERVER_INTERNAL_ERROR' }
 
 export const useSubmitReducer = () => {
   return useReducer(reducer, initialState)
