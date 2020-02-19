@@ -1,8 +1,9 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC, useMemo, useState } from 'react'
 import {
   FormContext,
   JSONSchemaType,
   JSONSchemaPathInfo,
+  getDataFromPath,
 } from 'react-hook-form-jsonschema'
 import { useMutation } from 'react-apollo'
 import { ExtensionPoint } from 'vtex.render-runtime'
@@ -20,7 +21,9 @@ export const FormRenderer: FC<{
   const [createDocumentMutation, { error }] = useMutation(createDocumentV2)
 
   const masterDataErrors = useMemo(() => parseMasterDataError(error), [error])
-  let lastErrorFieldValues: Record<string, string> = {}
+  const [lastErrorFieldValues, setLastErrorFieldValues] = useState<
+    Record<string, string>
+  >({})
 
   const [submitState, dispatchSubmitAction] = useSubmitReducer()
   if (submitState.success) {
@@ -47,8 +50,8 @@ export const FormRenderer: FC<{
             dispatchSubmitAction({ type: 'SUCCESS_SUBMITTING' })
           })
           .catch(e => {
-            methods.triggerValidation()
-            lastErrorFieldValues = {}
+            setLastErrorFieldValues(data)
+
             if (e.graphQLErrors) {
               for (const graphqlError of e.graphQLErrors as GraphQLError[]) {
                 if (
@@ -64,16 +67,17 @@ export const FormRenderer: FC<{
             } else {
               dispatchSubmitAction({ type: 'SERVER_INTERNAL_ERROR_SUBMITTING' })
             }
+
+            methods.triggerValidation()
           })
       }}
       customValidators={{
         graphqlError: (value, context: JSONSchemaPathInfo) => {
+          const lastValue = getDataFromPath(context.path, lastErrorFieldValues)
           if (
             masterDataErrors[context.pointer] &&
-            (lastErrorFieldValues[context.pointer] === undefined ||
-              lastErrorFieldValues[context.pointer] === value)
+            ((!lastValue && !value) || lastValue === value)
           ) {
-            lastErrorFieldValues[context.pointer] = value
             return masterDataErrors[context.pointer][0]
           }
           return true
