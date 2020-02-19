@@ -18,7 +18,7 @@ const Form: FC<FormProps> = props => {
   if (!React.Children.count(props.children)) {
     return (
       <FormRenderer schema={data} formProps={props}>
-        <ObjectRenderer path="#" />
+        <ObjectRenderer path="$" />
         <FormSubmit label="Submit" />
       </FormRenderer>
     )
