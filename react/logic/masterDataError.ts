@@ -30,13 +30,7 @@ const filterMasterDataErrors = (
   acc: MasterDataError[],
   message: GraphQLError
 ) => {
-  if (
-    message.extensions &&
-    message.extensions.exception &&
-    message.extensions.exception.response &&
-    message.extensions.exception.response.data &&
-    message.extensions.exception.response.data.errors
-  ) {
+  if (message?.extensions?.exception?.response?.data?.errors) {
     return acc.concat(
       message.extensions.exception.response.data.errors.reduce(concatErrors, [])
     )
