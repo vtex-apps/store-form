@@ -15,7 +15,10 @@ export default function FormSubmit(props: FormSubmitProps) {
         {props.label}
       </Button>
       {userInputError && (
-        <Alert type="error">Please review the form and try again!</Alert>
+        <Alert type="error">
+          Found some errors in the data provided please review the fields
+          indicated with errors and try again!
+        </Alert>
       )}
       {serverError && (
         <Alert type="error">
