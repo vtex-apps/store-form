@@ -9,7 +9,8 @@ interface MasterDataError {
   LineNumber: number
   LinePosition: number
   Path: string
-  Value: any
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Value: any | string[]
   SchemaId: string
   SchemaBaseUri: string | null
   ErrorType: string
@@ -69,13 +70,10 @@ const evaluateMasterDataErrors = (
   switch (serverError.ErrorType) {
     case 'required':
       if (Array.isArray(serverError.Value)) {
-        acc = (serverError.Value as Array<string>).reduce(
-          evaluateMasterDataRequiredErrors,
-          {
-            nodes: acc,
-            schemaId: serverError.SchemaId,
-          }
-        ).nodes
+        acc = serverError.Value.reduce(evaluateMasterDataRequiredErrors, {
+          nodes: acc,
+          schemaId: serverError.SchemaId,
+        }).nodes
       }
       break
     case 'format':
