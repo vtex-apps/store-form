@@ -68,13 +68,15 @@ const evaluateMasterDataErrors = (
 ) => {
   switch (serverError.ErrorType) {
     case 'required':
-      acc = (serverError.Value as Array<string>).reduce(
-        evaluateMasterDataRequiredErrors,
-        {
-          nodes: acc,
-          schemaId: serverError.SchemaId,
-        }
-      ).nodes
+      if (Array.isArray(serverError.Value)) {
+        acc = (serverError.Value as Array<string>).reduce(
+          evaluateMasterDataRequiredErrors,
+          {
+            nodes: acc,
+            schemaId: serverError.SchemaId,
+          }
+        ).nodes
+      }
       break
     case 'format':
     case 'type':
