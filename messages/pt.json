@@ -9,6 +9,6 @@
   "store/form.error.pattern": "Este texto não corresponde com o padrão esperado",
   "store/form.error.notInEnum": "Deve ser algum dos seguintes valores: {values}",
   "store/form.error.multipleOf": "Este campo deve ser um mútiplo de {value}",
-  "store/form.error.undefinedError": "Valor inválido!",
+  "store/form.error.undefinedError": "Valor inválido.",
   "store/form.submit": "Enviar"
 }
