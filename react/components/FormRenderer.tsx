@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from 'react'
+import React, { FC, useMemo, useState, useCallback } from 'react'
 import {
   FormContext,
   JSONSchemaType,
@@ -27,45 +27,56 @@ export const FormRenderer: FC<{
   >({})
 
   const [submitState, dispatchSubmitAction] = useSubmitReducer()
+
+  const onSubmit = useCallback(
+    async ({ data, methods, event }: OnSubmitParameters) => {
+      if (event) {
+        event.preventDefault()
+      }
+      dispatchSubmitAction({ type: 'SET_LOADING' })
+
+      await createDocumentMutation({
+        variables: {
+          dataEntity: props.formProps.entity,
+          document: { document: data },
+          schema: props.formProps.schema,
+        },
+      })
+        .then(() => {
+          dispatchSubmitAction({ type: 'SET_SUCCESS' })
+        })
+        .catch(e => {
+          setLastErrorFieldValues(data)
+
+          if (e.graphQLErrors) {
+            for (const graphqlError of e.graphQLErrors as GraphQLError[]) {
+              if (
+                graphqlError.extensions?.exception?.name === 'UserInputError'
+              ) {
+                dispatchSubmitAction({ type: 'SET_USER_INPUT_ERROR' })
+              } else {
+                dispatchSubmitAction({
+                  type: 'SET_SERVER_INTERNAL_ERROR',
+                })
+              }
+            }
+          } else {
+            dispatchSubmitAction({ type: 'SET_SERVER_INTERNAL_ERROR' })
+          }
+
+          methods.triggerValidation()
+        })
+    },
+    [
+      createDocumentMutation,
+      dispatchSubmitAction,
+      props.formProps.entity,
+      props.formProps.schema,
+    ]
+  )
+
   if (submitState.success) {
     return <ExtensionPoint id="form-success" />
-  }
-
-  const onSubmit = async ({ data, methods, event }: OnSubmitParameters) => {
-    if (event) {
-      event.preventDefault()
-    }
-    dispatchSubmitAction({ type: 'SET_LOADING' })
-
-    await createDocumentMutation({
-      variables: {
-        dataEntity: props.formProps.entity,
-        document: { document: data },
-        schema: props.formProps.schema,
-      },
-    })
-      .then(() => {
-        dispatchSubmitAction({ type: 'SET_SUCCESS' })
-      })
-      .catch(e => {
-        setLastErrorFieldValues(data)
-
-        if (e.graphQLErrors) {
-          for (const graphqlError of e.graphQLErrors as GraphQLError[]) {
-            if (graphqlError.extensions?.exception?.name === 'UserInputError') {
-              dispatchSubmitAction({ type: 'SET_USER_INPUT_ERROR' })
-            } else {
-              dispatchSubmitAction({
-                type: 'SET_SERVER_INTERNAL_ERROR',
-              })
-            }
-          }
-        } else {
-          dispatchSubmitAction({ type: 'SET_SERVER_INTERNAL_ERROR' })
-        }
-
-        methods.triggerValidation()
-      })
   }
 
   return (
