@@ -17,10 +17,6 @@ const CSS_HANDLES = [
   'formErrorUserInput',
 ] as const
 
-const userInputErrorMessage =
-  'Found some errors in the data provided please review the fields indicated with errors and try again!'
-const serverErrorMessage = 'Internal Server Error! Please try again later!'
-
 const messages = defineMessages({
   submitButton: {
     id: 'store/form.submit.buttonLabel',
@@ -52,14 +48,14 @@ export default function FormSubmit({
       <div className={handles.formErrorUserInput}>
         {userInputError && (
           <Alert type="error">
-            <IOMessage id={messages.userInputError} />
+            <IOMessage id={messages.userInputError.id} />
           </Alert>
         )}
       </div>
       <div className={handles.formErrorServer}>
         {serverError && (
           <Alert type="error">
-            <IOMessage id={messages.serverError} />
+            <IOMessage id={messages.serverError.id} />
           </Alert>
         )}
       </div>
