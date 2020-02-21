@@ -21,10 +21,10 @@ export default function FormInput(props: FormInputProps) {
 
   switch (inputType) {
     case InputTypes.input:
-      return <RawInput path={props.path} />
+      return <RawInput pointer={props.pointer} />
     case InputTypes.hidden:
-      return <HiddenInput path={props.path} />
+      return <HiddenInput pointer={props.pointer} />
     case InputTypes.password:
-      return <PasswordInput path={props.path} />
+      return <PasswordInput pointer={props.pointer} />
   }
 }

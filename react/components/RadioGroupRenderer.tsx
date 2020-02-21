@@ -8,8 +8,8 @@ import {
 
 import { useFormattedError } from '../hooks/useErrorMessage'
 
-export const RadioGroupInput: FC<{ path: string }> = props => {
-  const radioObject = useRadio(props.path)
+export const RadioGroupInput: FC<{ pointer: string }> = props => {
+  const radioObject = useRadio(props.pointer)
   return <RadioGroupRenderer radioObject={radioObject} />
 }
 
@@ -22,7 +22,7 @@ export const RadioGroupRenderer: FC<{
 
   return (
     <Controller
-      name={radioObject.path}
+      name={radioObject.pointer}
       control={radioObject.formContext.control}
       rules={radioObject.validator}
       as={

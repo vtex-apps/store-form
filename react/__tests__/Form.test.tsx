@@ -23,10 +23,10 @@ test('should render full schema', () => {
 test('should render partial schema', () => {
   const { getAllByText } = render(
     <Form entity="asdf" schema="asdf">
-      <FormInput path="$/firstName" />
-      <FormInput path="$/lastName" />
-      <FormFieldGroup path="$/address" />
-      <FormInputCheckbox path="$/agreement" />
+      <FormInput pointer="#/properties/firstName" />
+      <FormInput pointer="#/properties/lastName" />
+      <FormFieldGroup pointer="#/properties/address" />
+      <FormInputCheckbox pointer="#/properties/agreement" />
     </Form>
   )
 

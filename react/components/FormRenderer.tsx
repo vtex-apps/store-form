@@ -2,8 +2,8 @@ import React, { FC, useMemo, useState, useCallback } from 'react'
 import {
   FormContext,
   JSONSchemaType,
-  JSONSchemaPathInfo,
-  getDataFromPath,
+  JSONSubSchemaInfo,
+  getDataFromPointer,
   OnSubmitParameters,
 } from 'react-hook-form-jsonschema'
 import { useMutation } from 'react-apollo'
@@ -84,8 +84,11 @@ export const FormRenderer: FC<{
       schema={props.schema}
       onSubmit={onSubmit}
       customValidators={{
-        graphqlError: (value, context: JSONSchemaPathInfo) => {
-          const lastValue = getDataFromPath(context.path, lastErrorFieldValues)
+        graphqlError: (value, context: JSONSubSchemaInfo) => {
+          const lastValue = getDataFromPointer(
+            context.pointer,
+            lastErrorFieldValues
+          )
           if (
             masterDataErrors[context.pointer] &&
             ((!lastValue && !value) || lastValue === value)

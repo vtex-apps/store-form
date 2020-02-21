@@ -4,8 +4,8 @@ import { UseTextAreaReturnType, useTextArea } from 'react-hook-form-jsonschema'
 
 import { useFormattedError } from '../hooks/useErrorMessage'
 
-export const TextAreaInput: FC<{ path: string }> = props => {
-  const textAreaObject = useTextArea(props.path)
+export const TextAreaInput: FC<{ pointer: string }> = props => {
+  const textAreaObject = useTextArea(props.pointer)
   return <TextAreaRenderer textAreaObject={textAreaObject} />
 }
 

@@ -1,6 +1,10 @@
 import { ApolloError } from 'apollo-client'
 import { GraphQLError } from 'graphql'
-import { ErrorTypes, concatFormPath } from 'react-hook-form-jsonschema'
+import { ErrorTypes } from 'react-hook-form-jsonschema'
+
+const concatFormPointer = (currPath: string, next: string) => {
+  return `${currPath}/${next}`
+}
 
 export type MasterDataErrorRecord = Record<string, ErrorTypes[]>
 
@@ -41,13 +45,13 @@ const filterMasterDataErrors = (
 
 const createOrPushError = (
   errorRecord: MasterDataErrorRecord,
-  path: string,
+  pointer: string,
   error: ErrorTypes
 ) => {
-  if (errorRecord[path]) {
-    errorRecord[path].push(error)
+  if (errorRecord[pointer]) {
+    errorRecord[pointer].push(error)
   } else {
-    errorRecord[path] = [error]
+    errorRecord[pointer] = [error]
   }
 }
 
@@ -55,11 +59,11 @@ const evaluateMasterDataRequiredErrors = (
   data: { nodes: MasterDataErrorRecord; schemaId: string },
   nodeName: string
 ) => {
-  const path = concatFormPath(
-    concatFormPath(data.schemaId, 'properties'),
+  const pointer = concatFormPointer(
+    concatFormPointer(data.schemaId, 'properties'),
     nodeName
   )
-  createOrPushError(data.nodes, path, ErrorTypes.required)
+  createOrPushError(data.nodes, pointer, ErrorTypes.required)
   return { nodes: data.nodes, schemaId: data.schemaId }
 }
 

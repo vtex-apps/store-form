@@ -8,8 +8,8 @@ import {
 
 import { useFormattedError } from '../hooks/useErrorMessage'
 
-export const DropdownInput: FC<{ path: string }> = props => {
-  const selectObject = useSelect(props.path)
+export const DropdownInput: FC<{ pointer: string }> = props => {
+  const selectObject = useSelect(props.pointer)
   return <DropdownRenderer selectObject={selectObject} />
 }
 
@@ -29,7 +29,7 @@ export const DropdownRenderer: FC<{
   return (
     <>
       <Controller
-        name={selectObject.path}
+        name={selectObject.pointer}
         control={selectObject.formContext.control}
         rules={selectObject.validator}
         as={

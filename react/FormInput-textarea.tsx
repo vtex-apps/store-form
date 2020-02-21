@@ -4,5 +4,5 @@ import { TextAreaInput } from './components/TextAreaRenderer'
 import { BaseInputProps } from './typings/InputProps'
 
 export default function FormInput(props: BaseInputProps) {
-  return <TextAreaInput path={props.path} />
+  return <TextAreaInput pointer={props.pointer} />
 }

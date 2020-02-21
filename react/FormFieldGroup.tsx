@@ -9,5 +9,5 @@ export interface FormFieldGroupProps extends BaseInputProps {
 }
 
 export default function FormInput(props: FormFieldGroupProps) {
-  return <ObjectRenderer path={props.path} UISchema={props.uiSchema} />
+  return <ObjectRenderer pointer={props.pointer} UISchema={props.uiSchema} />
 }

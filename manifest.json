@@ -2,8 +2,8 @@
   "vendor": "vtex",
   "name": "store-form",
   "version": "0.1.0",
-  "title": "CHANGE_ME",
-  "description": "CHANGE_ME",
+  "title": "VTEX store-form",
+  "description": "Build forms based on Master Data",
   "builders": {
     "react": "3.x",
     "messages": "1.x",
@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "vtex.styleguide": "9.x",
-    "vtex.store-graphql": "2.x"
+    "vtex.store-graphql": "2.x",
+    "vtex.css-handles": "0.x",
+    "vtex.native-types": "0.x"
   },
   "registries": [
     "smartcheckout"
