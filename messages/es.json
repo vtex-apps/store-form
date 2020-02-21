@@ -10,5 +10,7 @@
   "store/form.error.notInEnum": "Debe ser uno de los siguientes valores: {values}",
   "store/form.error.multipleOf": "Debe ser un mútiplo de {value}",
   "store/form.error.undefinedError": "Valor no válido.",
-  "store/form.submit": "Enviar"
+  "store/form.submit.buttonLabel": "Enviar",
+  "store/form.submit.error.userInputError": "Encontrado algunos errores en los datos, revise los campos indicados e intente nuevamente.",
+  "store/form.submit.error.serverError": "¡Error interno de servidor! ¡Por favor, inténtelo de nuevo más tarde!"
 }
