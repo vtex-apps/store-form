@@ -6,6 +6,7 @@ const initialState: SubmittingState = {
   serverError: null,
   success: null,
 }
+
 function reducer(
   state: SubmittingState,
   action: SubmittingAction
