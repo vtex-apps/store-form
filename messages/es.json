@@ -4,7 +4,13 @@
   "store/form.error.minLength": "Este campo tiene una longitud mínima de: {value}",
   "store/form.error.maxValue": "El valor máximo aceptado por este campo es {value}",
   "store/form.error.minValue": "El valor mínimo aceptado por este campo es {value}",
+  "store/form.error.notFloat": "Debe ser un número",
+  "store/form.error.notInteger": "Debe ser un entero",
   "store/form.error.pattern": "Este texto no coincide con el patrón esperado",
+  "store/form.error.notInEnum": "Debe ser uno de los siguientes valores: {values}",
   "store/form.error.multipleOf": "Debe ser un mútiplo de {value}",
-  "store/form.error.undefinedError": "Valor no válido!"
+  "store/form.error.undefinedError": "Valor no válido.",
+  "store/form.submit.buttonLabel": "Enviar",
+  "store/form.submit.error.userInputError": "Encontrado algunos errores en los datos, revise los campos indicados e intente nuevamente.",
+  "store/form.submit.error.serverError": "¡Error interno de servidor! ¡Por favor, inténtelo de nuevo más tarde!"
 }

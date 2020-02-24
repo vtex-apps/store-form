@@ -1,3 +1,3 @@
 export interface BaseInputProps {
-  path: string
+  pointer: string
 }

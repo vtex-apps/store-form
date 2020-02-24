@@ -4,7 +4,13 @@
   "store/form.error.minLength": "This field has a min length of: {value}",
   "store/form.error.maxValue": "The maximum value accepted by this field is {value}",
   "store/form.error.minValue": "The minimum value accepted by this field is {value}",
+  "store/form.error.notFloat": "Must be a number",
+  "store/form.error.notInteger": "Must be an integer",
   "store/form.error.pattern": "This text does not match the expected pattern",
+  "store/form.error.notInEnum": "Must one of the following values: {values}",
   "store/form.error.multipleOf": "Must be a multiple of {value}",
-  "store/form.error.undefinedError": "Invalid value!"
+  "store/form.error.undefinedError": "Invalid value.",
+  "store/form.submit.buttonLabel": "Submit",
+  "store/form.submit.error.userInputError": "Found some errors in the data provided, please review the indicated fields try again!",
+  "store/form.submit.error.serverError": "Internal Server Error! Please, try again later!"
 }

@@ -7,9 +7,10 @@ To handle the schema this block uses the [`react-hook-form-jsonschema`](https://
 ## Table of Contents
 
 - [Store Form](#store-form)
+  - [Table of Contents](#table-of-contents)
   - [Configuration](#configuration)
     - [form](#form)
-    - [form-input](#form-input)
+    - [form-input.radiogroup, form-input.dropdown, form-input.textarea](#form-inputradiogroup-form-inputdropdown-form-inputtextarea)
     - [form-input.input](#form-inputinput)
     - [form-field-group](#form-field-group)
   - [Example usage](#example-usage)
@@ -18,14 +19,15 @@ To handle the schema this block uses the [`react-hook-form-jsonschema`](https://
 
 There are **multiple building blocks of Store Form**:
 
-- The `form`: This is the top level block in which you will specify which entity and schema from `Masterdata v2` to use for building and submitting your form.
-- The `form-input.checkbox`: This block will render a checkbox in the form.
-- The `form-input.dropdown`: This block will render a dropdown in the form.
-- The `form-input.input`: This block will render a simple text input in the form.
-- The `form-input.radiogroup`: This block will render a group of radio buttons in the form.
-- The `form-input.textarea`: This block will render a textarea input in the form.
-- The `form-field-group`: This block will, based on the schema provided, automatically build a form based on the provided path in the schema.
-- The `form-submit`: This block will render a button to submit the form content.
+- `form`: This is the top level block in which you will specify which entity and schema from `Masterdata v2` to use for building and submitting your form.
+- `form-input.checkbox`: Will render a checkbox in the form.
+- `form-input.dropdown`: Will render a dropdown in the form.
+- `form-input.input`: Will render a simple text input in the form.
+- `form-input.radiogroup`: Will render a group of radio buttons in the form.
+- `form-input.textarea`: Will render a textarea input in the form.
+- `form-field-group`: Will, based on the schema provided, automatically build a form based on the provided pointer in the schema.
+- `form-submit`: Will render a button to submit the form content.
+- `form-success`: Accepts a `children` element and these children will be rendered when the form is submitted succesfully instead of the form itself.
 
 If `form-input` family of blocks, `form-field-group` or `form-submit` are used, they **need** to be children of a `form` block.
 
@@ -40,23 +42,23 @@ If `form` does not have any children the default behaviour will be to try to gen
 
 ### `form-input.radiogroup`, `form-input.dropdown`, `form-input.textarea`
 
-| **Props** | **Type** | **Description**                                                                                                                                                                                                                                                                                                            | **Default Value** |
-| --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `path`    | `String` | Path in the jsonschema this input is validated against. The path is always in the form: `#/some/child/data/field/here` where `#` represents the root of the schema, and the `some/child/data/field/here` represents the tree of objects (from `some` to `here`) to get to the desired field, which in this case is `here`. | `""`              |
+| **Props** | **Type** | **Description**                                                                                                                                                                                                                                          | **Default Value** |
+| --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `pointer` | `String` | Pointer in the jsonschema this input is validated against. The pointer is always in the form: `#/properties/fieldToBeRendered` where `#` represents the root of the schema, and the `fieldToBeRendered` represents the subschema which will be rendered. | `""`              |
 
 ### `form-input.input`
 
-| **Props**   | **Type**                                  | **Description**                                                                                                                                                                                                                                                                                                            | **Default Value** |
-| ----------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `path`      | `String`                                  | Path in the jsonschema this input is validated against. The path is always in the form: `#/some/child/data/field/here` where `#` represents the root of the schema, and the `some/child/data/field/here` represents the tree of objects (from `some` to `here`) to get to the desired field, which in this case is `here`. | `""`              |
-| `inputType` | `input` &#124; `hidden` &#124; `password` | Defines the type of the text input to be rendered: <br>`input`: renders a normal text input.<br>`hidden`: Does not render an input, but adds it's value to the submitted document. <br>`password`: Renders an input as a password field.                                                                                   | `input`           |
+| **Props**   | **Type**                                  | **Description**                                                                                                                                                                                                                                          | **Default Value** |
+| ----------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `pointer`   | `String`                                  | Pointer in the jsonschema this input is validated against. The pointer is always in the form: `#/properties/fieldToBeRendered` where `#` represents the root of the schema, and the `fieldToBeRendered` represents the subschema which will be rendered. | `""`              |
+| `inputType` | `input` &#124; `hidden` &#124; `password` | Defines the type of the text input to be rendered: <br>`input`: renders a normal text input.<br>`hidden`: Does not render an input, but adds it's value to the submitted document. <br>`password`: Renders an input as a password field.                 | `input`           |
 
 ### `form-field-group`
 
-| **Props**  | **Type** | **Description**                                                                                                                                                                                                                                                                                                | **Default Value** |
-| ---------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `path`     | `String` | Path in the jsonschema this input is validated against. The path is always in the form: #/some/child/data/field/here where # represents the root of the schema, and the some/child/data/field/here represents the tree of objects (from some to here) to get to the desired field, which in this case is here. | `""`              |
-| `uiSchema` | `object` | This UISchema is a modified schema type, relative to the object passed in the `path` prop, the format of the UISchema is described bellow.                                                                                                                                                                     | `{}`              |
+| **Props**  | **Type** | **Description**                                                                                                                                                                                                                                                                                                           | **Default Value** |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `pointer`  | `String` | Pointer in the jsonschema this input is validated against. The pointer is always in the form: `#/properties/fieldToBeRendered` where `#` represents the root of the schema, and the `fieldToBeRendered` represents the tree of objects (from `some` to `here`) to get to the desired field, which in this case is `here`. | `""`              |
+| `uiSchema` | `object` | This UISchema is a modified schema type, relative to the object passed in the `pointer` prop, the format of the UISchema is described bellow.                                                                                                                                                                             | `{}`              |
 
 The uiSchema has the following schema format:
 
@@ -222,22 +224,22 @@ Suppose now that you only want to render the required fields and don't care abou
   },
   "form-input.input#firstName": {
     "props": {
-      "path": "#/firstName"
+      "pointer": "#/properties/firstName"
     }
   },
   "form-input.input#lastName": {
     "props": {
-      "path": "#/lastName"
+      "pointer": "#/properties/lastName"
     }
   },
   "form-input.checkbox#agreement": {
     "props": {
-      "path": "#/agreement"
+      "pointer": "#/properties/agreement"
     }
   },
   "form-field-group#address": {
     "props": {
-      "path": "#/address",
+      "pointer": "#/properties/address",
       "uiSchema": {
 	"type": "default",
 	"properties": {

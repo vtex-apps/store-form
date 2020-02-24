@@ -56,5 +56,5 @@ export default {
       title: 'Do you agree with the terms?',
     },
   },
-  required: ['firstName', 'lastName', 'agreement'],
+  required: ['agreement'],
 }
