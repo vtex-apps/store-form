@@ -12,5 +12,7 @@
   "store/form.error.undefinedError": "Valor inválido.",
   "store/form.submit.buttonLabel": "Enviar",
   "store/form.submit.error.userInputError": "Foram encontrados alguns erros nos dados fornecidos, revise os campos indicados e tente novamente.",
-  "store/form.submit.error.serverError": "Erro interno do servidor! Por favor, tente novamente mais tarde!"
+  "store/form.submit.error.serverError": "Erro interno do servidor! Por favor, tente novamente mais tarde!",
+  "store/form.schema.loading": "Carregando o formulário...",
+  "store/form.schema.error": "Erro carregando o formulário, tente de novo mais tarde!"
 }
