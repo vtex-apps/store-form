@@ -1,13 +1,8 @@
 import React from 'react'
-import { UISchemaType } from 'react-hook-form-jsonschema'
 
 import { ObjectRenderer } from './components/ObjectRenderer'
-import { BaseInputProps } from './typings/InputProps'
+import { FormFieldGroupProps } from './typings/InputProps'
 
-export interface FormFieldGroupProps extends BaseInputProps {
-  uiSchema?: UISchemaType
-}
-
-export default function FormInput(props: FormFieldGroupProps) {
-  return <ObjectRenderer pointer={props.pointer} UISchema={props.uiSchema} />
+export default function FormFieldGroup(props: FormFieldGroupProps) {
+  return <ObjectRenderer {...props} />
 }

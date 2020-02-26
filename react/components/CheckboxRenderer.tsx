@@ -2,15 +2,22 @@ import React, { FC } from 'react'
 import { Checkbox } from 'vtex.styleguide'
 import { UseCheckboxReturnType, useCheckbox } from 'react-hook-form-jsonschema'
 
-export const CheckboxInput: FC<{ pointer: string }> = props => {
+import { BaseInputProps } from '../typings/InputProps'
+
+export const CheckboxInput: FC<BaseInputProps> = props => {
   const checkboxObject = useCheckbox(props.pointer)
-  return <CheckboxRenderer checkboxObject={checkboxObject} />
+  return (
+    <CheckboxRenderer checkboxObject={checkboxObject} label={props.label} />
+  )
 }
 
 export const CheckboxRenderer: FC<{
   checkboxObject: UseCheckboxReturnType
+  label?: string
 }> = props => {
   const checkboxObject = props.checkboxObject
+  const subSchema = checkboxObject.getObject()
+  const label = props.label ?? subSchema.title ?? checkboxObject.name
 
   if (checkboxObject.isSingle) {
     const checked = checkboxObject.formContext.watch(checkboxObject.pointer)
@@ -19,7 +26,7 @@ export const CheckboxRenderer: FC<{
       <>
         <Checkbox
           {...checkboxObject.getItemInputProps(0)}
-          label={checkboxObject.getObject().title}
+          label={label}
           required={checkboxObject.isRequired}
           value="true"
           {...(checked ? { checked: true } : { checked: false })}
@@ -44,7 +51,7 @@ export const CheckboxRenderer: FC<{
           <Checkbox
             {...checkboxObject.getItemInputProps(index)}
             key={`${value}${index}`}
-            label={checkboxObject.getObject().title}
+            label={label}
             required={checkboxObject.isRequired}
             value={value}
             {...(checked ? { checked: true } : { checked: false })}

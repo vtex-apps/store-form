@@ -8,32 +8,37 @@ import {
 } from 'react-hook-form-jsonschema'
 
 import { useFormattedError } from '../hooks/useErrorMessage'
+import { FormRawInputProps } from '../typings/InputProps'
 
-export const HiddenInput: FC<{ pointer: string }> = props => {
+export const HiddenInput: FC<FormRawInputProps> = props => {
   const inputObject = useHidden(props.pointer)
   return <input {...inputObject.getInputProps()} />
 }
 
-export const PasswordInput: FC<{ pointer: string }> = props => {
+export const PasswordInput: FC<FormRawInputProps> = props => {
   const inputObject = usePassword(props.pointer)
-  return <InputRenderer inputObject={inputObject} />
+  return <InputRenderer inputObject={inputObject} label={props.label} />
 }
 
-export const RawInput: FC<{ pointer: string }> = props => {
+export const RawInput: FC<FormRawInputProps> = props => {
   const inputObject = useInput(props.pointer)
-  return <InputRenderer inputObject={inputObject} />
+  return <InputRenderer inputObject={inputObject} label={props.label} />
 }
 
 export const InputRenderer: FC<{
   inputObject: UseRawInputReturnType
+  label?: string
 }> = props => {
   const inputObject = props.inputObject
   const error = inputObject.getError()
 
+  const subSchema = inputObject.getObject()
+  const label = props.label ?? subSchema.title ?? inputObject.name
+
   return (
     <Input
       {...inputObject.getInputProps()}
-      label={inputObject.getObject().title}
+      label={label}
       error={error ? true : false}
       errorMessage={useFormattedError(error)}
     />

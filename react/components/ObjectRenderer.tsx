@@ -5,7 +5,6 @@ import {
   InputTypes,
   UseRadioReturnType,
   UseSelectReturnType,
-  UISchemaType,
   useObject,
   UseTextAreaReturnType,
   UseCheckboxReturnType,
@@ -16,6 +15,7 @@ import { TextAreaRenderer } from './TextAreaRenderer'
 import { RadioGroupRenderer } from './RadioGroupRenderer'
 import { DropdownRenderer } from './DropdownRenderer'
 import { CheckboxRenderer } from './CheckboxRenderer'
+import { FormFieldGroupProps } from '../typings/InputProps'
 
 const SpecializedObject: FC<{ baseObject: InputReturnTypes }> = props => {
   switch (props.baseObject.type) {
@@ -44,13 +44,10 @@ const SpecializedObject: FC<{ baseObject: InputReturnTypes }> = props => {
   }
 }
 
-export const ObjectRenderer: FC<{
-  pointer: string
-  UISchema?: UISchemaType
-}> = props => {
+export const ObjectRenderer: FC<FormFieldGroupProps> = props => {
   const methods = useObject({
     pointer: props.pointer,
-    UISchema: props.UISchema,
+    UISchema: props.uiSchema,
   })
 
   return (

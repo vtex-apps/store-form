@@ -5,26 +5,17 @@ import {
   HiddenInput,
   PasswordInput,
 } from './components/InputRenderer'
-import { BaseInputProps } from './typings/InputProps'
+import { FormRawInputProps, InputTypes } from './typings/InputProps'
 
-export enum InputTypes {
-  input = 'input',
-  hidden = 'hidden',
-  password = 'password',
-}
-export interface FormInputProps extends BaseInputProps {
-  inputType?: InputTypes
-}
-
-export default function FormInput(props: FormInputProps) {
-  const { inputType = InputTypes.input } = props
+export default function FormInput(props: FormRawInputProps) {
+  const { inputType = InputTypes.input, ...rest } = props
 
   switch (inputType) {
     case InputTypes.input:
-      return <RawInput pointer={props.pointer} />
+      return <RawInput pointer={props.pointer} {...rest} />
     case InputTypes.hidden:
-      return <HiddenInput pointer={props.pointer} />
+      return <HiddenInput pointer={props.pointer} {...rest} />
     case InputTypes.password:
-      return <PasswordInput pointer={props.pointer} />
+      return <PasswordInput pointer={props.pointer} {...rest} />
   }
 }
