@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Graphql mutation to save the form input in masterdata on submit.
 - Error messages when submitting goes wrong.
 - Success component(`form-success`) when the form is succesfully submitted.
+- Graphql query to fetch the schema automatically from MasterData
 
 ### Changed
 
