@@ -83,7 +83,7 @@ const UISchema = {
 }
 ```
 
-Also note that, regardless if the child is represented in the uiSchema or not, they will still be rendered, to prevent rendering a child use the `hidden` prop in the UISchema.
+Also note that, regardless if the child is represented in the uiSchema or not, they will still be rendered, to prevent rendering a child use the `hidden` prop in the `UISchema`.
 
 - The **`UITypes`** is an enum with the following values:
   - `default`: input will have a default type based on what [`react-hook-form-jsonschema`](https://github.com/vtex/react-hook-form-jsonschema) thinks is better.
