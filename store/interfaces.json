@@ -11,19 +11,19 @@
     "component": "nop"
   },
   "form-input.checkbox": {
-    "component": "FormInput-checkbox"
+    "component": "FormInputCheckbox"
   },
   "form-input.dropdown": {
-    "component": "FormInput-dropdown"
+    "component": "FormInputDropdown"
   },
-  "form-input.input": {
-    "component": "FormInput-input"
+  "form-input.text": {
+    "component": "FormInputText"
   },
   "form-input.radiogroup": {
-    "component": "FormInput-radiogroup"
+    "component": "FormInputRadiogroup"
   },
   "form-input.textarea": {
-    "component": "FormInput-textarea"
+    "component": "FormInputTextArea"
   },
   "form-submit": {
     "component": "FormSubmit"

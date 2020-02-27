@@ -1,8 +1,8 @@
 import { OperationVariables, ObservableQueryFields } from '@apollo/react-common'
 import { DocumentNode } from 'graphql'
-import { QueryHookOptions } from '@apollo/react-hooks'
+import { QueryHookOptions, MutationTuple } from '@apollo/react-hooks'
 
-import jsonSchema from '../mockJSONSchema'
+import jsonSchema from './mockJSONSchema'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface QueryResult<TData = any, TVariables = OperationVariables>
@@ -18,8 +18,23 @@ export function useQuery<TData, TVariables = OperationVariables>(
   options?: QueryHookOptions<TData, TVariables>
 ): Partial<QueryResult<TData, TVariables>> {
   return {
-    data: jsonSchema,
+    data: { documentPublicSchema: { schema: jsonSchema } },
     query: query,
     options: options,
   }
+}
+
+export function useMutation<
+  TData = any,
+  TVariables = OperationVariables
+>(): Partial<MutationTuple<TData, TVariables>> {
+  return [
+    () => {
+      return Promise.resolve({})
+    },
+    {
+      loading: false,
+      called: false,
+    },
+  ]
 }

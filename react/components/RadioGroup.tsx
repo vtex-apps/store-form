@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { RadioGroup } from 'vtex.styleguide'
+import { RadioGroup as StyleguideRadioGroup } from 'vtex.styleguide'
 import {
   UseRadioReturnType,
   Controller,
@@ -7,18 +7,23 @@ import {
 } from 'react-hook-form-jsonschema'
 
 import { useFormattedError } from '../hooks/useErrorMessage'
+import { BaseInputProps } from '../typings/InputProps'
 
-export const RadioGroupInput: FC<{ pointer: string }> = props => {
-  const radioObject = useRadio(props.pointer)
-  return <RadioGroupRenderer radioObject={radioObject} />
+export const RadioGroupInput: FC<BaseInputProps> = props => {
+  const { pointer, label } = props
+  const radioObject = useRadio(pointer)
+  return <RadioGroup radioObject={radioObject} label={label} />
 }
 
-export const RadioGroupRenderer: FC<{
+export const RadioGroup: FC<{
   radioObject: UseRadioReturnType
+  label?: string
 }> = props => {
-  const radioObject = props.radioObject
+  const { radioObject } = props
   const error = radioObject.getError()
-  const title = radioObject.getObject().title
+
+  const subSchema = radioObject.getObject()
+  const label = props.label ?? subSchema.title ?? radioObject.name
 
   return (
     <Controller
@@ -26,11 +31,11 @@ export const RadioGroupRenderer: FC<{
       control={radioObject.formContext.control}
       rules={radioObject.validator}
       as={
-        <RadioGroup
-          name={title}
+        <StyleguideRadioGroup
+          name={label}
           required={radioObject.isRequired}
           hideBorder
-          label={title}
+          label={label}
           options={radioObject.getItems().map(value => {
             return { value: value, label: value }
           })}

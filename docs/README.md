@@ -10,8 +10,8 @@ To handle the schema this block uses the [`react-hook-form-jsonschema`](https://
   - [Table of Contents](#table-of-contents)
   - [Configuration](#configuration)
     - [form](#form)
-    - [form-input.radiogroup, form-input.dropdown, form-input.textarea](#form-inputradiogroup-form-inputdropdown-form-inputtextarea)
-    - [form-input.input](#form-inputinput)
+    - [form-input.radiogroup, form-input.dropdown, form-input.textarea, form-input.checkbox](#form-inputradiogroup-form-inputdropdown-form-inputtextarea-form-inputcheckbox)
+    - [form-input.text](#form-inputtext)
     - [form-field-group](#form-field-group)
   - [Example usage](#example-usage)
 
@@ -22,7 +22,7 @@ There are **multiple building blocks of Store Form**:
 - `form`: This is the top level block in which you will specify which entity and schema from `Masterdata v2` to use for building and submitting your form.
 - `form-input.checkbox`: Will render a checkbox in the form.
 - `form-input.dropdown`: Will render a dropdown in the form.
-- `form-input.input`: Will render a simple text input in the form.
+- `form-input.text`: Will render a simple text input in the form.
 - `form-input.radiogroup`: Will render a group of radio buttons in the form.
 - `form-input.textarea`: Will render a textarea input in the form.
 - `form-field-group`: Will, based on the schema provided, automatically build a form based on the provided pointer in the schema.
@@ -40,13 +40,15 @@ If `form` does not have any children the default behaviour will be to try to gen
 | `entity`  | `String` | The entity in `Masterdata v2` where the document will be saved. This field is **required**.                                                             | `""`              |
 | `schema`  | `String` | The schema **already** in `Masterdata v2` against which the form content will be validated and the form will be built upon. This field is **required**. | `""`              |
 
-### `form-input.radiogroup`, `form-input.dropdown`, `form-input.textarea`
+Please, notice that when creating the schema in Masterdata, you **NEED** to set `"publicJsonSchema": true` in `v-security`, so this component will be able to fetch the schema from Masterdata. For saving/submitting the form, you need to set the `publicWrite` field to the values that the form will submit, or, easier, set them all to public using: `"publicWrite": ["publicForWrite"]` in `v-security`. Please check the [Master Data V2 API Documentation](https://documenter.getpostman.com/view/164907/vtex-master-data-api-v2/7EHbXTe?version=latest) for more info on creating schemas.
+
+### `form-input.radiogroup`, `form-input.dropdown`, `form-input.textarea`, `form-input.checkbox`
 
 | **Props** | **Type** | **Description**                                                                                                                                                                                                                                          | **Default Value** |
 | --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | `pointer` | `String` | Pointer in the jsonschema this input is validated against. The pointer is always in the form: `#/properties/fieldToBeRendered` where `#` represents the root of the schema, and the `fieldToBeRendered` represents the subschema which will be rendered. | `""`              |
 
-### `form-input.input`
+### `form-input.text`
 
 | **Props**   | **Type**                                  | **Description**                                                                                                                                                                                                                                          | **Default Value** |
 | ----------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
@@ -81,19 +83,17 @@ const UISchema = {
 }
 ```
 
-Also note that, regardless if the child is represented in the uiSchema or not, they will still be rendered, to prevent rendering a child use the `hidden` prop in the type.
+Also note that, regardless if the child is represented in the uiSchema or not, they will still be rendered, to prevent rendering a child use the `hidden` prop in the `UISchema`.
 
 - The **`UITypes`** is an enum with the following values:
   - `default`: input will have a default type based on what [`react-hook-form-jsonschema`](https://github.com/vtex/react-hook-form-jsonschema) thinks is better.
   - `radio`: will render a `form-input.radiogroup` block.
   - `select`: will render a `form-input.dropdown` block.
-  - `input`: will render a `form-input.input` block with `inputType` set to `input`.
-  - `hidden`: will render a `form-input.input` block with `inputType` set to `hidden`.
-  - `password`: will render a `form-input.input` block with `inputType` set to `password`.
+  - `input`: will render a `form-input.text` block with `inputType` set to `input`.
+  - `hidden`: will render a `form-input.text` block with `inputType` set to `hidden`.
+  - `password`: will render a `form-input.text` block with `inputType` set to `password`.
   - `textArea`: will render a `form-input.textarea` block.
   - `checkbox`: will render a `form-input.checkbox` block.
-
-![image](https://user-images.githubusercontent.com/19346539/73478292-97c8ad80-4374-11ea-961e-b02c8114ced7.png)
 
 ## Example usage
 
@@ -123,7 +123,7 @@ Suppose you have a schema, called `person` with the following format saved on a 
     },
     "height": {
       "type": "number",
-      "minimum": 0.8,
+      "minimum": 0.3,
       "maximum": 2.9,
       "title": "Your height in meters",
       "multipleOf": 0.01
@@ -215,19 +215,19 @@ Suppose now that you only want to render the required fields and don't care abou
 
   "form": {
     "children": [
-      "form-input.input#firstName",
-      "form-input.input#lastName",
+      "form-input.text#firstName",
+      "form-input.text#lastName",
       "form-field-group#address",
       "form-input.checkbox#agreement",
       "form-submit"
     ]
   },
-  "form-input.input#firstName": {
+  "form-input.text#firstName": {
     "props": {
       "pointer": "#/properties/firstName"
     }
   },
-  "form-input.input#lastName": {
+  "form-input.text#lastName": {
     "props": {
       "pointer": "#/properties/lastName"
     }

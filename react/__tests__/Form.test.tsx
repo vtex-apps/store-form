@@ -2,8 +2,8 @@ import React from 'react'
 import { render } from '@vtex/test-tools/react'
 
 import Form from '../Form'
-import FormInputCheckbox from '../FormInput-checkbox'
-import FormInput from '../FormInput-input'
+import FormInputCheckbox from '../FormInputCheckbox'
+import FormText from '../FormInputText'
 import FormFieldGroup from '../FormFieldGroup'
 
 test('should render full schema', () => {
@@ -23,8 +23,8 @@ test('should render full schema', () => {
 test('should render partial schema', () => {
   const { getAllByText } = render(
     <Form entity="asdf" schema="asdf">
-      <FormInput pointer="#/properties/firstName" />
-      <FormInput pointer="#/properties/lastName" />
+      <FormText pointer="#/properties/firstName" />
+      <FormText pointer="#/properties/lastName" />
       <FormFieldGroup pointer="#/properties/address" />
       <FormInputCheckbox pointer="#/properties/agreement" />
     </Form>
