@@ -1,3 +1,3 @@
-import { CheckboxInput } from './components/CheckboxRenderer'
+import { CheckboxInput } from './components/Checkbox'
 
 export default CheckboxInput

@@ -15,7 +15,7 @@ import { FormProps } from '../typings/FormProps'
 import { parseMasterDataError } from '../logic/masterDataError'
 import { useSubmitReducer, SubmitContext } from '../logic/formState'
 
-export const FormRenderer: FC<{
+export const FormHandler: FC<{
   schema: JSONSchemaType
   formProps: FormProps
 }> = props => {

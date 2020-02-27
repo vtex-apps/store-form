@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react'
-import { Dropdown } from 'vtex.styleguide'
+import { Dropdown as StyleguideDropdown } from 'vtex.styleguide'
 import {
   Controller,
   UseSelectReturnType,
@@ -11,10 +11,10 @@ import { BaseInputProps } from '../typings/InputProps'
 
 export const DropdownInput: FC<BaseInputProps> = props => {
   const selectObject = useSelect(props.pointer)
-  return <DropdownRenderer selectObject={selectObject} label={props.label} />
+  return <Dropdown selectObject={selectObject} label={props.label} />
 }
 
-export const DropdownRenderer: FC<{
+export const Dropdown: FC<{
   selectObject: UseSelectReturnType
   label?: string
 }> = props => {
@@ -38,7 +38,7 @@ export const DropdownRenderer: FC<{
         control={selectObject.formContext.control}
         rules={selectObject.validator}
         as={
-          <Dropdown
+          <StyleguideDropdown
             name={label}
             multi={false}
             label={label}

@@ -10,41 +10,41 @@ import {
   UseCheckboxReturnType,
 } from 'react-hook-form-jsonschema'
 
-import { InputRenderer } from './InputRenderer'
-import { TextAreaRenderer } from './TextAreaRenderer'
-import { RadioGroupRenderer } from './RadioGroupRenderer'
-import { DropdownRenderer } from './DropdownRenderer'
-import { CheckboxRenderer } from './CheckboxRenderer'
+import { Input } from './Input'
+import { TextArea } from './TextArea'
+import { RadioGroup } from './RadioGroup'
+import { Dropdown } from './Dropdown'
+import { Checkbox } from './Checkbox'
 import { FormFieldGroupProps } from '../typings/InputProps'
 
 const SpecializedObject: FC<{ baseObject: InputReturnTypes }> = props => {
   switch (props.baseObject.type) {
     case InputTypes.input: {
       const inputObject = props.baseObject as UseRawInputReturnType
-      return <InputRenderer inputObject={inputObject} />
+      return <Input inputObject={inputObject} />
     }
     case InputTypes.radio: {
       const radioObject = props.baseObject as UseRadioReturnType
-      return <RadioGroupRenderer radioObject={radioObject} />
+      return <RadioGroup radioObject={radioObject} />
     }
     case InputTypes.select: {
       const selectObject = props.baseObject as UseSelectReturnType
-      return <DropdownRenderer selectObject={selectObject} />
+      return <Dropdown selectObject={selectObject} />
     }
     case InputTypes.textArea: {
       const textAreaObject = props.baseObject as UseTextAreaReturnType
-      return <TextAreaRenderer textAreaObject={textAreaObject} />
+      return <TextArea textAreaObject={textAreaObject} />
     }
     case InputTypes.checkbox: {
       const checkboxObject = props.baseObject as UseCheckboxReturnType
-      return <CheckboxRenderer checkboxObject={checkboxObject} />
+      return <Checkbox checkboxObject={checkboxObject} />
     }
     default:
       return <></>
   }
 }
 
-export const ObjectRenderer: FC<FormFieldGroupProps> = props => {
+export const ObjectMapper: FC<FormFieldGroupProps> = props => {
   const { pointer, uiSchema } = props
   const methods = useObject({
     pointer: pointer,

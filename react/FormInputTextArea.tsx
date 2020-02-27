@@ -1,3 +1,3 @@
-import { TextAreaInput } from './components/TextAreaRenderer'
+import { TextAreaInput } from './components/TextArea'
 
 export default TextAreaInput

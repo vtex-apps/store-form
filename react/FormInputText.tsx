@@ -1,10 +1,6 @@
 import React from 'react'
 
-import {
-  RawInput,
-  HiddenInput,
-  PasswordInput,
-} from './components/InputRenderer'
+import { RawInput, HiddenInput, PasswordInput } from './components/Input'
 import { FormRawInputProps, InputTypes } from './typings/InputProps'
 
 export default function FormInput(props: FormRawInputProps) {

@@ -1,22 +1,22 @@
 import React, { FC } from 'react'
-import { Textarea } from 'vtex.styleguide'
+import { Textarea as StyleguideTextarea } from 'vtex.styleguide'
 import { UseTextAreaReturnType, useTextArea } from 'react-hook-form-jsonschema'
 
 import { useFormattedError } from '../hooks/useErrorMessage'
 
 export const TextAreaInput: FC<{ pointer: string }> = props => {
   const textAreaObject = useTextArea(props.pointer)
-  return <TextAreaRenderer textAreaObject={textAreaObject} />
+  return <TextArea textAreaObject={textAreaObject} />
 }
 
-export const TextAreaRenderer: FC<{
+export const TextArea: FC<{
   textAreaObject: UseTextAreaReturnType
 }> = props => {
   const textAreaObject = props.textAreaObject
   const error = textAreaObject.getError()
 
   return (
-    <Textarea
+    <StyleguideTextarea
       {...textAreaObject.getTextAreaProps()}
       label={textAreaObject.getObject().title}
       error={error ? true : false}

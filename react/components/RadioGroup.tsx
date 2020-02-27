@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { RadioGroup } from 'vtex.styleguide'
+import { RadioGroup as StyleguideRadioGroup } from 'vtex.styleguide'
 import {
   UseRadioReturnType,
   Controller,
@@ -12,10 +12,10 @@ import { BaseInputProps } from '../typings/InputProps'
 export const RadioGroupInput: FC<BaseInputProps> = props => {
   const { pointer, label } = props
   const radioObject = useRadio(pointer)
-  return <RadioGroupRenderer radioObject={radioObject} label={label} />
+  return <RadioGroup radioObject={radioObject} label={label} />
 }
 
-export const RadioGroupRenderer: FC<{
+export const RadioGroup: FC<{
   radioObject: UseRadioReturnType
   label?: string
 }> = props => {
@@ -31,7 +31,7 @@ export const RadioGroupRenderer: FC<{
       control={radioObject.formContext.control}
       rules={radioObject.validator}
       as={
-        <RadioGroup
+        <StyleguideRadioGroup
           name={label}
           required={radioObject.isRequired}
           hideBorder

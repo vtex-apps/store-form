@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Input } from 'vtex.styleguide'
+import { Input as StyleguideInput } from 'vtex.styleguide'
 import {
   UseRawInputReturnType,
   useInput,
@@ -19,16 +19,16 @@ export const HiddenInput: FC<FormRawInputProps> = props => {
 export const PasswordInput: FC<FormRawInputProps> = props => {
   const { pointer, label } = props
   const inputObject = usePassword(pointer)
-  return <InputRenderer inputObject={inputObject} label={label} />
+  return <Input inputObject={inputObject} label={label} />
 }
 
 export const RawInput: FC<FormRawInputProps> = props => {
   const { pointer, label } = props
   const inputObject = useInput(pointer)
-  return <InputRenderer inputObject={inputObject} label={label} />
+  return <Input inputObject={inputObject} label={label} />
 }
 
-export const InputRenderer: FC<{
+export const Input: FC<{
   inputObject: UseRawInputReturnType
   label?: string
 }> = props => {
@@ -39,7 +39,7 @@ export const InputRenderer: FC<{
   const label = props.label ?? subSchema.title ?? inputObject.name
 
   return (
-    <Input
+    <StyleguideInput
       {...inputObject.getInputProps()}
       label={label}
       error={error ? true : false}

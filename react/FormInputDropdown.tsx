@@ -1,3 +1,3 @@
-import { DropdownInput } from './components/DropdownRenderer'
+import { DropdownInput } from './components/Dropdown'
 
 export default DropdownInput

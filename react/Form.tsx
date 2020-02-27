@@ -3,10 +3,10 @@ import { useQuery } from 'react-apollo'
 import { useIntl, defineMessages } from 'react-intl'
 import { Alert } from 'vtex.styleguide'
 
-import { ObjectRenderer } from './components/ObjectRenderer'
+import { ObjectMapper } from './components/Object'
 import FormSubmit from './FormSubmit'
 import documentPublicSchema from './graphql/getSchema.graphql'
-import { FormRenderer } from './components/FormRenderer'
+import { FormHandler } from './components/FormHandler'
 import { FormProps } from './typings/FormProps'
 
 const messages = defineMessages({
@@ -48,17 +48,17 @@ const Form: FC<FormProps> = props => {
 
   if (!React.Children.count(children)) {
     return (
-      <FormRenderer schema={schemaDocument} formProps={props}>
-        <ObjectRenderer pointer="#" />
+      <FormHandler schema={schemaDocument} formProps={props}>
+        <ObjectMapper pointer="#" />
         <FormSubmit label="Submit" />
-      </FormRenderer>
+      </FormHandler>
     )
   }
 
   return (
-    <FormRenderer schema={schemaDocument} formProps={props}>
+    <FormHandler schema={schemaDocument} formProps={props}>
       {children}
-    </FormRenderer>
+    </FormHandler>
   )
 }
 

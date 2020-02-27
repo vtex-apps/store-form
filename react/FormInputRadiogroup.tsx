@@ -1,3 +1,3 @@
-import { RadioGroupInput } from './components/RadioGroupRenderer'
+import { RadioGroupInput } from './components/RadioGroup'
 
 export default RadioGroupInput

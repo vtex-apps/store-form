@@ -1,17 +1,15 @@
 import React, { FC } from 'react'
-import { Checkbox } from 'vtex.styleguide'
+import { Checkbox as StyleguideCheckbox } from 'vtex.styleguide'
 import { UseCheckboxReturnType, useCheckbox } from 'react-hook-form-jsonschema'
 
 import { BaseInputProps } from '../typings/InputProps'
 
 export const CheckboxInput: FC<BaseInputProps> = props => {
   const checkboxObject = useCheckbox(props.pointer)
-  return (
-    <CheckboxRenderer checkboxObject={checkboxObject} label={props.label} />
-  )
+  return <Checkbox checkboxObject={checkboxObject} label={props.label} />
 }
 
-export const CheckboxRenderer: FC<{
+export const Checkbox: FC<{
   checkboxObject: UseCheckboxReturnType
   label?: string
 }> = props => {
@@ -24,7 +22,7 @@ export const CheckboxRenderer: FC<{
 
     return (
       <>
-        <Checkbox
+        <StyleguideCheckbox
           {...checkboxObject.getItemInputProps(0)}
           label={label}
           required={checkboxObject.isRequired}
@@ -48,7 +46,7 @@ export const CheckboxRenderer: FC<{
           `${checkboxObject.pointer}[${index}]`
         )
         return (
-          <Checkbox
+          <StyleguideCheckbox
             {...checkboxObject.getItemInputProps(index)}
             key={`${value}${index}`}
             label={label}
