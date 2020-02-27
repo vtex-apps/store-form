@@ -34,7 +34,9 @@ const Form: FC<FormProps> = props => {
     return (
       <Alert type="warning">{intl.formatMessage(messages.loadingForm)}</Alert>
     )
-  } else if (error) {
+  }
+
+  if (error) {
     return (
       <Alert type="error">
         {intl.formatMessage(messages.errorLoadingForm)}
