@@ -10,15 +10,16 @@ import { useFormattedError } from '../hooks/useErrorMessage'
 import { BaseInputProps } from '../typings/InputProps'
 
 export const RadioGroupInput: FC<BaseInputProps> = props => {
-  const radioObject = useRadio(props.pointer)
-  return <RadioGroupRenderer radioObject={radioObject} label={props.label} />
+  const { pointer, label } = props
+  const radioObject = useRadio(pointer)
+  return <RadioGroupRenderer radioObject={radioObject} label={label} />
 }
 
 export const RadioGroupRenderer: FC<{
   radioObject: UseRadioReturnType
   label?: string
 }> = props => {
-  const radioObject = props.radioObject
+  const { radioObject } = props
   const error = radioObject.getError()
 
   const subSchema = radioObject.getObject()

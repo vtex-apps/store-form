@@ -45,9 +45,10 @@ const SpecializedObject: FC<{ baseObject: InputReturnTypes }> = props => {
 }
 
 export const ObjectRenderer: FC<FormFieldGroupProps> = props => {
+  const { pointer, uiSchema } = props
   const methods = useObject({
-    pointer: props.pointer,
-    UISchema: props.uiSchema,
+    pointer: pointer,
+    UISchema: uiSchema,
   })
 
   return (

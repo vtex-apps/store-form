@@ -24,12 +24,12 @@ export function useQuery<TData, TVariables = OperationVariables>(
   }
 }
 
-export function useMutation<TData = any, TVariables = OperationVariables>(
-  _: DocumentNode,
-  __?: QueryHookOptions<TData, TVariables>
-): Partial<MutationTuple<TData, TVariables>> {
+export function useMutation<
+  TData = any,
+  TVariables = OperationVariables
+>(): Partial<MutationTuple<TData, TVariables>> {
   return [
-    ___ => {
+    () => {
       return Promise.resolve({})
     },
     {

@@ -21,11 +21,12 @@ const messages = defineMessages({
 })
 
 const Form: FC<FormProps> = props => {
+  const { entity, schema, children } = props
   const intl = useIntl()
   const { data, loading, error } = useQuery(documentPublicSchema, {
     variables: {
-      dataEntity: props.entity,
-      schema: props.schema,
+      dataEntity: entity,
+      schema: schema,
     },
   })
 
@@ -41,11 +42,11 @@ const Form: FC<FormProps> = props => {
     )
   }
 
-  const schema = data.documentPublicSchema.schema
+  const schemaDocument = data.documentPublicSchema.schema
 
-  if (!React.Children.count(props.children)) {
+  if (!React.Children.count(children)) {
     return (
-      <FormRenderer schema={schema} formProps={props}>
+      <FormRenderer schema={schemaDocument} formProps={props}>
         <ObjectRenderer pointer="#" />
         <FormSubmit label="Submit" />
       </FormRenderer>
@@ -53,8 +54,8 @@ const Form: FC<FormProps> = props => {
   }
 
   return (
-    <FormRenderer schema={schema} formProps={props}>
-      {props.children}
+    <FormRenderer schema={schemaDocument} formProps={props}>
+      {children}
     </FormRenderer>
   )
 }
