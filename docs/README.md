@@ -10,7 +10,7 @@ To handle the schema this block uses the [`react-hook-form-jsonschema`](https://
   - [Table of Contents](#table-of-contents)
   - [Configuration](#configuration)
     - [form](#form)
-    - [form-input.radiogroup, form-input.dropdown, form-input.textarea](#form-inputradiogroup-form-inputdropdown-form-inputtextarea)
+    - [form-input.radiogroup, form-input.dropdown, form-input.textarea, form-input.checkbox](#form-inputradiogroup-form-inputdropdown-form-inputtextarea-form-inputcheckbox)
     - [form-input.text](#form-inputtext)
     - [form-field-group](#form-field-group)
   - [Example usage](#example-usage)
@@ -92,8 +92,6 @@ Also note that, regardless if the child is represented in the uiSchema or not, t
   - `password`: will render a `form-input.text` block with `inputType` set to `password`.
   - `textArea`: will render a `form-input.textarea` block.
   - `checkbox`: will render a `form-input.checkbox` block.
-
-![image](https://user-images.githubusercontent.com/19346539/73478292-97c8ad80-4374-11ea-961e-b02c8114ced7.png)
 
 ## Example usage
 
