@@ -2,8 +2,8 @@ import React from 'react'
 import { render } from '@vtex/test-tools/react'
 
 import Form from '../Form'
-import FormInputCheckbox from '../FormInput-checkbox'
-import FormText from '../FormInput-text'
+import FormInputCheckbox from '../FormInputCheckbox'
+import FormText from '../FormInputText'
 import FormFieldGroup from '../FormFieldGroup'
 
 test('should render full schema', () => {
