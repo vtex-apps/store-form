@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - props of `form-input` and `form-field-group` from `path` to `pointer`. And changed how to indicate the root path and subschema paths.
+- `form-input.input` to `form-input.text`
 
 ## [0.1.0] - 2020-02-04
 
