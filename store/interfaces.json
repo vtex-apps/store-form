@@ -16,8 +16,8 @@
   "form-input.dropdown": {
     "component": "FormInput-dropdown"
   },
-  "form-input.input": {
-    "component": "FormInput-input"
+  "form-input.text": {
+    "component": "FormInput-text"
   },
   "form-input.radiogroup": {
     "component": "FormInput-radiogroup"
