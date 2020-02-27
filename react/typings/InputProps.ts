@@ -14,6 +14,7 @@ export enum InputTypes {
   hidden = 'hidden',
   password = 'password',
 }
+
 export interface FormRawInputProps extends BaseInputProps {
   inputType?: InputTypes
 }
