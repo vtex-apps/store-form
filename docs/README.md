@@ -40,6 +40,8 @@ If `form` does not have any children the default behaviour will be to try to gen
 | `entity`  | `String` | The entity in `Masterdata v2` where the document will be saved. This field is **required**.                                                             | `""`              |
 | `schema`  | `String` | The schema **already** in `Masterdata v2` against which the form content will be validated and the form will be built upon. This field is **required**. | `""`              |
 
+Please, notice that when creating the schema in Masterdata, you **NEED** to set `"publicJsonSchema": true` in `v-security`, so this component will be able to fetch the schema from Masterdata. For saving/submitting the form, you need to set the `publicWrite` field to the values that the form will submit, or, easier, set them all to public using: `"publicWrite": ["publicForWrite"]` in `v-security`. Please check the [Master Data V2 API Documentation](https://documenter.getpostman.com/view/164907/vtex-master-data-api-v2/7EHbXTe?version=latest) for more info on creating schemas.
+
 ### `form-input.radiogroup`, `form-input.dropdown`, `form-input.textarea`, `form-input.checkbox`
 
 | **Props** | **Type** | **Description**                                                                                                                                                                                                                                          | **Default Value** |
@@ -121,7 +123,7 @@ Suppose you have a schema, called `person` with the following format saved on a 
     },
     "height": {
       "type": "number",
-      "minimum": 0.8,
+      "minimum": 0.3,
       "maximum": 2.9,
       "title": "Your height in meters",
       "multipleOf": 0.01
