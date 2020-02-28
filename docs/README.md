@@ -1,103 +1,12 @@
 # Store Form
 
-Store Form offers utilities to **build a form based on a [Masterdata v2](https://developers.vtex.com/reference#master-data-api-v2-overview)** [JSON Schema](https://json-schema.org/understanding-json-schema/index.html). It handles the creation and submission of the form, automatically or based on select fields from the schema. It also handles validation of the schema and the errors **Masterdata** itself returns when the document sent does not validate against the schema saved on it.
+The Store Form app provides blocks responsible for displaying an user form connected to [**Master Data v2**](https://help.vtex.com/tutorial/master-data-v2--3JJ1mlzuo88w22gO0gy0QS) through a [JSON schema](https://json-schema.org/understanding-json-schema/index.html).
 
-To handle the schema this block uses the [`react-hook-form-jsonschema`](https://github.com/vtex/react-hook-form-jsonschema) library under the hood.
+![image](https://user-images.githubusercontent.com/19346539/73491020-75428e80-438c-11ea-8217-4fb7696348b2.png)
 
-## Table of Contents
+## Configuration 
 
-- [Store Form](#store-form)
-  - [Table of Contents](#table-of-contents)
-  - [Configuration](#configuration)
-    - [form](#form)
-    - [form-input.radiogroup, form-input.dropdown, form-input.textarea, form-input.checkbox](#form-inputradiogroup-form-inputdropdown-form-inputtextarea-form-inputcheckbox)
-    - [form-input.text](#form-inputtext)
-    - [form-field-group](#form-field-group)
-  - [Example usage](#example-usage)
-
-## Configuration
-
-There are **multiple building blocks of Store Form**:
-
-- `form`: This is the top level block in which you will specify which entity and schema from `Masterdata v2` to use for building and submitting your form.
-- `form-input.checkbox`: Will render a checkbox in the form.
-- `form-input.dropdown`: Will render a dropdown in the form.
-- `form-input.text`: Will render a simple text input in the form.
-- `form-input.radiogroup`: Will render a group of radio buttons in the form.
-- `form-input.textarea`: Will render a textarea input in the form.
-- `form-field-group`: Will, based on the schema provided, automatically build a form based on the provided pointer in the schema.
-- `form-submit`: Will render a button to submit the form content.
-- `form-success`: Accepts a `children` element and these children will be rendered when the form is submitted succesfully instead of the form itself.
-
-If `form-input` family of blocks, `form-field-group` or `form-submit` are used, they **need** to be children of a `form` block.
-
-### `form`
-
-If `form` does not have any children the default behaviour will be to try to generate a form automatically based on the JSON Schema provided. If it has children it will simply create a context for the blocks `form-input` and `form-submit` to use.
-
-| **Props** | **Type** | **Description**                                                                                                                                         | **Default Value** |
-| --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `entity`  | `String` | The entity in `Masterdata v2` where the document will be saved. This field is **required**.                                                             | `""`              |
-| `schema`  | `String` | The schema **already** in `Masterdata v2` against which the form content will be validated and the form will be built upon. This field is **required**. | `""`              |
-
-Please, notice that when creating the schema in Masterdata, you **NEED** to set `"publicJsonSchema": true` in `v-security`, so this component will be able to fetch the schema from Masterdata. For saving/submitting the form, you need to set the `publicWrite` field to the values that the form will submit, or, easier, set them all to public using: `"publicWrite": ["publicForWrite"]` in `v-security`. Please check the [Master Data V2 API Documentation](https://documenter.getpostman.com/view/164907/vtex-master-data-api-v2/7EHbXTe?version=latest) for more info on creating schemas.
-
-### `form-input.radiogroup`, `form-input.dropdown`, `form-input.textarea`, `form-input.checkbox`
-
-| **Props** | **Type** | **Description**                                                                                                                                                                                                                                          | **Default Value** |
-| --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `pointer` | `String` | Pointer in the jsonschema this input is validated against. The pointer is always in the form: `#/properties/fieldToBeRendered` where `#` represents the root of the schema, and the `fieldToBeRendered` represents the subschema which will be rendered. | `""`              |
-
-### `form-input.text`
-
-| **Props**   | **Type**                                  | **Description**                                                                                                                                                                                                                                          | **Default Value** |
-| ----------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `pointer`   | `String`                                  | Pointer in the jsonschema this input is validated against. The pointer is always in the form: `#/properties/fieldToBeRendered` where `#` represents the root of the schema, and the `fieldToBeRendered` represents the subschema which will be rendered. | `""`              |
-| `inputType` | `input` &#124; `hidden` &#124; `password` | Defines the type of the text input to be rendered: <br>`input`: renders a normal text input.<br>`hidden`: Does not render an input, but adds it's value to the submitted document. <br>`password`: Renders an input as a password field.                 | `input`           |
-
-### `form-field-group`
-
-| **Props**  | **Type** | **Description**                                                                                                                                                                                                                                                                                                           | **Default Value** |
-| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `pointer`  | `String` | Pointer in the jsonschema this input is validated against. The pointer is always in the form: `#/properties/fieldToBeRendered` where `#` represents the root of the schema, and the `fieldToBeRendered` represents the tree of objects (from `some` to `here`) to get to the desired field, which in this case is `here`. | `""`              |
-| `uiSchema` | `object` | This UISchema is a modified schema type, relative to the object passed in the `pointer` prop, the format of the UISchema is described bellow.                                                                                                                                                                             | `{}`              |
-
-The uiSchema has the following schema format:
-
-```js
-const UISchema = {
-  /*
-   *  This is the type that will be used to choose what type of input will be
-   *  used to build the specified field. Please note that the type of a node
-   *  that is an object will be ignored, as there would make no sense to render
-   *  an object without it's children inside a form.
-   */
-  type: UITypes,
-  properties: {
-    // Note that the definition is recursive
-    child1NameHere: UISchema,
-    child2NameHere: UISchema,
-    // ...
-    childXNameHere: UISchema,
-  },
-}
-```
-
-Also note that, regardless if the child is represented in the uiSchema or not, they will still be rendered, to prevent rendering a child use the `hidden` prop in the `UISchema`.
-
-- The **`UITypes`** is an enum with the following values:
-  - `default`: input will have a default type based on what [`react-hook-form-jsonschema`](https://github.com/vtex/react-hook-form-jsonschema) thinks is better.
-  - `radio`: will render a `form-input.radiogroup` block.
-  - `select`: will render a `form-input.dropdown` block.
-  - `input`: will render a `form-input.text` block with `inputType` set to `input`.
-  - `hidden`: will render a `form-input.text` block with `inputType` set to `hidden`.
-  - `password`: will render a `form-input.text` block with `inputType` set to `password`.
-  - `textArea`: will render a `form-input.textarea` block.
-  - `checkbox`: will render a `form-input.checkbox` block.
-
-## Example usage
-
-Suppose you have a schema, called `person` with the following format saved on a `Masterdata v2` entity called `clients`
+1. Create your [**JSON schema**](https://json-schema.org/understanding-json-schema/index.html) on Master Data v2. For that, you will need to make a request to the [Master Data schema API](https://developers.vtex.com/reference#saveschemabyname), copying the following example in the request's body and use it as a default to make any required properties change (according to your store’s scenario):
 
 ```JSON
 {
@@ -170,10 +79,57 @@ Suppose you have a schema, called `person` with the following format saved on a 
     "lastName",
     "agreement"
   ]
+  {
+    "v-security": {
+      "publicWrite": [ "publicForWrite" ],
+      "publicJsonSchema": true
+    }
+  }
 }
 ```
 
-If you simply declare your form without children:
+:information_source: *When creating you schema and defining its properties, bear in mind that the schema's language will define the form default language as well.*
+
+2. Add `store-form` app to your theme's dependencies in the `manifest.json`, for example:
+
+```JSON
+dependencies: {
+  "vtex.store-form": "0.x"
+}
+```
+
+Now, you are able to use all blocks exported by the `store-form` app. Check out the full list below:
+
+| Block name     | Description                                     |
+| -------------- | ----------------------------------------------- |
+| `form` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red)  Top level block in which you will specify which entity and schema from `Masterdata v2` will be used for building the form. It provides context to all its 8 children blocks (listed below).   |
+| `form-input-checkbox` | Renders a checkbox field in the form. |
+| `form-input-dropdown` | Renders a dropdown field in the form. |
+| `form-input-radiogroup` | Renders a radio buttons field in the form.|
+| `form-input-textarea` | Renders a big text field in the form. |
+| `form-input-text` | Renders a small text field in the form which has few available characters. |
+| `form-field-group` | Renders different form blocks (such as `form-input-radiogroup` and `form-input-text`) according to each schema's sub-properties type. |
+| `form-submit` | Renders a button to submit the user form content. |
+| `form-success` | Accepts an array of blocks that will be rendered when the form is successfully submitted. Any children block is valid. | 
+
+3. In any desired store template, such as the `store.product`, add the `form` block. 
+In the example below, the form block is contained in a Flex Layout row:
+
+```JSON
+{
+ "store.product": {
+  "children": [
+   "flex-layout.row#product-breadcrumb",
+   "flex-layout.row#product-main"
++  "flex-layout.row#form",
+   "shelf.relatedProducts",
+   "product-reviews",
+   "product-questions-and-answers"
+ ]
+},
+```
+
+4.  Then, declare the `form` block. Bear in mind to specify which `entity` and `schema` from Master Data should be fetched to build the block.
 
 ```JSON
 {
@@ -194,69 +150,142 @@ If you simply declare your form without children:
 }
 ```
 
-the block will spit out something similar to the following:
-![image](https://user-images.githubusercontent.com/19346539/73480179-2c80da80-4378-11ea-8b94-6d9df856d6d2.png)
+:warning: *If the `form` block does not have any children configured, **a default form will be rendered** automatically based on the JSON schema in Master Data. This reading and interpretation of  JSON schemas is due to the [`React Hook Form JSON schema`](https://github.com/vtex/react-hook-form-jsonschema) library (which is supporting the Store Form blocks logic behind the scenes.*
 
-Suppose now that you only want to render the required fields and don't care about the rest, you can do the following (also notice I added a `uiSchema` to the `"streetType"` field making it a `RadioGroup` instead of a `Dropdown`):
+
+| **Props** | **Type** | **Description**                                                                                                                                         | **Default Value** |
+| --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `entity`  | `String` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red)   The [entity](https://help.vtex.com/tutorial/creating-data-entity--tutorials_1265) in `Masterdata v2` where the document will be saved.             | `undefined`              |
+| `schema`  | `String` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) The JSON schema name that will be used. The schema name is set in the API's request to create it in `Masterdata v2`.| `undefined`   
+
+5. If desired,  complete the `form` block by adding and configuring an array of children blocks.  For example: 
 
 ```JSON
-{
-  "flex-layout.row#form": {
-    "children": [
-      "flex-layout.col#form"
-    ]
-  },
-
-  "flex-layout.col#form": {
-    "children": [
-      "form"
-    ]
-  },
-
-  "form": {
-    "children": [
-      "form-input.text#firstName",
-      "form-input.text#lastName",
-      "form-field-group#address",
-      "form-input.checkbox#agreement",
-      "form-submit"
-    ]
-  },
-  "form-input.text#firstName": {
-    "props": {
-      "pointer": "#/properties/firstName"
-    }
-  },
-  "form-input.text#lastName": {
-    "props": {
-      "pointer": "#/properties/lastName"
-    }
-  },
-  "form-input.checkbox#agreement": {
-    "props": {
-      "pointer": "#/properties/agreement"
-    }
-  },
-  "form-field-group#address": {
-    "props": {
-      "pointer": "#/properties/address",
-      "uiSchema": {
-	"type": "default",
-	"properties": {
-	  "streetType": {
-	    "type": "radio"
-	  }
-	}
-      }
-    }
-  },
-  "form-submit": {
-    "props": {
-      "label": "Submit"
-    }
+  "form": {  
+    "props": {  
+      "entity": "clients",  
+      "schema": "person"  
+    },  
+    "children": [  
+      "rich-text#formTitle",  
+      "form-input.text#firstName",  
+      "form-input.text#lastName",  
+      "form-field-group#address",  
+      "form-input.checkbox#agreement",  
+      "form-submit"  
+    ],  
+    "blocks": ["form-success"]  
+  },  
+  "form-success": {  
+    "children": [  
+      "rich-text#successSubmit"  
+    ]  
+  },  
+  "rich-text#successSubmit": {  
+    "props": {  
+      "text": "Succesfully submitted the data!",  
+      "textAlignment": "CENTER",  
+      "textPosition": "CENTER"  
+    }  
+  },  
+  "form-input.text#firstName": {  
+    "props": {  
+      "pointer": "#/properties/firstName"  
+    }  
+  },  
+  "form-input.text#lastName": {  
+    "props": {  
+      "pointer": "#/properties/lastName"  
+    }  
+  },  
+  "form-input.checkbox#agreement": {  
+    "props": {  
+      "pointer": "#/properties/agreement",  
+      "label": "Do you agree that this is the best form component in the whole wide world?"  
+    }  
+  },  
+  "form-field-group#address": {  
+    "props": {  
+      "pointer": "#/properties/address"  
+    }  
+  },  
+  "form-submit": {  
+    "props": {  
+      "label": "Submit"  
+    }  
   }
+```
+
+-  `form-input.radiogroup`, `form-input.dropdown`, `form-input.textarea` and `form-input.checkbox`
+
+| Prop | Type | Description                                                                                                                                                                                                                                          | Default Value  |
+| --------| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `pointer` | `String` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red)  JSON schema pointer i.e. the JSON schema path  (for example: #/properties/firstName) in which the form block inputs should be validated against. | `undefined`              |
+| `label` | `String` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Field's name when rendered | Property's title  |
+
+-  `form-input.text`
+
+| **Props**   | **Type**                                  | **Description**                                                                                                                                                                                                                                          | **Default Value** |
+| ----------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `pointer`   | `String`    | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer i.e. the JSON schema path  (for example: #/properties/firstName) in which the form block inputs should be validated against. | `undefined`              |
+| `inputType` | `Enum` | Defines which type of a text field should be rendered: <br>`input`: renders a normal text field.<br>`hidden`: does not render any text field. It should be used in scenarios in which you want to pre-define a field value to be submitted to the form but that shouldn't be visible (and therefore editable) to users. <br>`password`: renders a password text field.                 | `input`           |
+| `label` | `String` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Field's name when rendered | Property's title  |
+
+-  `form-field-group`
+
+| **Props**  | **Type** | **Description**                                                                                                                                                                                                                                                                                                           | **Default Value** |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `pointer`  | `String` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer i.e. the JSON schema path  (for example: #/properties/address) in which the form block inputs should be validated against. Note that since you are configuring a `form-field-group` block, the path must not include a schema's sub-property, only a schema`s property. | `undefined`              |
+| `uiSchema` | `object` | Redefines how the `form-field-groups` block should render each sub-properties declared in the JSON schema path defined in `pointer`. As said previously, the `form-field-groups` already does that by itself, but you can overwrite the sub-properties types through a schema and so redefine which form block will be rendered. | `undefined`   |
+
+The `uiSchema` object must have the following schema format:
+
+```js
+const UISchema = {
+  type: UIType,
+  properties: {
+    // Note that the definition is recursive
+    childName: {UISchema},
+    childName: {UISchema},
+    // ...
+    childName: {UISchema},
+  },
 }
 ```
 
-then the block will make out something similar to the following:
-![image](https://user-images.githubusercontent.com/19346539/73491020-75428e80-438c-11ea-8217-4fb7696348b2.png)
+Where `childName` should be replaced for the desired sub-property name and the  `UIType` should be replaced for the following values:
+
+  - `default`: will consider the `form-field-group` own logic (the [React Hook Form JSON Schema](https://github.com/vtex/react-hook-form-jsonschema) library) for block's rendering;
+  - `radio`: the sub-property will be rendered as a `form-input.radiogroup` block.
+  - `select`: the sub-property will be rendered as a `form-input.dropdown` block.
+  - `input`: the sub-property will be rendered as a `form-input.text` block with `inputType` set to `input`.
+  - `hidden`:  the sub-property will be rendered as a `form-input.text` block with `inputType` set to `hidden`.
+  - `password`: the sub-property will be rendered as a `form-input.text` block with `inputType` set to `password`.
+  - `textArea`: the sub-property will be rendered as a `form-input.textarea` block.
+  - `checkbox`: the sub-property will be rendered as a`form-input.checkbox` block.
+
+## Modus operandi
+
+The JSON schema created in Master Data v2 is firstly responsible for telling form blocks which data they must receive i.e. specifying which kind of input each form field should expect from users.
+
+When the user clicks on the `Submit` button, the form blocks then fetch all input data and send it to the Schema validation. This process of understanding which input they must receive and sending it to Master Data is done by using the [`React Hook Form JSON schema`](https://github.com/vtex/react-hook-form-jsonschema) library behind the scenes.
+
+If any unexpected answer is detected, that is, if the form blocks data does not match the Schema, Master Data won't be able to create an user form and an error message will be returned.
+
+:warning: Notice that all configuration and interaction with user forms must be through Master Data v2, not v1. The newest version doesn't have an interface yet, so you will have to do it through [APIs](https://developers.vtex.com/reference#master-data-api-v1-overview). 
+
+## Customization
+
+In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
+
+| CSS Handles |
+| ----------- | 
+| `form` | 
+| `formLoading` | 
+| `formErrorLoading` | 
+| `formSubmitContainer` | 
+| `formSubmitButton` |
+| `formErrorServer` |
+| `formErrorUserInput` |
+
+` 
