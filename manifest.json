@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "store-form",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "title": "VTEX store-form",
   "description": "Build forms based on Master Data",
   "builders": {
