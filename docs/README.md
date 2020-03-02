@@ -88,7 +88,7 @@ The Store Form app provides blocks responsible for displaying an user form conne
 }
 ```
 
-:information_source: *When creating you schema and defining its properties, bear in mind that the schema's language will define the form default language as well.*
+:information_source: *When creating your schema and defining its properties, bear in mind that the schema's language will define the form default language as well.*
 
 2. Add `store-form` app to your theme's dependencies in the `manifest.json`, for example:
 
