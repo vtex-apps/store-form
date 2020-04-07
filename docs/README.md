@@ -144,8 +144,10 @@ In the example below, the form block is contained in a Flex Layout row:
     ]
   },
   "form": {
-    "entity": "clients",
-    "schema": "person"
+    "props": {
+      "entity": "clients",
+      "schema": "person"
+    }
   }
 }
 ```
