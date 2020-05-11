@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Test errors.
 
-### Securytiy
+### Security
 - Bump dependencies versions.
 
 ## [0.3.4] - 2020-04-15

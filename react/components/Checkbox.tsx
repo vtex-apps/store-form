@@ -26,14 +26,12 @@ export const Checkbox: FC<{
           {...checkboxObject.getItemInputProps(0)}
           label={label}
           required={checkboxObject.isRequired}
+          checked={Boolean(checked)}
           value="true"
-          {...(checked ? { checked: true } : { checked: false })}
           onChange={() => {
             const pointer = checkboxObject.pointer
-
             checkboxObject.formContext.setValue(pointer, !checked)
           }}
-          checked={Boolean(checked)}
         />
       </>
     )
