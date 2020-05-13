@@ -32,7 +32,7 @@ export const Input: FC<{
   inputObject: UseRawInputReturnType
   label?: string
 }> = props => {
-  const inputObject = props.inputObject
+  const { inputObject } = props
   const error = inputObject.getError()
 
   const subSchema = inputObject.getObject()
@@ -42,7 +42,7 @@ export const Input: FC<{
     <StyleguideInput
       {...inputObject.getInputProps()}
       label={label}
-      error={error ? true : false}
+      error={!!error}
       errorMessage={useFormattedError(error)}
     />
   )

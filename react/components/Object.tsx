@@ -47,7 +47,7 @@ const SpecializedObject: FC<{ baseObject: InputReturnTypes }> = props => {
 export const ObjectMapper: FC<FormFieldGroupProps> = props => {
   const { pointer, uiSchema } = props
   const methods = useObject({
-    pointer: pointer,
+    pointer,
     UISchema: uiSchema,
   })
 

@@ -13,7 +13,7 @@ interface MasterDataError {
   LineNumber: number
   LinePosition: number
   Path: string
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Value: any | string[]
   SchemaId: string
   SchemaBaseUri: string | null
@@ -71,6 +71,7 @@ const evaluateMasterDataErrors = (
   acc: MasterDataErrorRecord,
   serverError: MasterDataError
 ) => {
+  // eslint-disable-next-line default-case
   switch (serverError.ErrorType) {
     case 'required':
       if (Array.isArray(serverError.Value)) {

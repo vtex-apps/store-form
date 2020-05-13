@@ -97,7 +97,8 @@ export const FormHandler: FC<{
           }
           return true
         },
-      }}>
+      }}
+    >
       <SubmitContext.Provider value={submitState}>
         {props.children}
       </SubmitContext.Provider>

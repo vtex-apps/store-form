@@ -6,6 +6,7 @@ import { FormRawInputProps, InputTypes } from './typings/InputProps'
 export default function FormInput(props: FormRawInputProps) {
   const { inputType = InputTypes.input, ...rest } = props
 
+  // eslint-disable-next-line default-case
   switch (inputType) {
     case InputTypes.input:
       return <RawInput pointer={props.pointer} {...rest} />

@@ -13,7 +13,7 @@ export const Checkbox: FC<{
   checkboxObject: UseCheckboxReturnType
   label?: string
 }> = props => {
-  const checkboxObject = props.checkboxObject
+  const { checkboxObject } = props
   const subSchema = checkboxObject.getObject()
   const label = props.label ?? subSchema.title ?? checkboxObject.name
 
@@ -29,7 +29,7 @@ export const Checkbox: FC<{
           checked={Boolean(checked)}
           value="true"
           onChange={() => {
-            const pointer = checkboxObject.pointer
+            const { pointer } = checkboxObject
             checkboxObject.formContext.setValue(pointer, !checked)
           }}
         />
@@ -52,7 +52,7 @@ export const Checkbox: FC<{
             value={value}
             {...(checked ? { checked: true } : { checked: false })}
             onChange={() => {
-              const pointer = checkboxObject.pointer
+              const { pointer } = checkboxObject
 
               checkboxObject.formContext.setValue(pointer, !checked)
             }}

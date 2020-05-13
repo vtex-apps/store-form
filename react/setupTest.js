@@ -1,11 +1,12 @@
+/* eslint-disable no-undef */
 require('mutationobserver-shim')
 
 window.matchMedia =
   window.matchMedia ||
-  function() {
+  function matchMedia() {
     return {
       matches: false,
-      addListener: function() {},
-      removeListener: function() {},
+      addListener() {},
+      removeListener() {},
     }
   }

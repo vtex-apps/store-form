@@ -26,7 +26,7 @@ const Form: FC<FormProps> = props => {
   const { data, loading, error } = useQuery(documentPublicSchema, {
     variables: {
       dataEntity: entity,
-      schema: schema,
+      schema,
     },
   })
 
