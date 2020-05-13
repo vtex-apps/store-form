@@ -37,9 +37,9 @@ export const RadioGroup: FC<{
           hideBorder
           label={label}
           options={radioObject.getItems().map(value => {
-            return { value: value, label: value }
+            return { value, label: value }
           })}
-          error={error ? true : false}
+          error={!!error}
           errorMessage={useFormattedError(error)}
         />
       }

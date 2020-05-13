@@ -18,7 +18,7 @@ export const Dropdown: FC<{
   selectObject: UseSelectReturnType
   label?: string
 }> = props => {
-  const selectObject = props.selectObject
+  const { selectObject } = props
   const error = selectObject.getError()
 
   const subSchema = selectObject.getObject()
@@ -27,7 +27,7 @@ export const Dropdown: FC<{
   const items = selectObject.getItems()
   const options = useMemo(() => {
     return items.map(value => {
-      return { value: value, label: value }
+      return { value, label: value }
     })
   }, [items])
 
@@ -43,7 +43,7 @@ export const Dropdown: FC<{
             multi={false}
             label={label}
             options={options}
-            error={error ? true : false}
+            error={!!error}
             errorMessage={useFormattedError(error)}
           />
         }

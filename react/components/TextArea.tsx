@@ -12,14 +12,14 @@ export const TextAreaInput: FC<{ pointer: string }> = props => {
 export const TextArea: FC<{
   textAreaObject: UseTextAreaReturnType
 }> = props => {
-  const textAreaObject = props.textAreaObject
+  const { textAreaObject } = props
   const error = textAreaObject.getError()
 
   return (
     <StyleguideTextarea
       {...textAreaObject.getTextAreaProps()}
       label={textAreaObject.getObject().title}
-      error={error ? true : false}
+      error={!!error}
       errorMessage={useFormattedError(error)}
     />
   )

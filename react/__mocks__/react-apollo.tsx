@@ -19,8 +19,8 @@ export function useQuery<TData, TVariables = OperationVariables>(
 ): Partial<QueryResult<TData, TVariables>> {
   return {
     data: { documentPublicSchema: { schema: jsonSchema } },
-    query: query,
-    options: options,
+    query,
+    options,
   }
 }
 
