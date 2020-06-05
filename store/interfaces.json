@@ -2,7 +2,21 @@
   "form": {
     "component": "Form",
     "composition": "children",
-    "allowed": ["form-success"]
+    "allowed": ["form-success"],
+    "content": {
+      "title": "admin/editor.form.title",
+      "type": "object",
+      "properties": {
+        "entity": {
+          "title": "admin/editor.form.entity.title",
+          "type": "string"
+        },
+        "schema": {
+          "title": "admin/editor.form.schema.title",
+          "type": "string"
+        }
+      }
+    }
   },
   "form-field-group": {
     "component": "FormFieldGroup"

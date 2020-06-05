@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { useQuery } from 'react-apollo'
 import { useIntl, defineMessages } from 'react-intl'
 import { Alert } from 'vtex.styleguide'
@@ -20,7 +20,7 @@ const messages = defineMessages({
   },
 })
 
-const Form: FC<FormProps> = props => {
+const Form: SFC<FormProps> = props => {
   const { entity, schema, children } = props
   const intl = useIntl()
   const { data, loading, error } = useQuery(documentPublicSchema, {
@@ -60,6 +60,10 @@ const Form: FC<FormProps> = props => {
       {children}
     </FormHandler>
   )
+}
+
+Form.schema = {
+  title: 'admin/editor.form.title',
 }
 
 export default Form

@@ -1,4 +1,7 @@
 {
+  "admin/editor.form.title": "Form",
+  "admin/editor.form.entity.title": "Entity",
+  "admin/editor.form.schema.title": "Schema",
   "store/form.error.required": "This field is required",
   "store/form.error.maxLength": "This field has a max length of: {value}",
   "store/form.error.minLength": "This field has a min length of: {value}",
