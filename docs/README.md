@@ -1,4 +1,5 @@
 📢 Use this project, [contribute](https://github.com/vtex-apps/store-form) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).
+
 # Store Form
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
@@ -115,12 +116,14 @@ In the example below, the form block is contained in a Flex Layout row:
   },
   "form-input.text#firstName": {
     "props": {
-      "pointer": "#/properties/firstName"
+      "pointer": "#/properties/firstName",
+      "label" : "First name"
     }
   },
   "form-input.text#lastName": {
     "props": {
-      "pointer": "#/properties/lastName"
+      "pointer": "#/properties/lastName",
+      "label": "Last name"
     }
   },
   "form-input.checkbox#agreement": {
@@ -146,7 +149,7 @@ In the example below, the form block is contained in a Flex Layout row:
 | Prop name | Type | Description                                                                                                                                                                                                                                          | Default Value  |
 | --------| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | `pointer` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red)  JSON schema pointer i.e. the JSON schema path  (for example: #/properties/firstName) in which the form block inputs should be validated against. | `undefined`              |
-| `label` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Field's name when rendered | Property's title  |
+| `label` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Field's name when rendered | `label`  |
 
 ### `form-input.textarea` props
 
@@ -219,6 +222,7 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 | `formErrorServer` |
 | `formErrorUserInput` |
 
+<!-- DOCS-IGNORE:start -->
 
 ## Contributors ✨
 
@@ -239,3 +243,5 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
+
+<!-- DOCS-IGNORE:end -->
