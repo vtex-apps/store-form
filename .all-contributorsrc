@@ -9,6 +9,17 @@
   "imageSize": 100,
   "commit": true,
   "commitConvention": "none",
-  "contributors": [],
-  "contributorsPerLine": 7
+  "contributors": [
+    {
+      "login": "doruradu",
+      "name": "doruradu",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/42587916?v=4",
+      "profile": "https://github.com/doruradu",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
