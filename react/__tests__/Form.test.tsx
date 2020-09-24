@@ -1,5 +1,6 @@
 import React from 'react'
 import { render } from '@vtex/test-tools/react'
+import * as Apollo from 'react-apollo'
 
 import Form from '../Form'
 import FormInputCheckbox from '../FormInputCheckbox'
@@ -37,5 +38,60 @@ describe('Form', () => {
     expect(getAllByText('Address')[0]).toBeDefined()
     expect(getAllByText('Street Number')[0]).toBeDefined()
     expect(getAllByText('Do you agree with the terms?')[0]).toBeDefined()
+  })
+
+  it('should render an error if the properties is missing in the schema', () => {
+    const schema = { firstName: { type: 'string' } }
+    jest.spyOn(Apollo, 'useQuery').mockImplementation((query, options) => ({
+      data: {
+        documentPublicSchema: { schema },
+      },
+      query,
+      options,
+    }))
+
+    const errorSpy = jest.spyOn(global.console, 'error')
+    errorSpy.mockImplementation(() => {})
+
+    render(
+      <Form entity="foo" schema="bar">
+        <FormText pointer="#/properties/firstName" />
+      </Form>
+    )
+
+    expect(errorSpy.mock.calls[0][0]).toBe(
+      'The MasterData Schema fields should be inside "properties". Example: { "schema": { "type": "object", "properties": { "foo": { "type": "string" } }}}'
+    )
+    expect(errorSpy.mock.calls[1][0]).toBe(`Received:`)
+    expect(errorSpy.mock.calls[1][1]).toBe(schema)
+
+    errorSpy.mockReset()
+  })
+
+  it('should render an error if the type property is missing in the schema', () => {
+    const schema = { properties: { firstName: { type: 'string' } } }
+    jest.spyOn(Apollo, 'useQuery').mockImplementation((query, options) => ({
+      data: {
+        documentPublicSchema: {
+          schema,
+        },
+      },
+      query,
+      options,
+    }))
+
+    const errorSpy = jest.spyOn(global.console, 'error')
+
+    render(
+      <Form entity="foo" schema="bar">
+        <FormText pointer="#/properties/firstName" />
+      </Form>
+    )
+
+    expect(errorSpy.mock.calls[0][0]).toBe(
+      'The MasterData Schema is missing the required property `"type": "object"`. Example: { "schema": { "type": "object", "properties": { "foo": { "type": "string" } }}}'
+    )
+    expect(errorSpy.mock.calls[1][0]).toBe(`Received:`)
+    expect(errorSpy.mock.calls[1][1]).toBe(schema)
   })
 })
