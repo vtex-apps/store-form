@@ -46,6 +46,27 @@ const Form: FC<FormProps> = props => {
 
   const schemaDocument = data.documentPublicSchema.schema
 
+  if (!schemaDocument) {
+    console.error('No MasterData Schema found')
+    return null
+  }
+
+  if (!('properties' in schemaDocument)) {
+    console.error(
+      `The MasterData Schema fields should be inside "properties". Example: { "schema": { "type": "object", "properties": { "foo": { "type": "string" } }}}`
+    )
+    console.error('Received:', schemaDocument)
+    return null
+  }
+
+  if (!('type' in schemaDocument)) {
+    console.error(
+      `The MasterData Schema is missing the required property \`"type": "object"\`. Example: { "schema": { "type": "object", "properties": { "foo": { "type": "string" } }}}`
+    )
+    console.error('Received:', schemaDocument)
+    return null
+  }
+
   if (!React.Children.count(children)) {
     return (
       <FormHandler schema={schemaDocument} formProps={props}>
