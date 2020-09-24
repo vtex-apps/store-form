@@ -93,5 +93,31 @@ describe('Form', () => {
     )
     expect(errorSpy.mock.calls[1][0]).toBe(`Received:`)
     expect(errorSpy.mock.calls[1][1]).toBe(schema)
+
+    errorSpy.mockReset()
+  })
+
+  it('should render OK if all required fields are present', () => {
+    const schema = {
+      type: 'object',
+      properties: { firstName: { type: 'string' } },
+    }
+    jest.spyOn(Apollo, 'useQuery').mockImplementation((query, options) => ({
+      data: {
+        documentPublicSchema: {
+          schema,
+        },
+      },
+      query,
+      options,
+    }))
+
+    const { getAllByText } = render(
+      <Form entity="foo" schema="bar">
+        <FormText pointer="#/properties/firstName" />
+      </Form>
+    )
+
+    expect(getAllByText('firstName')[0]).toBeDefined()
   })
 })
