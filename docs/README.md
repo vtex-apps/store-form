@@ -9,7 +9,7 @@ The Store Form app provides blocks responsible for displaying an user form conne
 
 ![image](https://user-images.githubusercontent.com/19346539/73491020-75428e80-438c-11ea-8217-4fb7696348b2.png)
 
-## Configuration 
+## Configuration
 
 :warning: Before configuring the Store Form block in your theme, make sure you've already configure a <strong>JSON schema in Master Data</strong>, otherwise the client form won't be properly saved. To more info, access the recipe on [Creating forms for your store users](https://vtex.io/docs/recipes/templates/creating-a-native-form-for-your-store-users/).
 
@@ -33,9 +33,9 @@ Now, you are able to use all blocks exported by the `store-form` app. Check out 
 | `form-input-text` | Renders a small text field in the form which has few available characters. |
 | `form-field-group` | Renders different form blocks (such as `form-input-radiogroup` and `form-input-text`) according to each schema's sub-properties type. |
 | `form-submit` | Renders a button to submit the user form content. |
-| `form-success` | Accepts an array of blocks that will be rendered when the form is successfully submitted. Any children block is valid. | 
+| `form-success` | Accepts an array of blocks that will be rendered when the form is successfully submitted. Any children block is valid. |
 
-2. In any desired store template, such as the `store.product`, add the `form` block. 
+2. In any desired store template, such as the `store.product`, add the `form` block.
 In the example below, the form block is contained in a Flex Layout row:
 
 ```JSON
@@ -67,74 +67,76 @@ In the example below, the form block is contained in a Flex Layout row:
     ]
   },
   "form": {
-    "entity": "clients",
-    "schema": "person"
+    "props": {
+      "entity": "clients",
+      "schema": "person"
+    }
   }
 }
 ```
 
-:information_source: If the <code>form</code> block does not have any children configured, <strong>a default form will be rendered</strong> automatically based on the JSON schema in Master Data. This reading and interpretation of  JSON schemas is due to the <a href="[https://github.com/vtex/react-hook-form-jsonschema)](https://github.com/vtex/react-hook-form-jsonschema))">Reacht Hook Form JSON Schema</a> library (which is supporting the Store Form blocks logic behind the scenes).  
+:information_source: If the <code>form</code> block does not have any children configured, <strong>a default form will be rendered</strong> automatically based on the JSON schema in Master Data. This reading and interpretation of  JSON schemas is due to the <a href="[https://github.com/vtex/react-hook-form-jsonschema)](https://github.com/vtex/react-hook-form-jsonschema))">Reacht Hook Form JSON Schema</a> library (which is supporting the Store Form blocks logic behind the scenes).
 
 | Prop name | Type | Description                                                                                                                                         | Default Value |
 | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | `entity`  | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red)   The [entity](https://help.vtex.com/tutorial/creating-data-entity--tutorials_1265) in Master Data where the document will be saved.             | `undefined`              |
-| `schema`  | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) The JSON schema name that will be used. The schema name is set in the API's request to create it in Master Data.| `undefined`   
+| `schema`  | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) The JSON schema name that will be used. The schema name is set in the API's request to create it in Master Data.| `undefined`
 
-4. If desired,  complete the `form` block by adding and configuring an array of children blocks.  You can use the blocks listed in the first table stated above. For example: 
+4. If desired,  complete the `form` block by adding and configuring an array of children blocks.  You can use the blocks listed in the first table stated above. For example:
 
 ```JSON
-  "form": {  
-    "props": {  
-      "entity": "clients",  
-      "schema": "person"  
-    },  
-    "children": [  
-      "rich-text#formTitle",  
-      "form-input.text#firstName",  
-      "form-input.text#lastName",  
-      "form-field-group#address",  
-      "form-input.checkbox#agreement",  
-      "form-submit"  
-    ],  
-    "blocks": ["form-success"]  
-  },  
-  "form-success": {  
-    "children": [  
-      "rich-text#successSubmit"  
-    ]  
-  },  
-  "rich-text#successSubmit": {  
-    "props": {  
-      "text": "Succesfully submitted the data!",  
-      "textAlignment": "CENTER",  
-      "textPosition": "CENTER"  
-    }  
-  },  
-  "form-input.text#firstName": {  
-    "props": {  
-      "pointer": "#/properties/firstName"  
-    }  
-  },  
-  "form-input.text#lastName": {  
-    "props": {  
-      "pointer": "#/properties/lastName"  
-    }  
-  },  
-  "form-input.checkbox#agreement": {  
-    "props": {  
-      "pointer": "#/properties/agreement",  
-      "label": "Do you agree that this is the best form component in the whole wide world?"  
-    }  
-  },  
-  "form-field-group#address": {  
-    "props": {  
-      "pointer": "#/properties/address"  
-    }  
-  },  
-  "form-submit": {  
-    "props": {  
-      "label": "Submit"  
-    }  
+  "form": {
+    "props": {
+      "entity": "clients",
+      "schema": "person"
+    },
+    "children": [
+      "rich-text#formTitle",
+      "form-input.text#firstName",
+      "form-input.text#lastName",
+      "form-field-group#address",
+      "form-input.checkbox#agreement",
+      "form-submit"
+    ],
+    "blocks": ["form-success"]
+  },
+  "form-success": {
+    "children": [
+      "rich-text#successSubmit"
+    ]
+  },
+  "rich-text#successSubmit": {
+    "props": {
+      "text": "Succesfully submitted the data!",
+      "textAlignment": "CENTER",
+      "textPosition": "CENTER"
+    }
+  },
+  "form-input.text#firstName": {
+    "props": {
+      "pointer": "#/properties/firstName"
+    }
+  },
+  "form-input.text#lastName": {
+    "props": {
+      "pointer": "#/properties/lastName"
+    }
+  },
+  "form-input.checkbox#agreement": {
+    "props": {
+      "pointer": "#/properties/agreement",
+      "label": "Do you agree that this is the best form component in the whole wide world?"
+    }
+  },
+  "form-field-group#address": {
+    "props": {
+      "pointer": "#/properties/address"
+    }
+  },
+  "form-submit": {
+    "props": {
+      "label": "Submit"
+    }
   }
 ```
 
@@ -199,11 +201,11 @@ If any unexpected answer is detected, that is, if the form blocks data does not 
 In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
 
 | CSS Handles |
-| ----------- | 
-| `form` | 
-| `formLoading` | 
-| `formErrorLoading` | 
-| `formSubmitContainer` | 
+| ----------- |
+| `form` |
+| `formLoading` |
+| `formErrorLoading` |
+| `formSubmitContainer` |
 | `formSubmitButton` |
 | `formErrorServer` |
 | `formErrorUserInput` |
