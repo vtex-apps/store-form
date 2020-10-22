@@ -31,7 +31,7 @@ Now, you are able to use all blocks exported by the `store-form` app. Check out 
 | `form-input.radiogroup` | Renders a radio buttons field in the form.|
 | `form-input.textarea` | Renders a big text field in the form. |
 | `form-input.text` | Renders a small text field in the form which has few available characters. |
-| `form-field.group` | Renders different form blocks (such as `form-input.radiogroup` and `form-input.text`) according to each schema's sub-properties type. |
+| `form-field-group` | Renders different form blocks (such as `form-input.radiogroup` and `form-input.text`) according to each schema's sub-properties type. |
 | `form-submit` | Renders a button to submit the user form content. |
 | `form-success` | Accepts an array of blocks that will be rendered when the form is successfully submitted. Any children block is valid. |
 
