@@ -6,8 +6,6 @@ import {
   usePassword,
   useHidden,
 } from 'react-hook-form-jsonschema'
-import { useIntl } from 'react-intl'
-import { formatIOMessage } from 'vtex.native-types'
 
 import { useFormattedError } from '../hooks/useErrorMessage'
 import { FormRawInputProps } from '../typings/InputProps'
@@ -39,7 +37,6 @@ export const Input: FC<{
 }> = props => {
   const { inputObject, placeholder } = props
   const error = inputObject.getError()
-  const intl = useIntl()
 
   const subSchema = inputObject.getObject()
   const label = props.label ?? subSchema.title ?? inputObject.name
@@ -50,7 +47,7 @@ export const Input: FC<{
       label={label}
       error={!!error}
       errorMessage={useFormattedError(error)}
-      placeholder={formatIOMessage({ id: placeholder, intl })}
+      placeholder={placeholder}
     />
   )
 }
