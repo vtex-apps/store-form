@@ -17,9 +17,11 @@ export const HiddenInput: FC<FormRawInputProps> = props => {
 }
 
 export const PasswordInput: FC<FormRawInputProps> = props => {
-  const { pointer, label } = props
+  const { pointer, label, placeholder } = props
   const inputObject = usePassword(pointer)
-  return <Input inputObject={inputObject} label={label} />
+  return (
+    <Input inputObject={inputObject} label={label} placeholder={placeholder} />
+  )
 }
 
 export const RawInput: FC<FormRawInputProps> = props => {
