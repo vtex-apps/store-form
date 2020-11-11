@@ -7,14 +7,21 @@ import { useFormattedError } from '../hooks/useErrorMessage'
 
 export const TextAreaInput: FC<BaseInputProps> = props => {
   const textAreaObject = useTextArea(props.pointer)
-  return <TextArea textAreaObject={textAreaObject} label={props.label} />
+  return (
+    <TextArea
+      textAreaObject={textAreaObject}
+      label={props.label}
+      placeholderText={props.placeholderText}
+    />
+  )
 }
 
 export const TextArea: FC<{
   textAreaObject: UseTextAreaReturnType
   label?: string
+  placeholderText?: string
 }> = props => {
-  const { textAreaObject } = props
+  const { textAreaObject, placeholderText } = props
   const error = textAreaObject.getError()
   const subSchema = textAreaObject.getObject()
   const label = props.label ?? subSchema.title ?? textAreaObject.name
@@ -25,6 +32,7 @@ export const TextArea: FC<{
       label={label}
       error={!!error}
       errorMessage={useFormattedError(error)}
+      placeholder={placeholderText}
     />
   )
 }
