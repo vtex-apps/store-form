@@ -11,7 +11,7 @@ export const TextAreaInput: FC<BaseInputProps> = props => {
     <TextArea
       textAreaObject={textAreaObject}
       label={props.label}
-      placeholderText={props.placeholderText}
+      placeholder={props.placeholder}
     />
   )
 }
@@ -19,9 +19,9 @@ export const TextAreaInput: FC<BaseInputProps> = props => {
 export const TextArea: FC<{
   textAreaObject: UseTextAreaReturnType
   label?: string
-  placeholderText?: string
+  placeholder?: string
 }> = props => {
-  const { textAreaObject, placeholderText } = props
+  const { textAreaObject, placeholder } = props
   const error = textAreaObject.getError()
   const subSchema = textAreaObject.getObject()
   const label = props.label ?? subSchema.title ?? textAreaObject.name
@@ -32,7 +32,7 @@ export const TextArea: FC<{
       label={label}
       error={!!error}
       errorMessage={useFormattedError(error)}
-      placeholder={placeholderText}
+      placeholder={placeholder}
     />
   )
 }

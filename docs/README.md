@@ -151,7 +151,7 @@ In the example below, the form block is contained in a Flex Layout row:
 
 | Prop name   | Type                                 | Description                                                                                                                                                                                                                                      | Default Value |
 | ----------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `placeholderText`   | `string`    |  Placeholder text for the textarea input.	 | `undefined`              |
+| `placeholder`   | `string`    |  Placeholder for the textarea input.	 | `undefined`              |
 
 ### `form-input.text` props
 
@@ -160,7 +160,7 @@ In the example below, the form block is contained in a Flex Layout row:
 | `pointer`   | `string`    | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer i.e. the JSON schema path  (for example: #/properties/firstName) in which the form block inputs should be validated against. | `undefined`              |
 | `inputType` | `enum` | Defines which type of a text field should be rendered: <br>`input`: renders a normal text field.<br>`hidden`: does not render any text field. It should be used in scenarios in which you want to pre-define a field value to be submitted to the form but that shouldn't be visible (and therefore editable) to users. <br>`password`: renders a password text field.                 | `input`           |
 | `label` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Field's name when rendered | Property's title  |
-| `placeholderText`   | `string`    |  Placeholder text for the text input.	 | `undefined`              |
+| `placeholder`   | `string`    |  Placeholder for the text input.	 | `undefined`              |
 
 ### `form-field-group` props
 

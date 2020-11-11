@@ -25,23 +25,19 @@ export const PasswordInput: FC<FormRawInputProps> = props => {
 }
 
 export const RawInput: FC<FormRawInputProps> = props => {
-  const { pointer, label, placeholderText } = props
+  const { pointer, label, placeholder } = props
   const inputObject = useInput(pointer)
   return (
-    <Input
-      inputObject={inputObject}
-      label={label}
-      placeholderText={placeholderText}
-    />
+    <Input inputObject={inputObject} label={label} placeholder={placeholder} />
   )
 }
 
 export const Input: FC<{
   inputObject: UseRawInputReturnType
   label?: string
-  placeholderText?: string
+  placeholder?: string
 }> = props => {
-  const { inputObject, placeholderText } = props
+  const { inputObject, placeholder } = props
   const error = inputObject.getError()
   const intl = useIntl()
 
@@ -54,7 +50,7 @@ export const Input: FC<{
       label={label}
       error={!!error}
       errorMessage={useFormattedError(error)}
-      placeholder={formatIOMessage({ id: placeholderText, intl })}
+      placeholder={formatIOMessage({ id: placeholder, intl })}
     />
   )
 }
