@@ -3,6 +3,7 @@ import { UISchemaType } from 'react-hook-form-jsonschema'
 export interface BaseInputProps {
   pointer: string
   label?: string
+  placeholder?: string
 }
 
 export interface FormFieldGroupProps extends Omit<BaseInputProps, 'label'> {
