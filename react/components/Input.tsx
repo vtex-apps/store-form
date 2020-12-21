@@ -25,10 +25,15 @@ export const PasswordInput: FC<FormRawInputProps> = props => {
 }
 
 export const RawInput: FC<FormRawInputProps> = props => {
-  const { pointer, label, placeholder } = props
+  const { pointer, label, placeholder, value } = props
   const inputObject = useInput(pointer)
   return (
-    <Input inputObject={inputObject} label={label} placeholder={placeholder} />
+    <Input
+      inputObject={inputObject}
+      label={label}
+      placeholder={placeholder}
+      value={value}
+    />
   )
 }
 
@@ -36,8 +41,9 @@ export const Input: FC<{
   inputObject: UseRawInputReturnType
   label?: string
   placeholder?: string
+  value?: string
 }> = props => {
-  const { inputObject, placeholder } = props
+  const { inputObject, placeholder, value } = props
   const error = inputObject.getError()
 
   const subSchema = inputObject.getObject()
@@ -47,6 +53,7 @@ export const Input: FC<{
     <StyleguideInput
       {...inputObject.getInputProps()}
       label={label}
+      value={value}
       error={!!error}
       errorMessage={useFormattedError(error)}
       placeholder={placeholder}
