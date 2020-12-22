@@ -177,7 +177,7 @@ const InputUpload = (props: FormRawInputProps) => {
             <div className="mb4">
               <Input
                 label={intl.formatMessage(messages.addLabel)}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                onChange={(e: any) => {
                   setImageUrl(e.target.value)
                 }}
                 placeholder={intl.formatMessage(messages.addPlaceholder)}
