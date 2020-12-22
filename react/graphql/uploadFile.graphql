@@ -1,4 +1,4 @@
-mutation UploadFile($file: Upload!) {
+mutation uploadFile($file: Upload!) {
   uploadFile(file: $file) {
     fileUrl
   }
