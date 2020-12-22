@@ -32,6 +32,7 @@ Now, you are able to use all blocks exported by the `store-form` app. Check out 
 | `form-input.textarea` | Renders a big text field in the form. |
 | `form-input.text` | Renders a small text field in the form which has few available characters. |
 | `form-field-group` | Renders different form blocks (such as `form-input.radiogroup` and `form-input.text`) according to each schema's sub-properties type. |
+| `form-input.upload` | Renders a upload field in the form. |
 | `form-submit` | Renders a button to submit the user form content. |
 | `form-success` | Accepts an array of blocks that will be rendered when the form is successfully submitted. Any children block is valid. |
 
@@ -194,6 +195,7 @@ Where `childName` should be replaced for the desired sub-property name and the  
   - `password`: the sub-property will be rendered as a `form-input.text` block with `inputType` set to `password`.
   - `textArea`: the sub-property will be rendered as a `form-input.textarea` block.
   - `checkbox`: the sub-property will be rendered as a`form-input.checkbox` block.
+  - `upload`: the sub-property will be rendered as a`form-input.upload` block.
 
 ## Modus operandi
 

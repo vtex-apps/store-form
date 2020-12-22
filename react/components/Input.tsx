@@ -36,9 +36,8 @@ export const Input: FC<{
   inputObject: UseRawInputReturnType
   label?: string
   placeholder?: string
-  value?: string
 }> = props => {
-  const { inputObject, placeholder, value } = props
+  const { inputObject, placeholder } = props
   const error = inputObject.getError()
 
   const subSchema = inputObject.getObject()
@@ -48,7 +47,6 @@ export const Input: FC<{
     <StyleguideInput
       {...inputObject.getInputProps()}
       label={label}
-      value={value}
       error={!!error}
       errorMessage={useFormattedError(error)}
       placeholder={placeholder}

@@ -88,8 +88,6 @@ const InputUpload = (props: Props) => {
       .keySeq()
       .findIndex(key => key === editorState.getSelection().getStartKey())
 
-    // TODO: find out a better way to handle it
-    // if editor is out of focus we force the image to be appended, not prepended
     const defEditorState =
       currentOffset === 0
         ? EditorState.moveFocusToEnd(editorState)
