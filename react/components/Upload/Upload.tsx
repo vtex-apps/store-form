@@ -166,7 +166,7 @@ const InputUpload = (props: FormRawInputProps) => {
       />
 
       {isOpen && (
-        <div className="absolute pa5 bg-white b--solid b--muted-4 bw1 br2 w5">
+        <div className="absolute pa5 bg-white b--solid b--muted-4 bw1 br2 w5 z-1">
           {isLoading && (
             <div className="absolute flex justify-center items-center top-0 left-0 h-100 w-100 br2 z-1 bg-black-05">
               <Spinner />
