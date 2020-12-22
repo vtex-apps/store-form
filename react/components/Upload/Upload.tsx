@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { graphql, MutationFunc } from 'react-apollo'
+import { useMutation } from 'react-apollo'
 import { useDropzone } from 'react-dropzone'
 import { defineMessages, useIntl } from 'react-intl'
 import {
@@ -15,16 +15,12 @@ import { AtomicBlockUtils, CompositeDecorator, EditorState } from 'draft-js'
 import Link from './Link'
 import StyleButton from './StyleButton'
 import { convertToEditorState, findLinkEntities } from './utils'
-import UploadFile from '../../queries/UploadFile.graphql'
-import { FormRawInputProps, InputTypes } from '../typings/InputProps'
-import { HiddenInput } from './Input'
+import UploadFileMutation from '../../graphql/uploadFile.graphql'
+import { FormRawInputProps, InputTypes } from '../../typings/InputProps'
+import { HiddenInput } from '../Input'
 
 interface MutationData {
   uploadFile: { fileUrl: string }
-}
-
-interface Props extends FormRawInputProps {
-  uploadFile?: MutationFunc<MutationData>
 }
 
 const MAX_SIZE = 4 * 1024 * 1024
@@ -65,8 +61,9 @@ const messages = defineMessages({
   },
 })
 
-const InputUpload = (props: Props) => {
+const InputUpload = (props: FormRawInputProps) => {
   const intl = useIntl()
+  const [uploadFile] = useMutation<MutationData>(UploadFileMutation)
   const ref = React.useRef<HTMLDivElement>(null)
   const [isLoading, setIsLoading] = React.useState(false)
   const [fileName, setFileName] = React.useState('')
@@ -79,7 +76,7 @@ const InputUpload = (props: Props) => {
   const [editorState, setEditorState] = React.useState(
     EditorState.createWithContent(convertToEditorState(''), decorator)
   )
-  const { inputType = InputTypes.input, pointer, uploadFile, ...rest } = props
+  const { inputType = InputTypes.input, pointer, ...rest } = props
 
   const handleImage = (imageUrlTEST: string) => {
     const currentOffset = editorState
@@ -109,24 +106,27 @@ const InputUpload = (props: Props) => {
   }
 
   const onDropImage = async (files: any[]) => {
-    if (!uploadFile) {
-      return undefined
-    }
-
     setError(null)
 
     try {
       if (files?.[0]) {
         setIsLoading(true)
 
-        const result = await uploadFile({ variables: { file: files[0] } })
+        const { data, errors } = await uploadFile({
+          variables: { file: files[0] },
+        })
+
+        if (errors) {
+          setError(intl.formatMessage(messages.fileSizeError))
+          return
+        }
 
         setIsLoading(false)
         setIsOpen(false)
         setFileName(files?.[0].name)
-        setImageUrl(result.data.uploadFile.fileUrl)
+        setImageUrl(data?.uploadFile.fileUrl)
 
-        return result?.data && handleImage(result.data.uploadFile.fileUrl)
+        return data && handleImage(data.uploadFile.fileUrl)
       }
       return setError(intl.formatMessage(messages.fileSizeError))
     } catch (err) {
@@ -177,7 +177,7 @@ const InputUpload = (props: Props) => {
             <div className="mb4">
               <Input
                 label={intl.formatMessage(messages.addLabel)}
-                onChange={(e: any) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setImageUrl(e.target.value)
                 }}
                 placeholder={intl.formatMessage(messages.addPlaceholder)}
@@ -218,6 +218,4 @@ const InputUpload = (props: Props) => {
   )
 }
 
-export default graphql<FormRawInputProps, Props>(UploadFile, {
-  name: 'uploadFile',
-})(InputUpload)
+export default InputUpload

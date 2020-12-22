@@ -18,13 +18,4 @@ declare module 'draft-js' {
     selection: SelectionState
     tree: Immutable.List<unknown>
   }
-
-  export interface Link {
-    children: React.ElementType[]
-    contentState: ContentState
-    decoratedText: string
-    dir: string | null
-    entityKey: string
-    offsetKey: string
-  }
 }

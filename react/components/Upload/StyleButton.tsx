@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tooltip } from 'vtex.styleguide'
 
-interface StyleBtnProps {
+interface Props {
   label: string | JSX.Element
   title?: string | JSX.Element
   active: boolean
@@ -10,14 +10,14 @@ interface StyleBtnProps {
   className?: string
 }
 
-const StyleButton = ({
+function StyleButton({
   active,
   onToggle,
   label,
   style,
-  className,
-  title,
-}: StyleBtnProps) => {
+  className = '',
+  title = '',
+}: Props) {
   const handleToggle = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault()
     onToggle(style)
@@ -37,11 +37,6 @@ const StyleButton = ({
       </div>
     </Tooltip>
   )
-}
-
-StyleButton.defaultProps = {
-  title: '',
-  className: '',
 }
 
 export default StyleButton

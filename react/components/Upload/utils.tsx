@@ -1,4 +1,9 @@
-import { ContentBlock, ContentState, convertFromRaw } from 'draft-js'
+import {
+  ContentBlock,
+  ContentState,
+  convertFromRaw,
+  CharacterMetadata,
+} from 'draft-js'
 import { mdToDraftjs } from 'draftjs-md-converter'
 
 export function convertToEditorState(markdownText: string) {
@@ -11,7 +16,7 @@ export function findLinkEntities(
   callback: (start: number, end: number) => void,
   contentState: ContentState
 ) {
-  return contentBlock.findEntityRanges((character: any) => {
+  return contentBlock.findEntityRanges((character: CharacterMetadata) => {
     const entityKey = character.getEntity()
     return (
       entityKey !== null &&
