@@ -26,8 +26,8 @@ const StyleButton = ({
   return (
     <Tooltip label={title} position="bottom">
       <div
-        className={`vtex-styleguide-9-x-container vtex-dropdown__container br2 relative bw1 bg-base ba h-regular hover-b--muted-3 b--muted-4 t-body ${
-          active ? 'c-action-primary bg-muted-5' : ''
+        className={`vtex-styleguide-9-x-container vtex-dropdown__container br2 relative bw1 bg-base ba h-regular c-action-primary hover-b--muted-3 b--muted-4 t-body ${
+          active ? 'bg-muted-5' : ''
         } ${className}`}
         onMouseDown={handleToggle}
         role="button"

@@ -11,9 +11,9 @@ import { useFormattedError } from '../hooks/useErrorMessage'
 import { FormRawInputProps } from '../typings/InputProps'
 
 export const HiddenInput: FC<FormRawInputProps> = props => {
-  const { pointer } = props
+  const { pointer, value } = props
   const inputObject = useHidden(pointer)
-  return <input {...inputObject.getInputProps()} />
+  return <input {...inputObject.getInputProps()} value={value} />
 }
 
 export const PasswordInput: FC<FormRawInputProps> = props => {
@@ -25,15 +25,10 @@ export const PasswordInput: FC<FormRawInputProps> = props => {
 }
 
 export const RawInput: FC<FormRawInputProps> = props => {
-  const { pointer, label, placeholder, value } = props
+  const { pointer, label, placeholder } = props
   const inputObject = useInput(pointer)
   return (
-    <Input
-      inputObject={inputObject}
-      label={label}
-      placeholder={placeholder}
-      value={value}
-    />
+    <Input inputObject={inputObject} label={label} placeholder={placeholder} />
   )
 }
 

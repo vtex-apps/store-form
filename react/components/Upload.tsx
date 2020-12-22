@@ -17,7 +17,7 @@ import StyleButton from './StyleButton'
 import { convertToEditorState, findLinkEntities } from './utils'
 import UploadFile from '../../queries/UploadFile.graphql'
 import { FormRawInputProps, InputTypes } from '../typings/InputProps'
-import { RawInput } from './Input'
+import { HiddenInput } from './Input'
 
 interface MutationData {
   uploadFile: { fileUrl: string }
@@ -138,7 +138,7 @@ const InputUpload = (props: Props) => {
   }
 
   const { getInputProps, getRootProps } = useDropzone({
-    accept: 'image/*',
+    accept: '.pdf, image/*',
     maxSize: MAX_SIZE,
     multiple: false,
     onDrop: onDropImage,
@@ -160,7 +160,7 @@ const InputUpload = (props: Props) => {
         onToggle={() => setIsOpen(!isOpen)}
         style={null}
         label={
-          <div className="flex flex-row justify-between items-center w-100">
+          <div className="flex flex-row justify-between items-center w-100 pa4">
             <IconImage />
             <IconCaretDown size={8} />
           </div>
@@ -213,7 +213,9 @@ const InputUpload = (props: Props) => {
       )}
       {fileName}
 
-      {inputType && <RawInput pointer={pointer} {...rest} value={imageUrl} />}
+      {inputType && (
+        <HiddenInput pointer={pointer} {...rest} value={imageUrl} />
+      )}
     </div>
   )
 }
