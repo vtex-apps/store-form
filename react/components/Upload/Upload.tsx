@@ -151,7 +151,9 @@ const InputUpload = (props: FormRawInputProps) => {
 
   return (
     <div className="vtex-styleguide-9-x-dropdown vtex-dropdown" ref={ref}>
-      <span className="db mb3 w-100 c-on-base t-small">Upload</span>
+      <span className="db mb3 w-100 c-on-base t-small">
+        Operating Agreement
+      </span>
       <StyleButton
         title={intl.formatMessage(messages.addTitle)}
         active={isOpen}
