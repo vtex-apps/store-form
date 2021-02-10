@@ -25,36 +25,36 @@ const MAX_SIZE = 4 * 1024 * 1024
 const messages = defineMessages({
   addBtn: {
     defaultMessage: 'Add',
-    id: 'admin/pages.admin.rich-text-editor.add-button',
+    id: 'admin/form.add-button',
   },
   addTitle: {
     defaultMessage: 'Insert document',
-    id: 'admin/pages.admin.rich-text-editor.add-document.title',
+    id: 'admin/form.add-document.title',
   },
   addLabel: {
     defaultMessage: 'Document URL',
-    id: 'admin/pages.admin.rich-text-editor.add-document.label',
+    id: 'admin/form.add-document.label',
   },
   addPlaceholder: {
     defaultMessage: 'URL',
-    id: 'admin/pages.admin.rich-text-editor.add-document.placeholder',
+    id: 'admin/form.add-document.placeholder',
   },
   fileSizeError: {
     defaultMessage:
       'File exceeds the size limit of 4MB. Please choose a smaller one.',
-    id: 'admin/pages.editor.document-uploader.error.file-size',
+    id: 'admin/form.document-uploader.error.file-size',
   },
   genericError: {
     defaultMessage: 'Something went wrong. Please try again.',
-    id: 'admin/pages.editor.document-uploader.error.generic',
+    id: 'admin/form.document-uploader.error.generic',
   },
   uploadBtn: {
     defaultMessage: 'Upload document',
-    id: 'admin/pages.admin.rich-text-editor.upload-button',
+    id: 'admin/store.upload-button',
   },
   uploadLabel: {
     defaultMessage: 'Choose an document to upload',
-    id: 'admin/pages.admin.rich-text-editor.upload-document-label',
+    id: 'admin/store.upload-document-label',
   },
 })
 

@@ -14,5 +14,13 @@
   "store/form.submit.error.userInputError": "Found some errors in the data provided, please review the indicated fields try again!",
   "store/form.submit.error.serverError": "Internal Server Error! Please, try again later!",
   "store/form.schema.loading": "Loading form...",
-  "store/form.schema.error": "Error loading form, try again later!"
+  "store/form.schema.error": "Error loading form, try again later!",
+  "store/form.add-button": "Add",
+  "store/form.add-document.title": "Upload documento",
+  "store/form.add-document.label": "Document URL",
+  "store/form.add-document.placeholder": "URL",
+  "store/form.document-uploader.error.file-size": "File exceeds the size limit of 4MB. Please choose a smaller one.",
+  "store/form.document-uploader.error.generic": "Something went wrong. Please try again.",
+  "store/form.upload-button": "Upload document",
+  "store/form.upload-document-label": "Choose an document to upload"
 }
