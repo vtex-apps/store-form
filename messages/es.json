@@ -21,6 +21,6 @@
   "store/form.add-document.placeholder": "URL",
   "store/form.document-uploader.error.file-size": "El archivo supera el límite de tamaño de 4 MB. Elija uno más pequeño.",
   "store/form.document-uploader.error.generic": "Se produjo un error. Vuelva a intentarlo.",
-  "store/store.upload-button": "Subir el documento",
-  "store/store.upload-document-label": "Elija un documento para cargar"
+  "store/form.upload-button": "Subir el documento",
+  "store/form.upload-document-label": "Elija un documento para cargar"
 }

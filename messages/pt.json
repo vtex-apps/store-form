@@ -21,6 +21,6 @@
   "store/form.add-document.placeholder": "URL",
   "store/form.document-uploader.error.file-size": "O arquivo excede 4MB. Por favor, escolhe um menor.",
   "store/form.document-uploader.error.generic": "Erro ao carregar. Por favor, tente novamente.",
-  "store/store.upload-button": "Upload",
-  "store/store.upload-document-label": "Escolha um documento para upload"
+  "store/form.upload-button": "Upload",
+  "store/form.upload-document-label": "Escolha um documento para upload"
 }

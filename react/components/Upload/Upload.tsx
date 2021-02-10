@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useMutation } from 'react-apollo'
 import { useDropzone } from 'react-dropzone'
-import { defineMessages, useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import {
   Button,
   IconClose,
@@ -21,42 +21,6 @@ interface MutationData {
 }
 
 const MAX_SIZE = 4 * 1024 * 1024
-
-const messages = defineMessages({
-  addBtn: {
-    defaultMessage: 'Add',
-    id: 'admin/form.add-button',
-  },
-  addTitle: {
-    defaultMessage: 'Insert document',
-    id: 'admin/form.add-document.title',
-  },
-  addLabel: {
-    defaultMessage: 'Document URL',
-    id: 'admin/form.add-document.label',
-  },
-  addPlaceholder: {
-    defaultMessage: 'URL',
-    id: 'admin/form.add-document.placeholder',
-  },
-  fileSizeError: {
-    defaultMessage:
-      'File exceeds the size limit of 4MB. Please choose a smaller one.',
-    id: 'admin/form.document-uploader.error.file-size',
-  },
-  genericError: {
-    defaultMessage: 'Something went wrong. Please try again.',
-    id: 'admin/form.document-uploader.error.generic',
-  },
-  uploadBtn: {
-    defaultMessage: 'Upload document',
-    id: 'admin/store.upload-button',
-  },
-  uploadLabel: {
-    defaultMessage: 'Choose an document to upload',
-    id: 'admin/store.upload-document-label',
-  },
-})
 
 const InputUpload = (props: FormRawInputProps) => {
   const intl = useIntl()
@@ -82,7 +46,11 @@ const InputUpload = (props: FormRawInputProps) => {
         })
 
         if (errors) {
-          setError(intl.formatMessage(messages.fileSizeError))
+          setError(
+            intl.formatMessage({
+              id: 'store/form.document-uploader.error.file-size',
+            })
+          )
           return
         }
 
@@ -93,9 +61,15 @@ const InputUpload = (props: FormRawInputProps) => {
 
         return data
       }
-      return setError(intl.formatMessage(messages.fileSizeError))
+      return setError(
+        intl.formatMessage({
+          id: 'store/form.document-uploader.error.file-size',
+        })
+      )
     } catch (err) {
-      setError(intl.formatMessage(messages.genericError))
+      setError(
+        intl.formatMessage({ id: 'store/form.document-uploader.error.generic' })
+      )
       setIsLoading(false)
     }
   }
@@ -117,7 +91,7 @@ const InputUpload = (props: FormRawInputProps) => {
         Operating Agreement
       </span>
       <StyleButton
-        title={intl.formatMessage(messages.addTitle)}
+        title={intl.formatMessage({ id: 'store/form.add-document.title' })}
         active={isOpen}
         onToggle={() => setIsOpen(!isOpen)}
         style={null}
@@ -140,26 +114,30 @@ const InputUpload = (props: FormRawInputProps) => {
           <div className={`flex flex-column ${isLoading && 'o-20'}`}>
             <div className="mb4">
               <Input
-                label={intl.formatMessage(messages.addLabel)}
+                label={intl.formatMessage({
+                  id: 'store/form.add-document.label',
+                })}
                 onChange={(e: any) => {
                   setImageUrl(e.target.value)
                 }}
-                placeholder={intl.formatMessage(messages.addPlaceholder)}
+                placeholder={intl.formatMessage({
+                  id: 'store/form.add-document.placeholder',
+                })}
               />
             </div>
 
             <Button onClick={handleAddImage} size="small" disabled={!imageUrl}>
-              {intl.formatMessage(messages.addBtn)}
+              <FormattedMessage id="store/form.add-button" />
             </Button>
 
             <div className="flex flex-column">
               <span className="db mb3 w-100 c-on-base t-small">
-                {intl.formatMessage(messages.uploadLabel)}
+                <FormattedMessage id="store/form.upload-document-label" />
               </span>
               <div {...getRootProps()} className="flex flex-column">
                 <input {...getInputProps()} />
                 <Button size="small">
-                  {intl.formatMessage(messages.uploadBtn)}
+                  <FormattedMessage id="store/form.upload-button" />
                 </Button>
               </div>
             </div>
