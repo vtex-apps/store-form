@@ -10,11 +10,8 @@ import {
   Spinner,
   IconCaretDown,
 } from 'vtex.styleguide'
-import { AtomicBlockUtils, CompositeDecorator, EditorState } from 'draft-js'
 
-import Link from './Link'
 import StyleButton from './StyleButton'
-import { convertToEditorState, findLinkEntities } from './utils'
 import UploadFileMutation from '../../graphql/uploadFile.graphql'
 import { FormRawInputProps, InputTypes } from '../../typings/InputProps'
 import { HiddenInput } from '../Input'
@@ -70,40 +67,8 @@ const InputUpload = (props: FormRawInputProps) => {
   const [isOpen, setIsOpen] = React.useState(false)
   const [imageUrl, setImageUrl] = React.useState<string | undefined>()
   const [error, setError] = React.useState<string | null>()
-  const decorator = new CompositeDecorator([
-    { strategy: findLinkEntities, component: Link },
-  ])
-  const [editorState, setEditorState] = React.useState(
-    EditorState.createWithContent(convertToEditorState(''), decorator)
-  )
+
   const { inputType = InputTypes.input, pointer, ...rest } = props
-
-  const handleImage = (imageUrlTEST: string) => {
-    const currentOffset = editorState
-      .getCurrentContent()
-      .getBlockMap()
-      .keySeq()
-      .findIndex(key => key === editorState.getSelection().getStartKey())
-
-    const defEditorState =
-      currentOffset === 0
-        ? EditorState.moveFocusToEnd(editorState)
-        : editorState
-
-    const currentContentState = defEditorState.getCurrentContent()
-    const contentStateWithEntity = currentContentState.createEntity(
-      'IMAGE',
-      'IMMUTABLE',
-      { src: imageUrlTEST }
-    )
-    const entityKey = contentStateWithEntity.getLastCreatedEntityKey()
-    const newEditorState = EditorState.set(defEditorState, {
-      currentContent: contentStateWithEntity,
-    })
-    return setEditorState(
-      AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' ')
-    )
-  }
 
   const onDropImage = async (files: any[]) => {
     setError(null)
@@ -126,7 +91,7 @@ const InputUpload = (props: FormRawInputProps) => {
         setFileName(files?.[0].name)
         setImageUrl(data?.uploadFile.fileUrl)
 
-        return data && handleImage(data.uploadFile.fileUrl)
+        return data
       }
       return setError(intl.formatMessage(messages.fileSizeError))
     } catch (err) {
@@ -144,9 +109,6 @@ const InputUpload = (props: FormRawInputProps) => {
 
   const handleAddImage = () => {
     setIsOpen(false)
-    if (imageUrl) {
-      return handleImage(imageUrl)
-    }
   }
 
   return (
