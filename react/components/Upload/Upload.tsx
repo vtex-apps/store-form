@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { useMutation } from 'react-apollo'
 import { useDropzone } from 'react-dropzone'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { useIntl, defineMessages } from 'react-intl'
+import { IOMessage } from 'vtex.native-types'
 import {
   Button,
   IconClose,
@@ -21,6 +22,21 @@ interface MutationData {
 }
 
 const MAX_SIZE = 4 * 1024 * 1024
+
+const messages = defineMessages({
+  add: {
+    id: 'store/form.add-button',
+    defaultMessage: '',
+  },
+  uploadLabel: {
+    id: 'store/form.upload-document-label',
+    defaultMessage: '',
+  },
+  uploadButton: {
+    id: 'store/form.upload-button',
+    defaultMessage: '',
+  },
+})
 
 const InputUpload = (props: FormRawInputProps) => {
   const intl = useIntl()
@@ -127,17 +143,17 @@ const InputUpload = (props: FormRawInputProps) => {
             </div>
 
             <Button onClick={handleAddImage} size="small" disabled={!imageUrl}>
-              <FormattedMessage id="store/form.add-button" />
+              <IOMessage id={messages.add.id} />
             </Button>
 
             <div className="flex flex-column">
               <span className="db mb3 w-100 c-on-base t-small">
-                <FormattedMessage id="store/form.upload-document-label" />
+                <IOMessage id={messages.uploadLabel.id} />
               </span>
               <div {...getRootProps()} className="flex flex-column">
                 <input {...getInputProps()} />
                 <Button size="small">
-                  <FormattedMessage id="store/form.upload-button" />
+                  <IOMessage id={messages.uploadButton.id} />
                 </Button>
               </div>
             </div>
