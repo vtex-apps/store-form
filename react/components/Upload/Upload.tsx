@@ -24,6 +24,10 @@ interface MutationData {
 const MAX_SIZE = 4 * 1024 * 1024
 
 const messages = defineMessages({
+  titleLabel: {
+    id: 'store/form.operating.agreement',
+    defaultMessage: '',
+  },
   add: {
     id: 'store/form.add-button',
     defaultMessage: '',
@@ -104,7 +108,7 @@ const InputUpload = (props: FormRawInputProps) => {
   return (
     <div className="vtex-styleguide-9-x-dropdown vtex-dropdown" ref={ref}>
       <span className="db mb3 w-100 c-on-base t-small">
-        Operating Agreement
+        <IOMessage id={messages.titleLabel.id} />
       </span>
       <StyleButton
         title={intl.formatMessage({ id: 'store/form.add-document.title' })}
