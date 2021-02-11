@@ -15,6 +15,7 @@
   "store/form.submit.error.serverError": "Erro interno do servidor! Por favor, tente novamente mais tarde!",
   "store/form.schema.loading": "Carregando o formulário...",
   "store/form.schema.error": "Erro carregando o formulário, tente de novo mais tarde!",
+  "store/form.operating.agreement": "Acordo Operacional",
   "store/form.add-button": "Adicionar",
   "store/form.add-document.title": "Inserir documento",
   "store/form.add-document.label": "URL do documento",

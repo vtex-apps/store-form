@@ -15,6 +15,7 @@
   "store/form.submit.error.serverError": "Internal Server Error! Please, try again later!",
   "store/form.schema.loading": "Loading form...",
   "store/form.schema.error": "Error loading form, try again later!",
+  "store/form.operating.agreement": "Operating Agreement",
   "store/form.add-button": "Add",
   "store/form.add-document.title": "Upload document",
   "store/form.add-document.label": "Document URL",
