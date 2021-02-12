@@ -137,7 +137,7 @@ const InputUpload = (props: FormRawInputProps) => {
                 label={intl.formatMessage({
                   id: 'store/form.add-document.label',
                 })}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                onChange={(e: any) => {
                   setImageUrl(e.target.value)
                 }}
                 placeholder={intl.formatMessage({
