@@ -14,5 +14,14 @@
   "store/form.submit.error.userInputError": "Foram encontrados alguns erros nos dados fornecidos, revise os campos indicados e tente novamente.",
   "store/form.submit.error.serverError": "Erro interno do servidor! Por favor, tente novamente mais tarde!",
   "store/form.schema.loading": "Carregando o formulário...",
-  "store/form.schema.error": "Erro carregando o formulário, tente de novo mais tarde!"
+  "store/form.schema.error": "Erro carregando o formulário, tente de novo mais tarde!",
+  "store/form.operating.agreement": "Acordo Operacional",
+  "store/form.add-button": "Adicionar",
+  "store/form.add-document.title": "Inserir documento",
+  "store/form.add-document.label": "URL do documento",
+  "store/form.add-document.placeholder": "URL",
+  "store/form.document-uploader.error.file-size": "O arquivo excede 4MB. Por favor, escolhe um menor.",
+  "store/form.document-uploader.error.generic": "Erro ao carregar. Por favor, tente novamente.",
+  "store/form.upload-button": "Upload",
+  "store/form.upload-document-label": "Escolha um documento para upload"
 }

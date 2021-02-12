@@ -25,6 +25,9 @@
   "form-input.textarea": {
     "component": "FormInputTextArea"
   },
+  "form-input.upload": {
+    "component": "FormInputUpload"
+  },
   "form-submit": {
     "component": "FormSubmit"
   },
