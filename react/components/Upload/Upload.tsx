@@ -42,7 +42,7 @@ const messages = defineMessages({
   },
 })
 
-const InputUpload = (props: FormRawInputProps) => {
+const InputUpload = (props: FormRawInputProps & { accept?: string }) => {
   const intl = useIntl()
   const [uploadFile] = useMutation<MutationData>(UploadFileMutation)
   const ref = React.useRef<HTMLDivElement>(null)
