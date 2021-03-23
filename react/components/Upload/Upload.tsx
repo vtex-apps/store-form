@@ -52,7 +52,7 @@ const InputUpload = (props: FormRawInputProps) => {
   const [imageUrl, setImageUrl] = React.useState<string | undefined>()
   const [error, setError] = React.useState<string | null>()
 
-  const { inputType = InputTypes.input, typeAccept, pointer, ...rest } = props
+  const { inputType = InputTypes.input, accept, pointer, ...rest } = props
 
   const onDropImage = async (files: File[]) => {
     setError(null)
