@@ -95,7 +95,7 @@ const InputUpload = (props: FormRawInputProps) => {
   }
 
   const { getInputProps, getRootProps } = useDropzone({
-    accept: typeAccept ?? '.pdf, image/*',
+    accept: accept ?? '.pdf, image/*',
     maxSize: MAX_SIZE,
     multiple: false,
     onDrop: onDropImage,
