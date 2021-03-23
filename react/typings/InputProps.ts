@@ -19,4 +19,5 @@ export enum InputTypes {
 export interface FormRawInputProps extends BaseInputProps {
   inputType?: InputTypes
   value?: string
+  typeAccept?: string
 }

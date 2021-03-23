@@ -52,7 +52,7 @@ const InputUpload = (props: FormRawInputProps) => {
   const [imageUrl, setImageUrl] = React.useState<string | undefined>()
   const [error, setError] = React.useState<string | null>()
 
-  const { inputType = InputTypes.input, pointer, ...rest } = props
+  const { inputType = InputTypes.input, typeAccept, pointer, ...rest } = props
 
   const onDropImage = async (files: File[]) => {
     setError(null)
@@ -95,7 +95,7 @@ const InputUpload = (props: FormRawInputProps) => {
   }
 
   const { getInputProps, getRootProps } = useDropzone({
-    accept: '.pdf, image/*',
+    accept: typeAccept ?? '.pdf, image/*',
     maxSize: MAX_SIZE,
     multiple: false,
     onDrop: onDropImage,
