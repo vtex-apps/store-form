@@ -42,7 +42,7 @@ const messages = defineMessages({
   },
 })
 
-const InputUpload = (props: FormRawInputProps) => {
+const InputUpload = (props: FormRawInputProps & { accept?: string }) => {
   const intl = useIntl()
   const [uploadFile] = useMutation<MutationData>(UploadFileMutation)
   const ref = React.useRef<HTMLDivElement>(null)
@@ -52,7 +52,7 @@ const InputUpload = (props: FormRawInputProps) => {
   const [imageUrl, setImageUrl] = React.useState<string | undefined>()
   const [error, setError] = React.useState<string | null>()
 
-  const { inputType = InputTypes.input, pointer, ...rest } = props
+  const { inputType = InputTypes.input, accept, pointer, ...rest } = props
 
   const onDropImage = async (files: File[]) => {
     setError(null)
@@ -95,7 +95,7 @@ const InputUpload = (props: FormRawInputProps) => {
   }
 
   const { getInputProps, getRootProps } = useDropzone({
-    accept: '.pdf, image/*',
+    accept: accept ?? '.pdf, image/*',
     maxSize: MAX_SIZE,
     multiple: false,
     onDrop: onDropImage,

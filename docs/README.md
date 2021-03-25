@@ -170,6 +170,13 @@ In the example below, the form block is contained in a Flex Layout row:
 | `pointer`  | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer i.e. the JSON schema path  (for example: #/properties/address) in which the form block inputs should be validated against. Note that since you are configuring a `form-field-group` block, the path must not include a schema's sub-property, only a schema's property. | `undefined`     |
 | `uiSchema` | `object` | Redefines how the `form-field-groups` block should render each sub-properties declared in the JSON schema path defined in `pointer`. As said previously, the `form-field-groups` already does that by itself, but you can overwrite the sub-properties types through a schema and so redefine how each form block will be rendered. | `undefined`   |
 
+### `form-input.upload` props
+
+| Prop name  | Type | Description                                                                                                                                                                                                                                                                                                           | Default Value |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `pointer`  | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer i.e. the JSON schema path  (for example: #/properties/address) in which the form block inputs should be validated against. Note that since you are configuring a `form-field-group` block, the path must not include a schema's sub-property, only a schema's property. | `undefined`     |
+| `accept` | `string` | ![https://img.shields.io/badge/-optional-yellow](https://img.shields.io/badge/-optional-yellow) By default the upload input just accept image and PDF format files. If you want to customize it, you can pass the format type that you want following this pattern: `*.TYPEFILE`. You can [read more about the `accept` field](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept).
+
 - **`uiSchema` object:**
 
 ```js
