@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- New prop `accept` to `form-input.upload`.
+
 ## [0.5.1] - 2021-03-17
 ### Fixed
 - Change `form-input.upload` to render only on client since it breaks SSR.
