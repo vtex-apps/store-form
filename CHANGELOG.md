@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+- Change upload field title.
+
 ## [0.6.0] - 2021-03-25
 
 ### Added
