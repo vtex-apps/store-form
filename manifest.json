@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "store-form",
-  "version": "0.6.1",
+  "version": "0.6.0",
   "title": "VTEX store-form",
   "description": "Build forms based on Master Data",
   "builders": {
@@ -18,9 +18,7 @@
     "vtex.file-manager": "0.x",
     "vtex.file-manager-graphql": "0.x"
   },
-  "registries": [
-    "smartcheckout"
-  ],
+  "registries": ["smartcheckout"],
   "policies": [],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
