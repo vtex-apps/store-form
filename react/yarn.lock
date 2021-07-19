@@ -4484,10 +4484,10 @@ react-dropzone@^10.2.1:
     file-selector "^0.1.12"
     prop-types "^15.7.2"
 
-react-hook-form-jsonschema@0.2.0-beta.11:
-  version "0.2.0-beta.11"
-  resolved "https://registry.yarnpkg.com/react-hook-form-jsonschema/-/react-hook-form-jsonschema-0.2.0-beta.11.tgz#a1f3f1e25899140f9c2924e4ac0a90dceb288546"
-  integrity sha512-bEz1Pe1DoQKhCqhp39siU4igs1H9y3f2iY9M6z6L3zvYQSxwZ7+HC16RSH/hiGrDWEN7GmH6J6QK4WRuJgWY5g==
+react-hook-form-jsonschema@0.3.0-beta:
+  version "0.3.0-beta"
+  resolved "https://registry.yarnpkg.com/react-hook-form-jsonschema/-/react-hook-form-jsonschema-0.3.0-beta.tgz#9dc9af232957aea69d29953c117e25d272e0d671"
+  integrity sha512-PNt1GGPD9mrmm2DUxMwmCHlRH9yOKN39weNgaqAC2eNI/sE6/92e3X6pWdLqq3+9abeVlJ96f+dz5+Bi4hIkwA==
   dependencies:
     react-hook-form "^4.4.4"
 
