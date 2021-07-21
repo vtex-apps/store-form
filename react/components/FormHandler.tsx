@@ -14,6 +14,7 @@ import createDocumentV2 from '../graphql/createDocument.graphql'
 import { FormProps } from '../typings/FormProps'
 import { parseMasterDataError } from '../logic/masterDataError'
 import { useSubmitReducer, SubmitContext } from '../logic/formState'
+import { parseDateTimeFieldsData } from '../logic/parseDateTimeFields'
 
 export const FormHandler: FC<{
   schema: JSONSchemaType
@@ -34,6 +35,11 @@ export const FormHandler: FC<{
         event.preventDefault()
       }
       dispatchSubmitAction({ type: 'SET_LOADING' })
+
+      data = parseDateTimeFieldsData({
+        data,
+        properties: props.schema.properties,
+      })
 
       await createDocumentMutation({
         variables: {
@@ -72,6 +78,7 @@ export const FormHandler: FC<{
       dispatchSubmitAction,
       props.formProps.entity,
       props.formProps.schema,
+      props.schema.properties,
     ]
   )
 
