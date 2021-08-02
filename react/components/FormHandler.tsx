@@ -36,7 +36,7 @@ export const FormHandler: FC<{
       }
       dispatchSubmitAction({ type: 'SET_LOADING' })
 
-      data = parseDateTimeFieldsData({
+      const parsedData = parseDateTimeFieldsData({
         data,
         properties: props.schema.properties,
       })
@@ -44,7 +44,7 @@ export const FormHandler: FC<{
       await createDocumentMutation({
         variables: {
           dataEntity: props.formProps.entity,
-          document: { document: data },
+          document: { document: parsedData },
           schema: props.formProps.schema,
         },
       })
@@ -52,7 +52,7 @@ export const FormHandler: FC<{
           dispatchSubmitAction({ type: 'SET_SUCCESS' })
         })
         .catch(e => {
-          setLastErrorFieldValues(data)
+          setLastErrorFieldValues(parsedData)
 
           if (e.graphQLErrors) {
             for (const graphqlError of e.graphQLErrors as GraphQLError[]) {

@@ -7,11 +7,12 @@ export const parseDateTimeFieldsData = ({
   data,
   properties,
 }: ParseDateTimeParams) => {
+  const parsedData = { ...data }
   Object.entries(properties).forEach(([propertyKey, property]) => {
-    if ((property as any)?.format === 'date-time' && data[propertyKey]) {
-      data[propertyKey] = new Date(data[propertyKey]).toISOString()
+    if ((property as any)?.format === 'date-time' && parsedData[propertyKey]) {
+      parsedData[propertyKey] = new Date(parsedData[propertyKey]).toISOString()
     }
   })
 
-  return data
+  return parsedData
 }
