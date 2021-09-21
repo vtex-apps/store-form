@@ -23,5 +23,12 @@
   "store/form.document-uploader.error.file-size": "El archivo supera el límite de tamaño de 4 MB. Elija uno más pequeño.",
   "store/form.document-uploader.error.generic": "Se produjo un error. Vuelva a intentarlo.",
   "store/form.upload-button": "Subir el documento",
-  "store/form.upload-document-label": "Elija un documento para cargar"
+  "store/form.upload-document-label": "Elija un documento para cargar",
+  "store/form.label-returnReason": "Vuelve la razon",
+  "store/form.placeholder-firstName": "Primer nombre",
+  "store/form.placeholder-lastName": "Apellido",
+  "store/form.placeholder-phone": "Teléfono",
+  "store/form.placeholder-email": "Correo electrónico",
+  "store/form.placeholder-orderId": "Solicitar ID",
+  "store/form.label-submit": "Enviar"
 }

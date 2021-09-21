@@ -8,18 +8,20 @@ import {
 
 import { useFormattedError } from '../hooks/useErrorMessage'
 import { BaseInputProps } from '../typings/InputProps'
+import {getMessage} from "../utils/helpers";
 
 export const RadioGroupInput: FC<BaseInputProps> = props => {
-  const { pointer, label } = props
+  const { pointer, label, labelId } = props
   const radioObject = useRadio(pointer)
-  return <RadioGroup radioObject={radioObject} label={label} />
+  return <RadioGroup radioObject={radioObject} label={label} labelId={labelId} />
 }
 
 export const RadioGroup: FC<{
   radioObject: UseRadioReturnType
   label?: string
+  labelId?: string
 }> = props => {
-  const { radioObject } = props
+  const { radioObject, labelId } = props
   const error = radioObject.getError()
 
   const subSchema = radioObject.getObject()
@@ -35,7 +37,7 @@ export const RadioGroup: FC<{
           name={label}
           required={radioObject.isRequired}
           hideBorder
-          label={label}
+          label={labelId ? getMessage(`store/form.label-${labelId}`) : label}
           options={radioObject.getItems().map(value => {
             return { value, label: value }
           })}

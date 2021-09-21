@@ -23,5 +23,12 @@
   "store/form.document-uploader.error.file-size": "O arquivo excede 4MB. Por favor, escolhe um menor.",
   "store/form.document-uploader.error.generic": "Erro ao carregar. Por favor, tente novamente.",
   "store/form.upload-button": "Upload",
-  "store/form.upload-document-label": "Escolha um documento para upload"
+  "store/form.upload-document-label": "Escolha um documento para upload",
+  "store/form.label-returnReason": "Motivo de Devolução",
+  "store/form.placeholder-firstName": "Primeiro nome",
+  "store/form.placeholder-lastName": "Último nome",
+  "store/form.placeholder-phone": "Telefone",
+  "store/form.placeholder-email": "O email",
+  "store/form.placeholder-orderId": "ID do pedido",
+  "store/form.label-submit": "Enviar"
 }

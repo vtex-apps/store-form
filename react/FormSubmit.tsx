@@ -1,13 +1,15 @@
-import React, { useContext } from 'react'
-import { defineMessages } from 'react-intl'
-import { Button, Alert } from 'vtex.styleguide'
-import { useCssHandles } from 'vtex.css-handles'
-import { IOMessage } from 'vtex.native-types'
+import React, {useContext} from 'react'
+import {defineMessages} from 'react-intl'
+import {Button, Alert} from 'vtex.styleguide'
+import {useCssHandles} from 'vtex.css-handles'
+import {IOMessage} from 'vtex.native-types'
 
-import { SubmitContext } from './logic/formState'
+import {SubmitContext} from './logic/formState'
+import {getMessage} from "./utils/helpers";
 
 export type FormSubmitProps = {
   label?: string
+  labelId?: string
 }
 
 const CSS_HANDLES = [
@@ -33,29 +35,35 @@ const messages = defineMessages({
 })
 
 export default function FormSubmit({
-  label = messages.submitButton.id,
-}: FormSubmitProps) {
-  const { loading, userInputError, serverError } = useContext(SubmitContext)
+                                     label = messages.submitButton.id,
+                                     labelId = ''
+                                   }: FormSubmitProps) {
+  const {loading, userInputError, serverError} = useContext(SubmitContext)
   const handles = useCssHandles(CSS_HANDLES)
 
   return (
     <div className={handles.formSubmitContainer}>
       <div className={handles.formSubmitButton}>
         <Button type="submit" isLoading={loading}>
-          <IOMessage id={label} />
+          {labelId ? (
+            getMessage(`store/form.label-${labelId}`)
+          ) : (
+            <IOMessage id={label}/>
+          )}
+
         </Button>
       </div>
       <div className={handles.formErrorUserInput}>
         {userInputError && (
           <Alert type="error">
-            <IOMessage id={messages.userInputError.id} />
+            <IOMessage id={messages.userInputError.id}/>
           </Alert>
         )}
       </div>
       <div className={handles.formErrorServer}>
         {serverError && (
           <Alert type="error">
-            <IOMessage id={messages.serverError.id} />
+            <IOMessage id={messages.serverError.id}/>
           </Alert>
         )}
       </div>

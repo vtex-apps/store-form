@@ -9,6 +9,7 @@ import {
 
 import { useFormattedError } from '../hooks/useErrorMessage'
 import { FormRawInputProps } from '../typings/InputProps'
+import {getMessage} from "../utils/helpers";
 
 export const HiddenInput: FC<FormRawInputProps> = props => {
   const { pointer, value } = props
@@ -17,27 +18,30 @@ export const HiddenInput: FC<FormRawInputProps> = props => {
 }
 
 export const PasswordInput: FC<FormRawInputProps> = props => {
-  const { pointer, label, placeholder } = props
+  const { pointer, label, placeholder, placeholderId } = props
   const inputObject = usePassword(pointer)
   return (
-    <Input inputObject={inputObject} label={label} placeholder={placeholder} />
+    <Input inputObject={inputObject} label={label} placeholder={placeholder} placeholderId={placeholderId} />
   )
 }
 
 export const RawInput: FC<FormRawInputProps> = props => {
-  const { pointer, label, placeholder } = props
+  const { pointer, label, labelId, placeholder, placeholderId } = props
+
   const inputObject = useInput(pointer)
   return (
-    <Input inputObject={inputObject} label={label} placeholder={placeholder} />
+    <Input inputObject={inputObject} label={label} labelId={labelId} placeholder={placeholder} placeholderId={placeholderId} />
   )
 }
 
 export const Input: FC<{
   inputObject: UseRawInputReturnType
   label?: string
+  labelId?: string
   placeholder?: string
+  placeholderId?: string
 }> = props => {
-  const { inputObject, placeholder } = props
+  const { inputObject, placeholder, placeholderId, labelId } = props
   const error = inputObject.getError()
 
   const subSchema = inputObject.getObject()
@@ -46,10 +50,10 @@ export const Input: FC<{
   return (
     <StyleguideInput
       {...inputObject.getInputProps()}
-      label={label}
+      label={labelId ? getMessage(`store/form.label-${labelId}`) : label}
       error={!!error}
       errorMessage={useFormattedError(error)}
-      placeholder={placeholder}
+      placeholder={placeholderId ? getMessage(`store/form.placeholder-${placeholderId}`) : placeholder}
     />
   )
 }

@@ -23,5 +23,12 @@
   "store/form.document-uploader.error.file-size": "File exceeds the size limit of 4MB. Please choose a smaller one.",
   "store/form.document-uploader.error.generic": "Something went wrong. Please try again.",
   "store/form.upload-button": "Upload document",
-  "store/form.upload-document-label": "Choose an document to upload"
+  "store/form.upload-document-label": "Choose an document to upload",
+  "store/form.label-returnReason": "Return Reason",
+  "store/form.placeholder-firstName": "First Name",
+  "store/form.placeholder-lastName": "Last Name",
+  "store/form.placeholder-phone": "Phone",
+  "store/form.placeholder-email": "Email",
+  "store/form.placeholder-orderId": "Order ID",
+  "store/form.label-submit": "Submit"
 }

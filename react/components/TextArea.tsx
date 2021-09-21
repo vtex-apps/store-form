@@ -4,6 +4,7 @@ import { UseTextAreaReturnType, useTextArea } from 'react-hook-form-jsonschema'
 
 import { BaseInputProps } from '../typings/InputProps'
 import { useFormattedError } from '../hooks/useErrorMessage'
+import {getMessage} from "../utils/helpers";
 
 export const TextAreaInput: FC<BaseInputProps> = props => {
   const textAreaObject = useTextArea(props.pointer)
@@ -11,7 +12,9 @@ export const TextAreaInput: FC<BaseInputProps> = props => {
     <TextArea
       textAreaObject={textAreaObject}
       label={props.label}
+      labelId={props.labelId}
       placeholder={props.placeholder}
+      placeholderId={props.placeholderId}
     />
   )
 }
@@ -19,9 +22,11 @@ export const TextAreaInput: FC<BaseInputProps> = props => {
 export const TextArea: FC<{
   textAreaObject: UseTextAreaReturnType
   label?: string
+  labelId?: string
   placeholder?: string
+  placeholderId?: string
 }> = props => {
-  const { textAreaObject, placeholder } = props
+  const { textAreaObject, placeholder, labelId, placeholderId } = props
   const error = textAreaObject.getError()
   const subSchema = textAreaObject.getObject()
   const label = props.label ?? subSchema.title ?? textAreaObject.name
@@ -29,10 +34,10 @@ export const TextArea: FC<{
   return (
     <StyleguideTextarea
       {...textAreaObject.getTextAreaProps()}
-      label={label}
+      label={labelId ? getMessage(`store/form.label-${labelId}`) : label}
       error={!!error}
       errorMessage={useFormattedError(error)}
-      placeholder={placeholder}
+      placeholder={placeholderId ? getMessage(`store/form.placeholder-${placeholderId}`) : placeholder}
     />
   )
 }

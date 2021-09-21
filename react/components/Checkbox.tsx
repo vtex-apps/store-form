@@ -3,17 +3,19 @@ import { Checkbox as StyleguideCheckbox } from 'vtex.styleguide'
 import { UseCheckboxReturnType, useCheckbox } from 'react-hook-form-jsonschema'
 
 import { BaseInputProps } from '../typings/InputProps'
+import {getMessage} from "../utils/helpers";
 
 export const CheckboxInput: FC<BaseInputProps> = props => {
   const checkboxObject = useCheckbox(props.pointer)
-  return <Checkbox checkboxObject={checkboxObject} label={props.label} />
+  return <Checkbox checkboxObject={checkboxObject} label={props.label} labelId={props.labelId} />
 }
 
 export const Checkbox: FC<{
   checkboxObject: UseCheckboxReturnType
   label?: string
+  labelId?: string
 }> = props => {
-  const { checkboxObject } = props
+  const { checkboxObject, labelId } = props
   const subSchema = checkboxObject.getObject()
   const label = props.label ?? subSchema.title ?? checkboxObject.name
 
@@ -24,7 +26,7 @@ export const Checkbox: FC<{
       <>
         <StyleguideCheckbox
           {...checkboxObject.getItemInputProps(0)}
-          label={label}
+          label={labelId ? getMessage(`store/form.label-${labelId}`) : label}
           required={checkboxObject.isRequired}
           checked={Boolean(checked)}
           value="true"
