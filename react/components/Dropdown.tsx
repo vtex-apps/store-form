@@ -5,14 +5,21 @@ import {
   UseSelectReturnType,
   useSelect,
 } from 'react-hook-form-jsonschema'
+import { useIntl } from 'react-intl'
 
 import { useFormattedError } from '../hooks/useErrorMessage'
 import { BaseInputProps } from '../typings/InputProps'
-import {getMessage} from "../utils/helpers";
+import { getMessage } from '../utils/helpers'
 
 export const DropdownInput: FC<BaseInputProps> = props => {
   const selectObject = useSelect(props.pointer)
-  return <Dropdown selectObject={selectObject} label={props.label} labelId={props.labelId} />
+  return (
+    <Dropdown
+      selectObject={selectObject}
+      label={props.label}
+      labelId={props.labelId}
+    />
+  )
 }
 
 export const Dropdown: FC<{
@@ -22,10 +29,11 @@ export const Dropdown: FC<{
 }> = props => {
   const { selectObject } = props
   const error = selectObject.getError()
+  const intl = useIntl()
 
   const subSchema = selectObject.getObject()
   const label = props.label ?? subSchema.title ?? selectObject.name
-  const labelId = props.labelId
+  const { labelId } = props
 
   const items = selectObject.getItems()
   const options = useMemo(() => {
@@ -33,7 +41,6 @@ export const Dropdown: FC<{
       return { value, label: value }
     })
   }, [items])
-
 
   return (
     <>
@@ -45,7 +52,7 @@ export const Dropdown: FC<{
           <StyleguideDropdown
             name={label}
             multi={false}
-            label={labelId ? getMessage(`store/form.label-${labelId}`) : label}
+            label={labelId ? getMessage(intl, labelId) : label}
             options={options}
             error={!!error}
             errorMessage={useFormattedError(error)}

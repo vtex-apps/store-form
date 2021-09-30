@@ -6,10 +6,11 @@ import {
   usePassword,
   useHidden,
 } from 'react-hook-form-jsonschema'
+import { useIntl } from 'react-intl'
 
 import { useFormattedError } from '../hooks/useErrorMessage'
 import { FormRawInputProps } from '../typings/InputProps'
-import {getMessage} from "../utils/helpers";
+import { getMessage } from '../utils/helpers'
 
 export const HiddenInput: FC<FormRawInputProps> = props => {
   const { pointer, value } = props
@@ -21,7 +22,12 @@ export const PasswordInput: FC<FormRawInputProps> = props => {
   const { pointer, label, placeholder, placeholderId } = props
   const inputObject = usePassword(pointer)
   return (
-    <Input inputObject={inputObject} label={label} placeholder={placeholder} placeholderId={placeholderId} />
+    <Input
+      inputObject={inputObject}
+      label={label}
+      placeholder={placeholder}
+      placeholderId={placeholderId}
+    />
   )
 }
 
@@ -30,7 +36,13 @@ export const RawInput: FC<FormRawInputProps> = props => {
 
   const inputObject = useInput(pointer)
   return (
-    <Input inputObject={inputObject} label={label} labelId={labelId} placeholder={placeholder} placeholderId={placeholderId} />
+    <Input
+      inputObject={inputObject}
+      label={label}
+      labelId={labelId}
+      placeholder={placeholder}
+      placeholderId={placeholderId}
+    />
   )
 }
 
@@ -43,6 +55,7 @@ export const Input: FC<{
 }> = props => {
   const { inputObject, placeholder, placeholderId, labelId } = props
   const error = inputObject.getError()
+  const intl = useIntl()
 
   const subSchema = inputObject.getObject()
   const label = props.label ?? subSchema.title ?? inputObject.name
@@ -50,10 +63,12 @@ export const Input: FC<{
   return (
     <StyleguideInput
       {...inputObject.getInputProps()}
-      label={labelId ? getMessage(`store/form.label-${labelId}`) : label}
+      label={labelId ? getMessage(intl, labelId) : label}
       error={!!error}
       errorMessage={useFormattedError(error)}
-      placeholder={placeholderId ? getMessage(`store/form.placeholder-${placeholderId}`) : placeholder}
+      placeholder={
+        placeholderId ? getMessage(intl, placeholderId) : placeholder
+      }
     />
   )
 }

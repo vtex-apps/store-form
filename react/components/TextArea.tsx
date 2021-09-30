@@ -1,10 +1,11 @@
 import React, { FC } from 'react'
 import { Textarea as StyleguideTextarea } from 'vtex.styleguide'
 import { UseTextAreaReturnType, useTextArea } from 'react-hook-form-jsonschema'
+import { useIntl } from 'react-intl'
 
 import { BaseInputProps } from '../typings/InputProps'
 import { useFormattedError } from '../hooks/useErrorMessage'
-import {getMessage} from "../utils/helpers";
+import { getMessage } from '../utils/helpers'
 
 export const TextAreaInput: FC<BaseInputProps> = props => {
   const textAreaObject = useTextArea(props.pointer)
@@ -30,14 +31,17 @@ export const TextArea: FC<{
   const error = textAreaObject.getError()
   const subSchema = textAreaObject.getObject()
   const label = props.label ?? subSchema.title ?? textAreaObject.name
+  const intl = useIntl()
 
   return (
     <StyleguideTextarea
       {...textAreaObject.getTextAreaProps()}
-      label={labelId ? getMessage(`store/form.label-${labelId}`) : label}
+      label={labelId ? getMessage(intl, labelId) : label}
       error={!!error}
       errorMessage={useFormattedError(error)}
-      placeholder={placeholderId ? getMessage(`store/form.placeholder-${placeholderId}`) : placeholder}
+      placeholder={
+        placeholderId ? getMessage(intl, placeholderId) : placeholder
+      }
     />
   )
 }

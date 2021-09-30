@@ -147,14 +147,14 @@ In the example below, the form block is contained in a Flex Layout row:
 | --------| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | `pointer` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red)  JSON schema pointer i.e. the JSON schema path  (for example: #/properties/firstName) in which the form block inputs should be validated against. | `undefined`              |
 | `label` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Field's name when rendered | Property's title  |
-| `labelId` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-optional-yellow) Id for translations | Message id for translations (For `store/form.label-firstName` you will use only `firstName` )  |
+| `labelId` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-optional-yellow) Id for translations | Message id for translations  |
 
 ### `form-input.textarea` props
 
 | Prop name   | Type                                 | Description                                                                                                                                                                                                                                      | Default Value |
 | ----------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | `placeholder`   | `string`    |  Placeholder for the textarea input.	 | `undefined`              |
-| `placeholderId` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-optional-yellow) Id for translations | Message id for translations (For `store/form.placeholder-firstName` you will use only `firstName` )  |
+| `placeholderId` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-optional-yellow) Id for translations | Message id for translations  |
 
 
 ### `form-input.text` props
@@ -164,9 +164,9 @@ In the example below, the form block is contained in a Flex Layout row:
 | `pointer`   | `string`    | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer i.e. the JSON schema path  (for example: #/properties/firstName) in which the form block inputs should be validated against. | `undefined`              |
 | `inputType` | `enum` | Defines which type of a text field should be rendered: <br>`input`: renders a normal text field.<br>`hidden`: does not render any text field. It should be used in scenarios in which you want to pre-define a field value to be submitted to the form but that shouldn't be visible (and therefore editable) to users. <br>`password`: renders a password text field.                 | `input`           |
 | `label` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Field's name when rendered | Property's title  |
-| `labelId` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-optional-yellow) Id for translations | Message id for translations (For `store/form.label-firstName` you will use only `firstName` )  |
+| `labelId` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-optional-yellow) Id for translations | Message id for translations  |
 | `placeholder`   | `string`    |  Placeholder for the text input.	 | `undefined`              |
-| `placeholderId` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-optional-yellow) Id for translations | Message id for translations (For `store/form.placeholder-firstName` you will use only `firstName` )  |
+| `placeholderId` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-optional-yellow) Id for translations | Message id for translations  |
 
 ### `form-field-group` props
 
@@ -227,7 +227,7 @@ If any unexpected answer is detected, that is, if the form blocks data does not 
 "form-input.dropdown": {
     "props": {
       "pointer": "#/properties/dropdown",
-      "labelId": "myCustomLabel"
+      "labelId": "store/form.label-myCustomLabel"
     }
   },
 ```

@@ -5,15 +5,18 @@ import {
   Controller,
   useRadio,
 } from 'react-hook-form-jsonschema'
+import { useIntl } from 'react-intl'
 
 import { useFormattedError } from '../hooks/useErrorMessage'
 import { BaseInputProps } from '../typings/InputProps'
-import {getMessage} from "../utils/helpers";
+import { getMessage } from '../utils/helpers'
 
 export const RadioGroupInput: FC<BaseInputProps> = props => {
   const { pointer, label, labelId } = props
   const radioObject = useRadio(pointer)
-  return <RadioGroup radioObject={radioObject} label={label} labelId={labelId} />
+  return (
+    <RadioGroup radioObject={radioObject} label={label} labelId={labelId} />
+  )
 }
 
 export const RadioGroup: FC<{
@@ -23,6 +26,7 @@ export const RadioGroup: FC<{
 }> = props => {
   const { radioObject, labelId } = props
   const error = radioObject.getError()
+  const intl = useIntl()
 
   const subSchema = radioObject.getObject()
   const label = props.label ?? subSchema.title ?? radioObject.name
@@ -37,7 +41,7 @@ export const RadioGroup: FC<{
           name={label}
           required={radioObject.isRequired}
           hideBorder
-          label={labelId ? getMessage(`store/form.label-${labelId}`) : label}
+          label={labelId ? getMessage(intl, labelId) : label}
           options={radioObject.getItems().map(value => {
             return { value, label: value }
           })}
