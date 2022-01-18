@@ -1,7 +1,7 @@
 {
-  "vendor": "blacksipqa",
+  "vendor": "vtex",
   "name": "store-form",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "title": "VTEX store-form",
   "description": "Build forms based on Master Data",
   "builders": {
