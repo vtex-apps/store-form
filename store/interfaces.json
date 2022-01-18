@@ -34,5 +34,8 @@
   },
   "form-success": {
     "composition": "children"
+  },
+  "form-captcha": {
+    "component": "FormCaptcha"
   }
 }

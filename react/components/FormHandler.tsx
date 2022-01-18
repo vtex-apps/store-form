@@ -29,6 +29,18 @@ export const FormHandler: FC<{
 
   const [submitState, dispatchSubmitAction] = useSubmitReducer()
 
+  const handlerOnChangeCaptcha = (args: any) => {
+    dispatchSubmitAction({
+      type: 'SET_CAPTCHA',
+      args: {
+        // eslint-disable-next-line eqeqeq
+        isValidCaptcha: args?.value != undefined,
+        isRequireCaptcha: !!args?.captchaKey,
+        captchaError: args?.captchaError,
+      },
+    })
+  }
+
   const onSubmit = useCallback(
     async ({ data, methods, event }: OnSubmitParameters) => {
       if (event) {
@@ -106,7 +118,9 @@ export const FormHandler: FC<{
         },
       }}
     >
-      <SubmitContext.Provider value={submitState}>
+      <SubmitContext.Provider
+        value={{ ...submitState, handlerOnChangeCaptcha }}
+      >
         {props.children}
       </SubmitContext.Provider>
     </FormContext>

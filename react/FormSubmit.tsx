@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useContext } from 'react'
 import { defineMessages } from 'react-intl'
 import { Button, Alert } from 'vtex.styleguide'
@@ -30,18 +31,33 @@ const messages = defineMessages({
     id: 'store/form.submit.error.serverError',
     defaultMessage: '',
   },
+  captchaError: {
+    id: 'store/form.submit.error.captchaError',
+    defaultMessage: '',
+  },
 })
 
 export default function FormSubmit({
   label = messages.submitButton.id,
 }: FormSubmitProps) {
-  const { loading, userInputError, serverError } = useContext(SubmitContext)
+  const {
+    loading,
+    userInputError,
+    serverError,
+    isRequireCaptcha,
+    isValidCaptcha,
+    captchaError,
+  } = useContext(SubmitContext)
   const handles = useCssHandles(CSS_HANDLES)
-
+  console.log('isRequireCaptcha ', isRequireCaptcha)
+  console.log('isValidCaptcha ', isValidCaptcha)
   return (
     <div className={handles.formSubmitContainer}>
       <div className={handles.formSubmitButton}>
-        <Button type="submit" isLoading={loading}>
+        <Button
+          isLoading={loading}
+          disabled={isRequireCaptcha && !isValidCaptcha}
+        >
           <IOMessage id={label} />
         </Button>
       </div>
@@ -56,6 +72,13 @@ export default function FormSubmit({
         {serverError && (
           <Alert type="error">
             <IOMessage id={messages.serverError.id} />
+          </Alert>
+        )}
+      </div>
+      <div className={handles.formErrorServer}>
+        {captchaError && (
+          <Alert type="error">
+            <IOMessage id={messages.captchaError.id} />
           </Alert>
         )}
       </div>
