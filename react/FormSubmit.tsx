@@ -49,8 +49,6 @@ export default function FormSubmit({
     captchaError,
   } = useContext(SubmitContext)
   const handles = useCssHandles(CSS_HANDLES)
-  console.log('isRequireCaptcha ', isRequireCaptcha)
-  console.log('isValidCaptcha ', isValidCaptcha)
   return (
     <div className={handles.formSubmitContainer}>
       <div className={handles.formSubmitButton}>
