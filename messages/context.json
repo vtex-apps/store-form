@@ -13,6 +13,7 @@
   "store/form.submit.buttonLabel": "Submit",
   "store/form.submit.error.userInputError": "Found some errors in the data provided, please review the indicated fields try again!",
   "store/form.submit.error.serverError": "Internal Server Error! Please, try again later!",
+  "store/form.submit.error.captchaError": "Invalid captcha",
   "store/form.schema.loading": "Loading form...",
   "store/form.schema.error": "Error loading form, try again later!"
 }
