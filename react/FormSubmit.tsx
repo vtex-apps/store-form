@@ -53,6 +53,7 @@ export default function FormSubmit({
     <div className={handles.formSubmitContainer}>
       <div className={handles.formSubmitButton}>
         <Button
+          type="submit"
           isLoading={loading}
           disabled={isRequireCaptcha && !isValidCaptcha}
         >
