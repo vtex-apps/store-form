@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Arabic translation.
+
 ## [0.7.1] - 2021-08-10
 ### Fixed
 - the value of date-time input field to UTC.
