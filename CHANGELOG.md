@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Bulgarian, Catalan, Danish, German, Greek, Finnish, French, Italian, Dutch, Norwegian, Polish, Romanian, Russian, Slovakian, Swedish, Thai and Ukrainian translations.
+
+### Fixed
+- English translation.
+
 ## [0.9.0] - 2022-12-23
 
 ### Added
