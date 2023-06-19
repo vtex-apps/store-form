@@ -160,7 +160,7 @@ In the example below, the form block is contained in a Flex Layout row:
 | ----------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | `pointer`   | `string`    | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer i.e. the JSON schema path  (for example: #/properties/firstName) in which the form block inputs should be validated against. | `undefined`              |
 | `inputType` | `enum` | Defines which type of a text field should be rendered: <br>`input`: renders a normal text field.<br>`hidden`: does not render any text field. It should be used in scenarios where you want to pre-define a field value to be submitted to the form, but that should be hidden (and, therefore, editable) to users. <br>`password`: renders a password text field.                 | `input`           |
-| `value` | `string` | Sets the `value` field when the `inputType` is `hidden`. | `undefined` |
+| `value` (optional) | `string` | Sets the value of the `inputType` when it is `hidden`.  | `undefined` |
 | `label` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Field's name when rendered | Property's title  |
 | `placeholder`   | `string`    |  Placeholder for the text input.	 | `undefined`              |
 
