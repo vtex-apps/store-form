@@ -161,7 +161,7 @@ In the example below, the form block is contained in a Flex Layout row:
 | `pointer`   | `string`    | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema path (e.g., `#/properties/firstName`) for validating form block inputs. | `undefined`              |
 | `inputType` | `enum` | Defines the type of the text field. Possible values are: `input` - renders a regular text field; `hidden` - renders a hidden text field used for pre-defining an editable value to be submitted to the form; `password` -  renders a password text field.                 | `input`           |
 | `value` (optional) | `string` | Displays a pre-defined text to be submitted when the `inputType` is set as `hidden`.  | `undefined` |
-| `label` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Field's name when rendered | Property's title  |
+| `label` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Label of the input field. | Property's title  |
 | `placeholder`   | `string`    |  Placeholder for the text input.	 | `undefined`              |
 
 ### `form-field-group` props
