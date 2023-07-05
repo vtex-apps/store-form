@@ -15,10 +15,11 @@ The Store Form app provides blocks responsible for displaying a user form connec
 
 1. Add the `store-form` app to your theme dependencies in the `manifest.json`. For example:
 
-  ```json
-  "dependencies": {
-    "vtex.store-form": "0.x"
-  }
+    ```json
+    "dependencies": {
+        "vtex.store-form": "0.x"
+    }
+    ```
 
 Now, you can use all blocks exported by the `store-form` app. See the full list below:
 
