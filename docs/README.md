@@ -37,20 +37,21 @@ Now, you can use all blocks exported by the `store-form` app. See the full list 
 
 2. In any desired store template, such as the `store.product`, add the `form` block. In the example below, the form block is contained in a Flex Layout row:
 
-```json
-{
- "store.product": {
-   "children": [
-     "flex-layout.row#product-breadcrumb",
-     "flex-layout.row#product-main"
-+    "flex-layout.row#form",
-     "shelf.relatedProducts",
-     "product-reviews",
-     "product-questions-and-answers"
-   ]
- },
-...
-}
+    ```json
+    {
+        "store.product": {
+            "children": [
+                "flex-layout.row#product-breadcrumb",
+                "flex-layout.row#product-main"
+                "flex-layout.row#form",
+                "shelf.relatedProducts",
+                "product-reviews",
+                "product-questions-and-answers"
+            ]
+        },
+        ...
+    }
+    ```
 
 3. Then, declare the `form` block. Remember to specify which `entity` and `schema` from Master Data should be fetched to build the block.
 
