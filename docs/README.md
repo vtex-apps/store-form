@@ -158,9 +158,10 @@ In the example below, the form block is contained in a Flex Layout row:
 
 | Prop name   | Type                                 | Description                                                                                                                                                                                                                                      | Default Value |
 | ----------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `pointer`   | `string`    | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer i.e. the JSON schema path  (for example: #/properties/firstName) in which the form block inputs should be validated against. | `undefined`              |
-| `inputType` | `enum` | Defines which type of a text field should be rendered: <br>`input`: renders a normal text field.<br>`hidden`: does not render any text field. It should be used in scenarios in which you want to pre-define a field value to be submitted to the form but that shouldn't be visible (and therefore editable) to users. <br>`password`: renders a password text field.                 | `input`           |
-| `label` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Field's name when rendered | Property's title  |
+| `pointer`   | `string`    | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema path (e.g., `#/properties/firstName`) for validating form block inputs. | `undefined`              |
+| `inputType` | `enum` | Defines the type of the text field. Possible values are: `input` - renders a regular text field; `hidden` - renders a hidden text field used for pre-defining an editable value to be submitted to the form; `password` -  renders a password text field.                 | `input`           |
+| `value` (optional) | `string` | Displays a pre-defined text to be submitted when the `inputType` is set as `hidden`.  | `undefined` |
+| `label` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Label of the input field. | Property's title  |
 | `placeholder`   | `string`    |  Placeholder for the text input.	 | `undefined`              |
 
 ### `form-field-group` props
@@ -204,7 +205,7 @@ Where `childName` should be replaced for the desired sub-property name and the  
   - `checkbox`: the sub-property will be rendered as a`form-input.checkbox` block.
   - `upload`: the sub-property will be rendered as a`form-input.upload` block.
 
-## Modus operandi
+## App behavior
 
 The JSON schema created in Master Data is firstly responsible for telling form blocks which data they must receive i.e. specifying which kind of input each form field should expect from users.
 
