@@ -157,12 +157,13 @@ Now, you can use all blocks exported by the `store-form` app. See the full list 
 
 ### `form-input.text` props
 
-| Prop name | Type | Description | Default value |
-| - | - | - | - |
-| `pointer` | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer, i.e., the JSON schema path (for example: #/properties/firstName) in which the form block inputs should be validated against. | `undefined` |
-| `inputType` | `enum` | Defines which type of text field should be rendered. <br>`input`: Renders a normal text field.<br>`hidden`: Does not render any text field. It should be used when you want to pre-define a field value to be submitted to the form, but it should not be visible or editable to users. <br>`password`: Renders a password text field. | `input` |
-| `label` | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Field name when rendered. | Property title |
-| `placeholder` | `string` | Placeholder for the text input. | `undefined` |
+| Prop name   | Type                                 | Description                                                                                                                                                                                                                                      | Default Value |
+| ----------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `pointer`   | `string`    | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema path (e.g., `#/properties/firstName`) for validating form block inputs. | `undefined`              |
+| `inputType` | `enum` | Defines the type of the text field. Possible values are: `input` - renders a regular text field; `hidden` - renders a hidden text field used for pre-defining an editable value to be submitted to the form; `password` -  renders a password text field.                 | `input`           |
+| `value` (optional) | `string` | Displays a pre-defined text to be submitted when the `inputType` is set as `hidden`.  | `undefined` |
+| `label` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Label of the input field. | Property's title  |
+| `placeholder`   | `string`    |  Placeholder for the text input.	 | `undefined`              |
 
 ### `form-field-group` props
 
