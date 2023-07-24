@@ -5,55 +5,56 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-The Store Form app provides blocks responsible for displaying an user form connected to [**Master Data**](https://help.vtex.com/tutorial/what-is-master-data--4otjBnR27u4WUIciQsmkAw?locale=en) through a [JSON schema](https://json-schema.org/understanding-json-schema/index.html).
+The Store Form app provides blocks responsible for displaying a user form connected to [**Master Data**](https://help.vtex.com/tutorial/what-is-master-data--4otjBnR27u4WUIciQsmkAw?locale=en) through a [JSON schema](https://json-schema.org/understanding-json-schema/index.html).
 
 ![image](https://user-images.githubusercontent.com/19346539/73491020-75428e80-438c-11ea-8217-4fb7696348b2.png)
 
 ## Configuration
 
-:warning: Before configuring the Store Form block in your theme, make sure you've already configure a <strong>JSON schema in Master Data</strong>, otherwise the client form won't be properly saved. To more info, access the recipe on [Creating forms for your store users](https://vtex.io/docs/recipes/templates/creating-a-native-form-for-your-store-users/).
+> ⚠️ Before configuring the Store Form block in your theme, make sure you have already configured a **JSON schema in Master Data**. Otherwise, the customer form will not be saved appropriately. To learn more, please refer to [Creating forms for your store users](https://developers.vtex.com/docs/guides/vtex-io-documentation-creating-a-native-form-for-your-store-users).
 
-1. Add `store-form` app to your theme's dependencies in the `manifest.json`, for example:
+1. Add the `store-form` app to your theme dependencies in the `manifest.json`. For example:
 
-```JSON
-dependencies: {
-  "vtex.store-form": "0.x"
-}
-```
+    ```json
+    "dependencies": {
+        "vtex.store-form": "0.x"
+    }
+    ```
 
-Now, you are able to use all blocks exported by the `store-form` app. Check out the full list below:
+Now, you can use all blocks exported by the `store-form` app. See the full list below:
 
-| Block name     | Description                                     |
-| -------------- | ----------------------------------------------- |
-| `form` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red)  Top level block in which you will specify which entity and schema from Master Data will be used for building the form. It provides context to all its 8 children blocks (listed below).   |
+| Block name | Description |
+| - | - |
+| `form` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Top-level block, in which you will specify which entity and schema from Master Data will be used for building the form. It provides context to its 8 children blocks (listed below). |
 | `form-input.checkbox` | Renders a checkbox field in the form. |
 | `form-input.dropdown` | Renders a dropdown field in the form. |
-| `form-input.radiogroup` | Renders a radio buttons field in the form.|
+| `form-input.radiogroup` | Renders a radio button field in the form. |
 | `form-input.textarea` | Renders a big text field in the form. |
-| `form-input.text` | Renders a small text field in the form which has few available characters. |
-| `form-field-group` | Renders different form blocks (such as `form-input.radiogroup` and `form-input.text`) according to each schema's sub-properties type. |
+| `form-input.text` | Renders a small text field in the form with few available characters. |
+| `form-field-group` | Renders different form blocks (such as `form-input.radiogroup` and `form-input.text`) based on the schema's sub-property type. |
 | `form-input.upload` | Renders an `Upload` field in the form. |
 | `form-submit` | Renders a button to submit the user form content. |
-| `form-success` | Accepts an array of blocks that will be rendered when the form is successfully submitted. Any children block is valid. |
+| `form-success` | Accepts an array of blocks rendered when the form is successfully submitted. Any children block is valid. |
 
-2. In any desired store template, such as the `store.product`, add the `form` block.
-In the example below, the form block is contained in a Flex Layout row:
+2. In any desired store template, such as the `store.product`, add the `form` block. In the example below, the form block is contained in a Flex Layout row:
 
-```JSON
-{
- "store.product": {
-   "children": [
-     "flex-layout.row#product-breadcrumb",
-     "flex-layout.row#product-main"
-+    "flex-layout.row#form",
-     "shelf.relatedProducts",
-     "product-reviews",
-     "product-questions-and-answers"
-   ]
- },
-```
+    ```json
+    {
+        "store.product": {
+            "children": [
+                "flex-layout.row#product-breadcrumb",
+                "flex-layout.row#product-main"
+                "flex-layout.row#form",
+                "shelf.relatedProducts",
+                "product-reviews",
+                "product-questions-and-answers"
+            ]
+        },
+        ...
+    }
+    ```
 
-3.  Then, declare the `form` block. Bear in mind to specify which `entity` and `schema` from Master Data should be fetched to build the block.
+3. Then, declare the `form` block. Remember to specify which `entity` and `schema` from Master Data should be fetched to build the block.
 
 ```JSON
 {
@@ -76,16 +77,16 @@ In the example below, the form block is contained in a Flex Layout row:
 }
 ```
 
-:information_source: If the <code>form</code> block does not have any children configured, <strong>a default form will be rendered</strong> automatically based on the JSON schema in Master Data. This reading and interpretation of  JSON schemas is due to the <a href="[https://github.com/vtex/react-hook-form-jsonschema)](https://github.com/vtex/react-hook-form-jsonschema))">Reacht Hook Form JSON Schema</a> library (which is supporting the Store Form blocks logic behind the scenes).
+> ℹ️ If the `form` block does not have any children configured, **a default form will be rendered** automatically based on the JSON schema in Master Data. This reading and interpretation of JSON schemas is facilitated by the [Reacht Hook Form JSON Schema](https://github.com/vtex/react-hook-form-jsonschema) library, which supports the Store Form blocks logic behind the scenes.
 
-| Prop name | Type | Description                                                                                                                                         | Default Value |
-| --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `entity`  | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red)   The [entity](https://help.vtex.com/tutorial/creating-data-entity--tutorials_1265) in Master Data where the document will be saved.             | `undefined`              |
-| `schema`  | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) The JSON schema name that will be used. The schema name is set in the API's request to create it in Master Data.| `undefined`
+| Prop name | Type | Description| Default value |
+| - | - | - | - |
+| `entity` | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) The [entity](https://help.vtex.com/tutorial/creating-data-entity--tutorials_1265) in Master Data where the document will be saved. | `undefined` |
+| `schema`  | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) The JSON schema name will be used. The schema name is set in the API request to create it in Master Data. | `undefined` |
 
-4. If desired,  complete the `form` block by adding and configuring an array of children blocks.  You can use the blocks listed in the first table stated above. For example:
+4. If desired, complete the `form` block by adding and configuring an array of children blocks. You can use the blocks listed in the first table stated above. For example:
 
-```JSON
+```json
   "form": {
     "props": {
       "entity": "clients",
@@ -143,16 +144,16 @@ In the example below, the form block is contained in a Flex Layout row:
 
 ### `form-input.radiogroup`, `form-input.dropdown`, `form-input.textarea` and `form-input.checkbox` props
 
-| Prop name | Type | Description                                                                                                                                                                                                                                          | Default Value  |
-| --------| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `pointer` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red)  JSON schema pointer i.e. the JSON schema path  (for example: #/properties/firstName) in which the form block inputs should be validated against. | `undefined`              |
-| `label` | `string` |  ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Field's name when rendered | Property's title  |
+| Prop name | Type | Description | Default value |
+| - | - | - | - |
+| `pointer` | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer, i.e., the JSON schema path (for example: #/properties/firstName) in which the form block inputs should be validated against. | `undefined` |
+| `label` | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Field name when rendered. | Property title |
 
 ### `form-input.textarea` props
 
-| Prop name   | Type                                 | Description                                                                                                                                                                                                                                      | Default Value |
-| ----------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `placeholder`   | `string`    |  Placeholder for the textarea input.	 | `undefined`              |
+| Prop name | Type | Description | Default value |
+| - | - | - | - |
+| `placeholder` | `string` | Placeholder for the text area input. | `undefined` |
 
 ### `form-input.text` props
 
@@ -166,17 +167,17 @@ In the example below, the form block is contained in a Flex Layout row:
 
 ### `form-field-group` props
 
-| Prop name  | Type | Description                                                                                                                                                                                                                                                                                                           | Default Value |
-| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `pointer`  | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer i.e. the JSON schema path  (for example: #/properties/address) in which the form block inputs should be validated against. Note that since you are configuring a `form-field-group` block, the path must not include a schema's sub-property, only a schema's property. | `undefined`     |
-| `uiSchema` | `object` | Redefines how the `form-field-groups` block should render each sub-properties declared in the JSON schema path defined in `pointer`. As said previously, the `form-field-groups` already does that by itself, but you can overwrite the sub-properties types through a schema and so redefine how each form block will be rendered. | `undefined`   |
+| Prop name | Type | Description | Default value |
+| - | - | - | - |
+| `pointer` | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer, i.e., the JSON schema path (for example: #/properties/address) in which the form block inputs should be validated against. Note that since you are configuring a `form-field-group` block, the path must not include a schema sub-property, only a schema property. | `undefined` |
+| `uiSchema` | `object` | Redefines how the `form-field-groups` block should render each sub-property declared in the JSON schema path defined in `pointer`. As previously mentioned, the `form-field-groups` already handle this functionality on their own. However, you have the option to override the sub-property types using a schema and redefine how each form block will be rendered. | `undefined` |
 
 ### `form-input.upload` props
 
-| Prop name  | Type | Description                                                                                                                                                                                                                                                                                                           | Default Value |
-| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `pointer`  | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer i.e. the JSON schema path  (for example: #/properties/address) in which the form block inputs should be validated against. Note that since you are configuring a `form-field-group` block, the path must not include a schema's sub-property, only a schema's property. | `undefined`     |
-| `accept` | `string` | ![https://img.shields.io/badge/-optional-yellow](https://img.shields.io/badge/-optional-yellow) By default the upload input just accept image and PDF format files. If you want to customize it, you can pass the format type that you want following this pattern: `*.TYPEFILE`. You can [read more about the `accept` field](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept).
+| Prop name | Type | Description | Default value |
+| - | - | - | - |
+| `pointer` | `string` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) JSON schema pointer, i.e., the JSON schema path (for example: #/properties/address) in which the form block inputs should be validated against. Note that since you are configuring a `form-field-group` block, the path must not include a schema's sub-property, only a schema's property. | `undefined` |
+| `accept`  | `string` | ![https://img.shields.io/badge/-optional-yellow](https://img.shields.io/badge/-optional-yellow) By default, the upload input only supports image and PDF format files. If you want to customize it, you can use the format type you want by following this pattern: `*.TYPEFILE`. Learn more [about the `accept` field](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept). | |
 
 - **`uiSchema` object:**
 
@@ -185,40 +186,40 @@ const UISchema = {
   type: UIType,
   properties: {
     // Note that the definition is recursive
-    childName: {UISchema},
-    childName: {UISchema},
+    childName: { UISchema },
+    childName: { UISchema },
     // ...
-    childName: {UISchema},
+    childName: { UISchema },
   },
-}
+};
 ```
 
-Where `childName` should be replaced for the desired sub-property name and the  `UIType` should be replaced for one of the following values:
+Where `childName` should be replaced for the desired sub-property name and the `UIType` should be replaced for one of the following values:
 
-  - `default`: will consider the `form-field-group` own logic (e.g. using the [React Hook Form JSON Schema](https://github.com/vtex/react-hook-form-jsonschema) library) for block's rendering;
-  - `radio`: the sub-property will be rendered as a `form-input.radiogroup` block.
-  - `select`: the sub-property will be rendered as a `form-input.dropdown` block.
-  - `input`: the sub-property will be rendered as a `form-input.text` block with `inputType` set to `input`.
-  - `hidden`:  the sub-property will be rendered as a `form-input.text` block with `inputType` set to `hidden`.
-  - `password`: the sub-property will be rendered as a `form-input.text` block with `inputType` set to `password`.
-  - `textArea`: the sub-property will be rendered as a `form-input.textarea` block.
-  - `checkbox`: the sub-property will be rendered as a`form-input.checkbox` block.
-  - `upload`: the sub-property will be rendered as a`form-input.upload` block.
+- `default`: Will consider the `form-field-group` own logic (e.g. using the [React Hook Form JSON Schema](https://github.com/vtex/react-hook-form-jsonschema) library) for block rendering;
+- `radio`: The sub-property will be rendered as a `form-input.radiogroup` block.
+- `select`: The sub-property will be rendered as a `form-input.dropdown` block.
+- `input`: The sub-property will be rendered as a `form-input.text` block with `inputType` set to `input`.
+- `hidden`: The sub-property will be rendered as a `form-input.text` block with `inputType` set to `hidden`.
+- `password`: The sub-property will be rendered as a `form-input.text` block with `inputType` set to `password`.
+- `textArea`: The sub-property will be rendered as a `form-input.textarea` block.
+- `checkbox`: The sub-property will be rendered as a `form-input.checkbox` block.
+- `upload`: The sub-property will be rendered as a `form-input.upload` block.
 
-## App behavior
+## App Behavior
 
-The JSON schema created in Master Data is firstly responsible for telling form blocks which data they must receive i.e. specifying which kind of input each form field should expect from users.
+The JSON schema created in Master Data is responsible for informing the form blocks about the data they should receive. It specifies the type of input expected for each form field from users.
 
-When the user clicks on the `Submit` button, the form blocks then fetch all input data and send it to the Schema validation. This process of understanding which input they must receive and sending it to Master Data is done by using the [`React Hook Form JSON schema`](https://github.com/vtex/react-hook-form-jsonschema) library behind the scenes.
+When the user clicks the `Submit` button, the form blocks retrieve all input data and send it to the Schema validation. This process, which involves understanding the expected input and sending it to Master Data, is facilitated by the [`React Hook Form JSON schema`](https://github.com/vtex/react-hook-form-jsonschema) library working behind the scenes.
 
-If any unexpected answer is detected, that is, if the form blocks data does not match the Schema, Master Data won't be able to create an user form and an error message will be returned for the user.
+If any unexpected answer is detected, and the form blocks does not match the Schema, Master Data will be unable to create a user form, and an error message will be returned to the user.
 
 ## Customization
 
-In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
+In order to apply CSS customizations to this and other blocks, follow the instructions in [Using CSS handles for store customizations](https://developers.vtex.com/docs/guides/vtex-io-documentation-using-css-handles-for-store-customization).
 
-| CSS Handles |
-| ----------- |
+| CSS handles |
+| - |
 | `form` |
 | `formLoading` |
 | `formErrorLoading` |
@@ -226,7 +227,6 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 | `formSubmitButton` |
 | `formErrorServer` |
 | `formErrorUserInput` |
-
 
 ## Contributors ✨
 
