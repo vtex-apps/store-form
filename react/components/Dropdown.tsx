@@ -17,12 +17,14 @@ export const DropdownInput: FC<BaseInputProps> = props => {
 export const Dropdown: FC<{
   selectObject: UseSelectReturnType
   label?: string
+  placeholder?: string
 }> = props => {
   const { selectObject } = props
   const error = selectObject.getError()
 
   const subSchema = selectObject.getObject()
   const label = props.label ?? subSchema.title ?? selectObject.name
+  const placeholder = props.placeholder || label
 
   const items = selectObject.getItems()
   const options = useMemo(() => {
@@ -45,6 +47,7 @@ export const Dropdown: FC<{
             options={options}
             error={!!error}
             errorMessage={useFormattedError(error)}
+            placeholder={placeholder}
           />
         }
       />
